@@ -1,8 +1,8 @@
 package cancer.cssbackend.Controllers;
 
-import cancer.cssbackend.Entities.Department;
-import cancer.cssbackend.Services.DepartmentService;
+import cancer.cssbackend.Services.OnboardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/department")
-public class DepartmentController {
-    private final DepartmentService departmentService;
+@RequestMapping(path = {"/onboard"})
+
+public class OnboardController {
+    private final OnboardService onboardService;
 }
