@@ -170,3 +170,6 @@ CREATE SEQUENCE ONBOARD_SEQ
     INCREMENT BY 1
     START WITH 1
     MINVALUE 1;
+
+alter table ACCESSTABLE drop constraint FK_USER_ACCESS;
+alter table ACCESSTABLE drop column USER_ID;
