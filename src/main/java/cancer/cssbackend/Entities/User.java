@@ -23,11 +23,11 @@ public class User {
     @Column(name = "USER_ID")
     private Long userId;
     @JsonProperty("USER_LASTNAME")
-    private String userLastName;
+    private String userLastname;
     @JsonProperty("USER_FIRSTNAME")
-    private String userFirstName;
+    private String userFirstname;
     @JsonProperty("USER_MIDDLENAME")
-    private String userMiddleName;
+    private String userMiddlename;
     @JsonProperty("USER_EMAIL")
     private String userEmail;
     @JsonProperty("USER_PASSWORD")
@@ -61,7 +61,7 @@ public class User {
     @JsonProperty("USER_UPDATED_ON")
     private Timestamp userUpdatedOn;
     @ManyToOne
-    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    @JoinColumn(name = "USER_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("USER_ENCODER")
     private User userEncoder;
 }

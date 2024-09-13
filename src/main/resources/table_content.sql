@@ -12,3 +12,5 @@ INSERT INTO USERTABLE VALUES (USER_SEQ.nextval, 'Gomez', 'Ron Brylle', 'San Gabr
                               'pw', 'Male', 'Single', TO_DATE('11-09-2002', 'mm-dd-yyyy'), 'Caloocan City', 1, 1, 1, 'Y', 'Active', sysdate, sysdate, null);
 INSERT INTO USERTABLE VALUES (USER_SEQ.nextval, 'Callang', 'Nathan', 'B', 'nbcallang@up.edu.ph',
                               'pw', 'Male', 'Single', TO_DATE('08-07-2003', 'mm-dd-yyyy'), 'Oman', 2, 2, 2, 'Y', 'Active', sysdate, sysdate, null);
+
+SELECT * FROM USERTABLE;

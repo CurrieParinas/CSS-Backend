@@ -2,7 +2,15 @@ package cancer.cssbackend.Entities.Requests;
 
 import cancer.cssbackend.Entities.Access;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class AddAccessRequest {
     @JsonProperty("ACCESS_CANENROLLPATIENT")
     private char accessCanEnrollPatient;
