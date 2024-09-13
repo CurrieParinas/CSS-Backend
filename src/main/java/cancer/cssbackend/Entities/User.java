@@ -53,7 +53,7 @@ public class User {
     @JsonProperty("USER_ACCESS")
     private Access userAccess;
     @JsonProperty("USER_IS_VERIFIED")
-    private String userIsVerified;
+    private char userIsVerified;
     @JsonProperty("USER_STATUS")
     private String userStatus;
     @JsonProperty("USER_CREATED_ON")

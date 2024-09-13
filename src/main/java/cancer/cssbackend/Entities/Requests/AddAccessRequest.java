@@ -4,19 +4,19 @@ import cancer.cssbackend.Entities.Access;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AddAccessRequest {
-    @JsonProperty("accessCanEnrollPatient")
+    @JsonProperty("ACCESS_CANENROLLPATIENT")
     private char accessCanEnrollPatient;
 
-    @JsonProperty("accessCanEditPatientInfo")
+    @JsonProperty("ACCESS_CANEDITPATIENTINFO")
     private char accessCanEditPatientInfo;
 
-    @JsonProperty("accessCanViewPatientInfo")
+    @JsonProperty("ACCESS_CANVIEWPATIENTINFO")
     private char accessCanViewPatientInfo;
 
-    @JsonProperty("accessCanDeleteUser")
+    @JsonProperty("ACCESS_CANDELETEUSER")
     private char accessCanDeleteUser;
 
-    @JsonProperty("accessCanDeletePatientInfo")
+    @JsonProperty("ACCESS_CANDELETEPATIENTINFO")
     private char accessCanDeletePatientInfo;
 
     public Access mapToAccess(){

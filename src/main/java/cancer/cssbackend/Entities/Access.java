@@ -1,27 +1,24 @@
 package cancer.cssbackend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "ADDRESS")
+@Entity(name = "ACCESSTABLE")
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 public class Access {
     @Id
+    @JsonProperty("ACCESS_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ACCESS_SEQ")
     @SequenceGenerator(name = "ACCESS_SEQ", sequenceName = "ACCESS_SEQ", allocationSize = 1)
     @Column(name = "ACCESS_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ACCESS_SEQ")
     private Long accessID;
-
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
-    @Column(name = "USER_ID")
-    private User user;
 
     @Column(name = "ACCESS_CANENROLLPATIENT")
     private char accessCanEnrollPatient;
