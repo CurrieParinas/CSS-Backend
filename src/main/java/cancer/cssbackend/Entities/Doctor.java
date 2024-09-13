@@ -32,7 +32,7 @@ public class Doctor {
     @JoinColumn(name = "DOCTOR_DEPARTMENT", referencedColumnName = "DEPARTMENT_ID")
     private Department department;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "DOCTOR_SPECIALTY", referencedColumnName = "SPECIALTY_ID")
     private Specialty specialty;
 
