@@ -173,3 +173,4 @@ CREATE SEQUENCE ONBOARD_SEQ
 
 alter table ACCESSTABLE drop constraint FK_USER_ACCESS;
 alter table ACCESSTABLE drop column USER_ID;
+alter table USERTABLE modify USER_ENCODER null;

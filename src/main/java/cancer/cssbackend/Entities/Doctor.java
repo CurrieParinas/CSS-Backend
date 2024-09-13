@@ -20,18 +20,21 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "DOCTOR_SEQ")
     private Long doctorID;
 
-    //@OneToOne(mappedBy = user)
-    //@Column(name = )
-    //private Patient patient;
+    @OneToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    private User user;
 
-    @Column(name = "DOCTOR_HOSPITAL", nullable = false)
-    private int doctorHospital;
+    @OneToOne
+    @JoinColumn(name = "DOCTOR_HOSPITAL", referencedColumnName = "HOSPITAL_ID")
+    private Hospital hospital;
 
-    @Column(name = "DOCTOR_DEPARTMENT", nullable = false)
-    private int doctorDepartment;
+    @OneToOne
+    @JoinColumn(name = "DOCTOR_DEPARTMENT", referencedColumnName = "DEPARTMENT_ID")
+    private Department department;
 
-    @Column(name = "DOCTOR_SPECIALTY", nullable = false)
-    private int doctorSpecialty;
+    @OneToOne
+    @JoinColumn(name = "DOCTOR_SPECIALTY", referencedColumnName = "SPECIALTY_ID")
+    private Specialty specialty;
 
     @Lob
     @Column(name = "DOCTOR_E_SIGNATURE")
