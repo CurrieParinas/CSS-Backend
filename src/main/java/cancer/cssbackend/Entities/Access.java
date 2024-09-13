@@ -18,10 +18,10 @@ public class Access {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ACCESS_SEQ")
     private Long accessID;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    /*@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @Column(name = "USER_ID")
-    private User user;
+    private User user;*/
 
     @Column(name = "ACCESS_CANENROLLPATIENT")
     private char accessCanEnrollPatient;
