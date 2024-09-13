@@ -64,7 +64,7 @@ CREATE TABLE USERTABLE (
     USER_STATUS VARCHAR2(50),
     USER_CREATED_ON TIMESTAMP,
     USER_UPDATED_ON TIMESTAMP,
-    USER_ENCODER NUMBER NOT NULL, -- Foreign key to another User or another table
+    USER_ENCODER NUMBER, -- Foreign key to another User or another table
     CONSTRAINT pk_user_id PRIMARY KEY (USER_ID),
     CONSTRAINT fk_address_user FOREIGN KEY (USER_ADDRESS) REFERENCES Address(ADDRESS_ID),
     CONSTRAINT fk_role_user FOREIGN KEY (USER_ROLE) REFERENCES Role(role_ID),
@@ -170,6 +170,3 @@ CREATE SEQUENCE ONBOARD_SEQ
     INCREMENT BY 1
     START WITH 1
     MINVALUE 1;
-
-alter table ACCESSTABLE drop constraint FK_USER_ACCESS;
-alter table ACCESSTABLE drop column USER_ID;
