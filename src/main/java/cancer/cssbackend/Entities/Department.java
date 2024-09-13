@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "ADDRESS")
+@Entity(name = "DEPARTMENT")
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Setter
