@@ -35,7 +35,7 @@ public class Doctor {
     @ManyToOne
     @JoinColumn(name = "DOCTOR_SPECIALTY", referencedColumnName = "SPECIALTY_ID")
     private Specialty specialty;
-
+    //dhsdhsh
     @Lob
     @Column(name = "DOCTOR_E_SIGNATURE")
     private byte[] doctorESignature;
