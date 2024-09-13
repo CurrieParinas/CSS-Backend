@@ -41,15 +41,15 @@ public class User {
     @JsonProperty("USER_BIRTHPLACE")
     private String userBirthplace;
     @OneToOne
-    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
+    @JoinColumn(name = "USER_ADDRESS", referencedColumnName = "ADDRESS_ID")
     @JsonProperty("USER_ADDRESS")
     private Address userAddress;
     @ManyToOne
-    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
+    @JoinColumn(name = "USER_ROLE", referencedColumnName = "ROLE_ID")
     @JsonProperty("USER_ROLE")
     private Role userRole;
     @ManyToOne
-    @JoinColumn(name = "ACCESS_ID", referencedColumnName = "ACCESS_ID")
+    @JoinColumn(name = "USER_ACCESS", referencedColumnName = "ACCESS_ID")
     @JsonProperty("USER_ACCESS")
     private Access userAccess;
     @JsonProperty("USER_IS_VERIFIED")
