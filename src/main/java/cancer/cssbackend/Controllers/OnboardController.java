@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = {"/onboard"})
+@RequestMapping(path = "/onboard")
 
 public class OnboardController {
     private final OnboardService onboardService;
