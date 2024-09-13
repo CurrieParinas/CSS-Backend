@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.sql.Timestamp;
 import java.sql.Date;
 
-@Entity(name = "USER")
+@Entity(name = "USERTABLE")
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Setter
