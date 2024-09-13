@@ -17,7 +17,7 @@ public class Doctor {
     @Id
     @SequenceGenerator(name = "DOCTOR_SEQ", sequenceName = "DOCTOR_SEQ", allocationSize = 1)
     @Column(name = "DOCTOR_ID", nullable = false)
-    //@GeneratedValue(strategy = GenerationType.AUTO, generator = "DOCTOR_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "DOCTOR_SEQ")
     private Long doctorID;
 
     //@OneToOne(mappedBy = user)
