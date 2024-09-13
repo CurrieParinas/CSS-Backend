@@ -20,13 +20,13 @@ public class Address {
     @Column(name = "ADDRESS_ID")
     private Long addressId;
     @JsonProperty("ADDRESS_NUMBER")
-    private Long addressNumber;
+    private String addressNumber;
     @JsonProperty("ADDRESS_STREET")
-    private Long addressStreet;
+    private String addressStreet;
     @JsonProperty("ADDRESS_CITY")
-    private Long addressCity;
+    private String addressCity;
     @JsonProperty("ADDRESS_REGION")
-    private Long addressRegion;
+    private String addressRegion;
     @JsonProperty("ADDRESS_ZIPCODE")
-    private Long addressZipcode;
+    private String addressZipcode;
 }
