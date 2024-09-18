@@ -1,0 +1,15 @@
+Changes in the schema
+
+Address table
+-removed User ID
+
+Patient table
+-removed Patient_disease FK
+-removed Patient_surgery fk
+-removed Patient_chemo FK
+-removed Radiotherapy FK
+-removed ImmunoRX FK
+-removed HormonalRX FK
+
+Disease table
+-OtherSites FK now refernces BODYSITE_ID instead
