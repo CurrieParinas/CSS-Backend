@@ -18,11 +18,11 @@ public class LoginController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (user != null) {
             // User found, handle successful login
-            return ResponseEntity.ok("Login successful!");
+            return ResponseEntity.ok(user);
         } else {
             // User not found
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
