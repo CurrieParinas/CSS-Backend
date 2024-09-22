@@ -17,7 +17,7 @@ public class Hospital {
     @SequenceGenerator(name = "HOSPITAL_SEQ", sequenceName = "HOSPITAL_SEQ", allocationSize = 1)
     @Column(name = "HOSPITAL_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HOSPITAL_SEQ")
-    private Long hospitalID;
+    private Long hospitalId;
 
     @Column(name = "HOSPITAL_NAME")
     private String hospitalName;

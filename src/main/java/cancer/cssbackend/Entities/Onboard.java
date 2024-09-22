@@ -19,7 +19,7 @@ public class Onboard {
     @SequenceGenerator(name = "ONBOARD_SEQ", sequenceName = "ONBOARD_SEQ", allocationSize = 1)
     @Column(name = "RELATION_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ONBOARD_SEQ")
-    private Long relationID;
+    private Long relationId;
 
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")

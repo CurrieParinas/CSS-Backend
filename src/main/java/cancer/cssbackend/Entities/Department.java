@@ -16,7 +16,7 @@ public class Department {
     @SequenceGenerator(name = "DEPARTMENT_SEQ", sequenceName = "DEPARTMENT_SEQ", allocationSize = 1)
     @Column(name = "DEPARTMENT_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "DEPARTMENT_SEQ")
-    private Long doctorID;
+    private Long departmentId;
 
     @Column(name = "DEPARTMENT_NAME")
     private String departmentName;

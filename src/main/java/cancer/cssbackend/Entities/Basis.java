@@ -18,7 +18,7 @@ public class Basis {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "BASIS_SEQ")
     @SequenceGenerator(name = "BASIS_SEQ", sequenceName = "BASIS_SEQ", allocationSize = 1)
     @Column(name = "BASIS_ID", nullable = false)
-    private Long basisID;
+    private Long basisId;
 
     @Column(name = "CATEGORY")
     private String category;

@@ -18,8 +18,8 @@ public class BodySite {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "BODYSITE_SEQ")
     @SequenceGenerator(name = "BODYSITE_SEQ", sequenceName = "BODYSITE_SEQ", allocationSize = 1)
     @Column(name = "BODYSITE_ID", nullable = false)
-    private Long bodySiteID;
+    private Long bodysiteId;
 
     @Column(name = "BODYSITE_NAME")
-    private String bodySiteName;
+    private String bodysiteName;
 }

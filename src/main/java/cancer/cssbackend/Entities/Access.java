@@ -18,20 +18,20 @@ public class Access {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ACCESS_SEQ")
     @SequenceGenerator(name = "ACCESS_SEQ", sequenceName = "ACCESS_SEQ", allocationSize = 1)
     @Column(name = "ACCESS_ID", nullable = false)
-    private Long accessID;
+    private Long accessId;
 
     @Column(name = "ACCESS_CANENROLLPATIENT")
-    private char accessCanEnrollPatient;
+    private char accessCanenrollpatient;
 
     @Column(name = "ACCESS_CANEDITPATIENTINFO")
-    private char accessCanEditPatientInfo;
+    private char accessCaneditpatientinfo;
 
     @Column(name = "ACCESS_CANVIEWPATIENTINFO")
-    private char accessCanViewPatientInfo;
+    private char accessCanviewpatientinfo;
 
     @Column(name = "ACCESS_CANDELETEUSER")
-    private char accessCanDeleteUser;
+    private char accessCandeleteuser;
 
     @Column(name = "ACCESS_CANDELETEPATIENTINFO")
-    private char accessCanDeletePatientInfo;
+    private char accessCandeletepatientinfo;
 }

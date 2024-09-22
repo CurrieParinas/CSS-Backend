@@ -13,27 +13,27 @@ import lombok.Setter;
 @Getter
 public class AddAccessRequest {
     @JsonProperty("ACCESS_CANENROLLPATIENT")
-    private char accessCanEnrollPatient;
+    private char accessCanenrollpatient;
 
     @JsonProperty("ACCESS_CANEDITPATIENTINFO")
-    private char accessCanEditPatientInfo;
+    private char accessCaneditpatientinfo;
 
     @JsonProperty("ACCESS_CANVIEWPATIENTINFO")
-    private char accessCanViewPatientInfo;
+    private char accessCanviewpatientinfo;
 
     @JsonProperty("ACCESS_CANDELETEUSER")
-    private char accessCanDeleteUser;
+    private char accessCandeleteuser;
 
     @JsonProperty("ACCESS_CANDELETEPATIENTINFO")
-    private char accessCanDeletePatientInfo;
+    private char accessCandeletepatientinfo;
 
     public Access mapToAccess(){
         Access access = new Access();
-        access.setAccessCanEnrollPatient(this.accessCanEnrollPatient);
-        access.setAccessCanEditPatientInfo(this.accessCanEditPatientInfo);
-        access.setAccessCanViewPatientInfo(this.accessCanViewPatientInfo);
-        access.setAccessCanDeleteUser(this.accessCanDeleteUser);
-        access.setAccessCanDeletePatientInfo(this.accessCanDeletePatientInfo);
+        access.setAccessCanenrollpatient(this.accessCanenrollpatient);
+        access.setAccessCaneditpatientinfo(this.accessCaneditpatientinfo);
+        access.setAccessCanviewpatientinfo(this.accessCanviewpatientinfo);
+        access.setAccessCandeleteuser(this.accessCandeleteuser);
+        access.setAccessCandeletepatientinfo(this.accessCandeletepatientinfo);
 
         return access;
     }

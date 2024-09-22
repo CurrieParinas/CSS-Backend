@@ -22,44 +22,61 @@ public class User {
     @SequenceGenerator(name="USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
     @Column(name = "USER_ID")
     private Long userId;
-    @JsonProperty("USER_LASTNAME")
+
+    @Column(name = "USER_LASTNAME")
     private String userLastname;
-    @JsonProperty("USER_FIRSTNAME")
+
+    @Column(name = "USER_FIRSTNAME")
     private String userFirstname;
-    @JsonProperty("USER_MIDDLENAME")
+
+    @Column(name = "USER_MIDDLENAME")
     private String userMiddlename;
-    @JsonProperty("USER_EMAIL")
+
+    @Column(name = "USER_EMAIL")
     private String userEmail;
-    @JsonProperty("USER_PASSWORD")
+
+    @Column(name = "USER_PASSWORD")
     private String userPassword;
-    @JsonProperty("USER_GENDER")
+
+    @Column(name = "USER_GENDER")
     private String userGender;
-    @JsonProperty("USER_MARITAL_STATUS")
+
+    @Column(name = "USER_MARITAL_STATUS")
     private String userMaritalStatus;
-    @JsonProperty("USER_BIRTHDATE")
+
+    @Column(name = "USER_BIRTHDATE")
     private Date userBirthdate;
-    @JsonProperty("USER_BIRTHPLACE")
+
+    @Column(name = "USER_BIRTHPLACE")
     private String userBirthplace;
+
     @OneToOne
     @JoinColumn(name = "USER_ADDRESS", referencedColumnName = "ADDRESS_ID")
     @JsonProperty("USER_ADDRESS")
     private Address userAddress;
+
     @ManyToOne
     @JoinColumn(name = "USER_ROLE", referencedColumnName = "ROLE_ID")
     @JsonProperty("USER_ROLE")
     private Role userRole;
+
     @ManyToOne
     @JoinColumn(name = "USER_ACCESS", referencedColumnName = "ACCESS_ID")
     @JsonProperty("USER_ACCESS")
     private Access userAccess;
-    @JsonProperty("USER_IS_VERIFIED")
+
+    @Column(name = "USER_IS_VERIFIED")
     private char userIsVerified;
-    @JsonProperty("USER_STATUS")
+
+    @Column(name = "USER_STATUS")
     private String userStatus;
-    @JsonProperty("USER_CREATED_ON")
+
+    @Column(name = "USER_CREATED_ON")
     private Timestamp userCreatedOn;
-    @JsonProperty("USER_UPDATED_ON")
+
+    @Column(name = "USER_UPDATED_ON")
     private Timestamp userUpdatedOn;
+
     @ManyToOne
     @JoinColumn(name = "USER_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("USER_ENCODER")

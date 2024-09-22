@@ -19,16 +19,15 @@ public class MetastaticSite {
     @SequenceGenerator(name = "METASTATICSITE_SEQ", sequenceName = "METASTATICSITE_SEQ", allocationSize = 1)
     @Column(name = "METS_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "METASTATICSITE_SEQ")
-    private Long metSID;
+    private Long metsId;
 
     @OneToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
     @JsonProperty("PATIENT_ID")
     private Patient patient;
 
-
     @Column(name = "METS_DISTANTLN")
-    private char metsDistantLN;
+    private char metsDistantln;
 
     @Column(name = "METS_BONE")
     private char metsBone;
@@ -60,14 +59,14 @@ public class MetastaticSite {
     @Column(name = "METS_NOTES")
     private String metsNotes;
 
-    @Column(name = "METS_CREATEDON")
+    @Column(name = "METS_CREATED_ON")
     private Timestamp metsCreatedOn;
 
-    @Column(name = "METS_UPDATEDON")
+    @Column(name = "METS_UPDATED_ON")
     private Timestamp metsUpdatedOn;
 
     @ManyToOne
-    @JoinColumn(name = "METS_ENCODER", referencedColumnName = "METS_ENCODER")
+    @JoinColumn(name = "METS_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("METS_ENCODER")
     private User histoEncoder;
 }
