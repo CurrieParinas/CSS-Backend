@@ -108,6 +108,9 @@ public class Disease {
     @JoinColumn(name = "DISEASE_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("DISEASE_ENCODER")
     private User diseaseEncoder;
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 }

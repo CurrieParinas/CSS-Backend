@@ -9,9 +9,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+<<<<<<< Updated upstream
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+=======
+import java.sql.Timestamp;
+>>>>>>> Stashed changes
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -88,10 +92,16 @@ public class AddDiseaseRequest {
     @JsonProperty("DISEASE_UPDATEDON")
     private String diseaseUpdatedOn;
 
+<<<<<<< Updated upstream
+=======
+    @JsonProperty("DISEASE_ENCODER")
+    private Long diseaseEncoderID;
+>>>>>>> Stashed changes
 
     public Disease mapToDisease(){
         Disease disease = new Disease();
 
+<<<<<<< Updated upstream
         disease.setDiseaseExtent(this.diseaseExtent);
         disease.setDiseaseLaterality(this.diseaseLaterality);
         disease.setDiseaseDiagnosisDate(Date.valueOf(this.diseaseDiagnosisDate));
@@ -140,6 +150,10 @@ public class AddDiseaseRequest {
         //add loop for othersites
         //add loop for diseasestatuses
 
+=======
+
+
+>>>>>>> Stashed changes
         return disease;
     }
 }

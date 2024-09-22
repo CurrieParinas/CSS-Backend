@@ -59,7 +59,11 @@ public class AddMetastaticSiteRequest {
     public MetastaticSite mapToMetastaticSite(){
         MetastaticSite metastaticSite = new MetastaticSite();
 
+<<<<<<< Updated upstream
         metastaticSite.setMetsDistantln(this.metsDistantLN);
+=======
+        metastaticSite.setMetsDistantLN(this.metsDistantLN);
+>>>>>>> Stashed changes
         metastaticSite.setMetsBone(this.metsBone);
         metastaticSite.setMetsLiver(this.metsLiver);
         metastaticSite.setMetsLung(this.metsLung);

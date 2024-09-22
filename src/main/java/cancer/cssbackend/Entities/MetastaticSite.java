@@ -70,6 +70,9 @@ public class MetastaticSite {
     @JoinColumn(name = "METS_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("METS_ENCODER")
     private User metsEncoder;
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 }
