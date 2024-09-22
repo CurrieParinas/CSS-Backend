@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CollectionId;
 
 @Entity(name = "ADDRESS")
 @RequiredArgsConstructor
@@ -17,16 +18,21 @@ public class Address {
     @JsonProperty("ADDRESS_ID")
     @GeneratedValue(generator = "ADDRESS_SEQ")
     @SequenceGenerator(name="ADDRESS_SEQ", sequenceName = "ADDRESS_SEQ", allocationSize = 1)
-    @Column(name = "ADDRESS_ID")
+    @Column(name = "ADDRESS_ID", nullable = false)
     private Long addressId;
-    @JsonProperty("ADDRESS_NUMBER")
+
+    @Column(name = "ADDRESS_NUMBER")
     private String addressNumber;
-    @JsonProperty("ADDRESS_STREET")
+
+    @Column(name = "ADDRESS_STREET")
     private String addressStreet;
-    @JsonProperty("ADDRESS_CITY")
+
+    @Column(name = "ADDRESS_CITY")
     private String addressCity;
-    @JsonProperty("ADDRESS_REGION")
+
+    @Column(name = "ADDRESS_REGION")
     private String addressRegion;
-    @JsonProperty("ADDRESS_ZIPCODE")
+
+    @Column(name = "ADDRESS_ZIPCODE")
     private String addressZipcode;
 }

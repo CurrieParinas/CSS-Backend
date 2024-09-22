@@ -21,12 +21,15 @@ public class Patient {
     @SequenceGenerator(name="PATIENT_SEQ", sequenceName = "PATIENT_SEQ", allocationSize = 1)
     @Column(name = "PATIENT_ID")
     private Long patientId;
+
     @OneToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @JsonProperty("USER")
     private User user;
+
     @JsonProperty("PATIENT_CREATED_ON")
     private Timestamp patientCreatedOn;
+
     @JsonProperty("PATIENT_UPDATED_ON")
     private Timestamp patientUpdatedOn;
 }

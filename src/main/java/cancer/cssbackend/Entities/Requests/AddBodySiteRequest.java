@@ -13,12 +13,12 @@ import lombok.Setter;
 @Getter
 public class AddBodySiteRequest {
     @JsonProperty("BODYSITE_NAME")
-    private String bodySiteName;
+    private String bodysiteName;
 
     public BodySite mapToBodySite(){
         BodySite bodySite = new BodySite();
 
-        bodySite.setBodySiteName(this.bodySiteName);
+        bodySite.setBodysiteName(this.bodysiteName);
 
         return bodySite;
     }

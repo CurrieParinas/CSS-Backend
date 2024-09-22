@@ -1,7 +1,10 @@
 package cancer.cssbackend.Entities.Requests;
 
+import cancer.cssbackend.Entities.Access;
+import cancer.cssbackend.Entities.DiseaseStatus;
 import cancer.cssbackend.Entities.Patient;
 import cancer.cssbackend.Entities.User;
+import cancer.cssbackend.Repositories.PatientRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
@@ -13,48 +16,54 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 public class AddDiseaseStatusRequest {
+    private final PatientRepository patientRepository;
+
     @JsonProperty("PATIENT_ID")
     private Long patientID;
 
-    @JsonProperty("HISTO_PATHOLOGY")
-    private Long histoPathology;
+    @JsonProperty("DXSTATUS_ALIVE")
+    private char dxstatusAlive;
 
-    @JsonProperty("HISTO_TUMORSIZE")
-    private int histoTumorSize;
+    @JsonProperty("DXSTATUS_SYMPTOMS")
+    private char dxstatusSymptoms;
 
-    @JsonProperty("HISTO_TUMOREXTENSION")
-    private char histoTumorExtension;
+    @JsonProperty("DXSTATUS_RECURRENCE")
+    private char dxstatusRecurrence;
 
-    @JsonProperty("HISTO_GRADE")
-    private int histoGrade;
+    @JsonProperty("DXSTATUS_METASTATIC")
+    private char dxstatusMetastatic;
 
-    @JsonProperty("HISTO_NODEPOSITIVE")
-    private int histoNodePositive;
+    @JsonProperty("DXSTATUS_CURATIVE")
+    private char dxstatusCurative;
 
-    @JsonProperty("HISTO_NODEHARVEST")
-    private int histoNodeHarvest;
+    @JsonProperty("DXSTATUS_CREATED_ON")
+    private Timestamp dxstatusCreatedOn;
 
-    @JsonProperty("HISTO_MARGINS_NEGATIVE")
-    private char histoMarginsNegative;
+    public DiseaseStatus mapToDiseaseStatus(){
+        DiseaseStatus diseaseStatus = new DiseaseStatus();
+        Optional<Patient> optionalPatient = patientRepository.findById(this.patientID);
 
-    @JsonProperty("HISTO_POSITIVEMARGINS")
-    private String histoMarginsPositive;
+        if(optionalPatient.isPresent()) {
+            Patient patient = optionalPatient.get();
+            diseaseStatus.setPatient(patient);
+            diseaseStatus.setDxstatusAlive(this.dxstatusAlive);
+            diseaseStatus.setDxstatusSymptoms(this.dxstatusSymptoms);
+            diseaseStatus.setDxstatusRecurrence(this.dxstatusRecurrence);
+            diseaseStatus.setDxstatusMetastatic(this.dxstatusMetastatic);
+            diseaseStatus.setDxstatusCurative(this.dxstatusCurative);
 
-    @JsonProperty("HISTO_STAGE")
-    private String histoStage;
-
-    @JsonProperty("HISTO_CREATEDON")
-    private Timestamp histoCreatedOn;
-
-    @JsonProperty("HISTO_UPDATEDON")
-    private Timestamp histoUpdatedOn;
-
-    @JsonProperty("HISTO_ENCODER")
-    private Long histoEncoderID;
+            Timestamp currrentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+            diseaseStatus.setDxstatusCreatedOn(currrentTimestamp);
+            return diseaseStatus;
+        }
+        return null;
+    }
 }

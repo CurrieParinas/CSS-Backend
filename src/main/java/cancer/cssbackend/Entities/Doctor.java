@@ -18,7 +18,7 @@ public class Doctor {
     @SequenceGenerator(name = "DOCTOR_SEQ", sequenceName = "DOCTOR_SEQ", allocationSize = 1)
     @Column(name = "DOCTOR_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "DOCTOR_SEQ")
-    private Long doctorID;
+    private Long doctorId;
 
     @OneToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
@@ -35,7 +35,7 @@ public class Doctor {
     @ManyToOne
     @JoinColumn(name = "DOCTOR_SPECIALTY", referencedColumnName = "SPECIALTY_ID")
     private Specialty specialty;
-    //dhsdhsh
+
     @Lob
     @Column(name = "DOCTOR_E_SIGNATURE")
     private byte[] doctorESignature;
