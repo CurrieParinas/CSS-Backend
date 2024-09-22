@@ -58,6 +58,7 @@ CREATE TABLE USERTABLE (
     USER_BIRTHDATE DATE NOT NULL,
     USER_BIRTHPLACE VARCHAR2(255) NOT NULL,
     USER_ADDRESS NUMBER, -- Foreign key to Address table
+    USER_CONTACTNO NUMBER,
     USER_ROLE NUMBER, -- Foreign key to a Role table
     USER_ACCESS NUMBER , -- Foreign key to an Access table
     USER_IS_VERIFIED CHAR(1),
