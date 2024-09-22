@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.Meta;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -35,7 +34,7 @@ public class Disease {
     @JsonProperty("DISEASE_PRIMARY_SITE")
     private BodySite bodySite;
 
-    @Column(name = "DISEASE_DIAGNOSISDATE")
+    @Column(name = "DISEASE_DIAGNOSIS_DATE")
     private Date diseaseDiagnosisDate;
 
     @OneToOne
@@ -46,34 +45,33 @@ public class Disease {
     @Column(name = "DISEASE_LATERALITY")
     private String diseaseLaterality;
 
-    //wala pa histology table
-    //@Column(name = "DISEASE_HISTOLOGY")
-    //private int diseaseHistology;
+    @OneToOne
+    @Column(name = "DISEASE_HISTOLOGY")
+    private Histology diseaseHistology;
 
     @Column(name = "DISEASE_EXTENT")
     private String diseaseExtent;
 
-    @Column(name = "DISEASE_TUMORSIZE")
+    @Column(name = "DISEASE_TUMOR_SIZE")
     private int diseaseTumorSize;
 
-    @Column(name = "DISEASE_LYMPHNODE")
+    @Column(name = "DISEASE_LYMPH_NODE")
     private int diseaseLymphNode;
 
     @Column(name = "DISEASE_METASTATIC")
     private char diseaseMetastatic;
 
-    @OneToMany
-    @JoinColumn(name = "DISEASE_METASTATICSITE")
-    @JsonProperty("DISEASE_METASTATICSITE")
-    private List<MetastaticSite> metastaticSites;
+    @OneToOne
+    @JoinColumn(name = "DISEASE_METASTATIC_SITE", referencedColumnName = "METS_ID")
+    @JsonProperty("DISEASE_METASTATIC_SITE")
+    private MetastaticSite metastaticSite;
 
-    @Column(name = "DISEASE_MULTIPLEPRIMARY")
+    @Column(name = "DISEASE_MULTIPLE_PRIMARY")
     private int diseaseMultiplePrimary;
 
     @OneToMany
-    @JoinColumn(name = "DISEASE_OTHERSITE")
-    @JsonProperty("DISEASE_OTHERSITE")
-    private List<MetastaticSite> otherSites;
+    @JsonProperty("DISEASE_OTHER_SITE")
+    private List<BodySite> otherSites;
 
     @Column(name = "DISEASE_TSTAGE")
     private int diseaseTstage;
@@ -90,27 +88,22 @@ public class Disease {
     @Column(name = "DISEASE_STAGE")
     private String diseaseStage;
 
-    @Column(name = "DISEASE_STAGETYPE")
+    @Column(name = "DISEASE_STAGE_TYPE")
     private String diseaseStageType;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "DISEASE_STATUS")
     @JsonProperty("DISEASE_STATUS")
-    private List<DiseaseStatus> diseaseStatuses;
+    private DiseaseStatus diseaseStatus;
 
-    @Column(name = "DISEASE_CREATEDON")
+    @Column(name = "DISEASE_CREATED_ON")
     private Timestamp diseaseCreatedOn;
 
-    @Column(name = "DISEASE_UPDATEDON")
+    @Column(name = "DISEASE_UPDATED_ON")
     private Timestamp diseaseUpdatedOn;
 
     @ManyToOne
     @JoinColumn(name = "DISEASE_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("DISEASE_ENCODER")
     private User diseaseEncoder;
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 }
