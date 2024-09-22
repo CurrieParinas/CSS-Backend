@@ -1,23 +1,16 @@
 package cancer.cssbackend.Entities.Requests;
 
-import cancer.cssbackend.Entities.Access;
+
 import cancer.cssbackend.Entities.DiseaseStatus;
-import cancer.cssbackend.Entities.Patient;
-import cancer.cssbackend.Entities.User;
+
 import cancer.cssbackend.Repositories.PatientRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -34,6 +27,34 @@ public class AddDiseaseStatusRequest {
 
     @JsonProperty("DXSTATUS_SYMPTOMS")
     private char dxstatusSymptoms;
+    //@JsonProperty("PATIENT_ID")
+    //private Long patientID;
+
+    //@JsonProperty("HISTO_PATHOLOGY")
+    //private Long histoPathology;
+
+    @JsonProperty("DXSTATUS_ALIVE")
+    private char diseaseStatusAlive;
+
+    @JsonProperty("DXSTATUS_SYMPTOMS")
+    private char diseaseStatusSymptoms;
+
+    @JsonProperty("DXSTATUS_RECURRENCE")
+    private char diseaseStatusRecurrence;
+
+    @JsonProperty("DXSTATUS_METASTATIC")
+    private char diseaseStatusMetastatic;
+
+    @JsonProperty("DXSTATUS_CURATIVE")
+    private char diseaseStatusCurative;
+
+    @JsonProperty("DXSTATUS_CREATEDON")
+    private String diseaseStatusCreatedOn;
+
+    /*
+    @JsonProperty("HISTO_TUMORSIZE")
+    private int histoTumorSize;
+>>>>>>> Stashed changes
 
     @JsonProperty("DXSTATUS_RECURRENCE")
     private char dxstatusRecurrence;
@@ -65,5 +86,28 @@ public class AddDiseaseStatusRequest {
             return diseaseStatus;
         }
         return null;
+    @JsonProperty("HISTO_STAGE")
+    private String histoStage;
+
+    @JsonProperty("HISTO_CREATEDON")
+    private String histoCreatedOn;
+
+    @JsonProperty("HISTO_UPDATEDON")
+    private String histoUpdatedOn;
+
+    @JsonProperty("HISTO_ENCODER")
+    private Long histoEncoderID;
+    */
+    public DiseaseStatus mapToDiseaseStatus(){
+        DiseaseStatus diseaseStatus = new DiseaseStatus();
+
+        diseaseStatus.setDiseaseStatusAlive(this.diseaseStatusAlive);
+        diseaseStatus.setDiseaseStatusSymptoms(this.diseaseStatusSymptoms);
+        diseaseStatus.setDiseaseStatusRecurrence(this.diseaseStatusRecurrence);
+        diseaseStatus.setDiseaseStatusMetastatic(this.diseaseStatusMetastatic);
+        diseaseStatus.setDiseaseStatusCurative(this.diseaseStatusCurative);
+        diseaseStatus.setDiseaseStatusCreatedOn(Timestamp.valueOf(this.diseaseStatusCreatedOn));
+
+        return diseaseStatus;
     }
 }

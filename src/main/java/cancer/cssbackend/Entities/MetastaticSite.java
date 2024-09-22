@@ -1,5 +1,6 @@
 package cancer.cssbackend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -68,5 +69,7 @@ public class MetastaticSite {
     @ManyToOne
     @JoinColumn(name = "METS_ENCODER", referencedColumnName = "USER_ID")
     @JsonProperty("METS_ENCODER")
-    private User histoEncoder;
+    private User metsEncoder;
+
+
 }

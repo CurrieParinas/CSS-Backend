@@ -28,22 +28,26 @@ public class DiseaseStatus {
 
     @Column(name = "DXSTATUS_ALIVE")
     private char dxstatusAlive;
+    private char diseaseStatusAlive;
 
     @Column(name = "DXSTATUS_SYMPTOMS")
-    private char dxstatusSymptoms;
+    private char diseaseStatusSymptoms;
 
     @Column(name = "DXSTATUS_RECURRENCE")
-    private char dxstatusRecurrence;
+    private char diseaseStatusRecurrence;
 
     @Column(name = "DXSTATUS_METASTATIC")
-    private char dxstatusMetastatic;
+    private char diseaseStatusMetastatic;
 
     @Column(name = "DXSTATUS_CURATIVE")
-    private char dxstatusCurative;
+    private char diseaseStatusCurative;
 
-    @Column(name = "DXSTATUS_CREATED_ON")
-    private Timestamp dxstatusCreatedOn;
+    @Column(name = "DXSTATUS_CREATEDON")
+    private Timestamp diseaseStatusCreatedOn;
 
+    /*
+    @Column(name="HISTO_PATHOLOGY")
+    private Long histoPathology;
 //    @Column(name="HISTO_PATHOLOGY")
 //    private Long histoPathology;
 //
@@ -82,5 +86,5 @@ public class DiseaseStatus {
 //    @ManyToOne
 //    @JoinColumn(name = "HISTO_ENCODER", referencedColumnName = "HISTO_ENCODER")
 //    @JsonProperty("HISTO_ENCODER")
-//    private User histoEncoder;
+//    private User histoEncoder; */
 }
