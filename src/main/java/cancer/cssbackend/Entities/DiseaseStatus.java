@@ -27,107 +27,21 @@ public class DiseaseStatus {
     private Patient patient;
 
     @Column(name = "DXSTATUS_ALIVE")
-<<<<<<< Updated upstream
     private char dxstatusAlive;
-=======
->>>>>>> Stashed changes
-    private char diseaseStatusAlive;
+
 
     @Column(name = "DXSTATUS_SYMPTOMS")
-    private char diseaseStatusSymptoms;
+    private char dxstatusSymptoms;
 
     @Column(name = "DXSTATUS_RECURRENCE")
-    private char diseaseStatusRecurrence;
+    private char dxstatusRecurrence;
 
     @Column(name = "DXSTATUS_METASTATIC")
-    private char diseaseStatusMetastatic;
+    private char dxstatusMetastatic;
 
     @Column(name = "DXSTATUS_CURATIVE")
-    private char diseaseStatusCurative;
+    private char dxstatusCurative;
 
-    @Column(name = "DXSTATUS_CREATEDON")
-    private Timestamp diseaseStatusCreatedOn;
-
-    /*
-    @Column(name="HISTO_PATHOLOGY")
-    private Long histoPathology;
-<<<<<<< Updated upstream
-//    @Column(name="HISTO_PATHOLOGY")
-//    private Long histoPathology;
-//
-//    @Column(name = "HISTO_TUMORSIZE")
-//    private int histoTumorSize;
-//
-//    @Column(name = "HISTO_TUMOREXTENSION")
-//    private char histoTumorExtension;
-//
-//    @Column(name = "HISTO_GRADE")
-//    private int histoGrade;
-//
-//    @Column(name = "HISTO_NODEPOSITIVE")
-//    private int histoNodePositive;
-//
-//    @Column(name = "HISTO_NODEHARVEST")
-//    private int histoNodeHarvest;
-//
-//    @Column(name = "HISTO_MARGINS_NEGATIVE")
-//    private char histoMarginsNegative;
-//
-//    @Column(name = "HISTO_POSITIVEMARGINS")
-//    private String histoMarginsPositive;
-//
-//    @Column(name = "HISTO_STAGE")
-//    private String histoStage;
-//
-//    @Column(name = "HISTO_CREATEDON")
-//    private Timestamp histoCreatedOn;
-//
-//    @Column(name = "HISTO_UPDATEDON")
-//    private Timestamp histoUpdatedOn;
-//
-//
-//    //tama ba to huhu
-//    @ManyToOne
-//    @JoinColumn(name = "HISTO_ENCODER", referencedColumnName = "HISTO_ENCODER")
-//    @JsonProperty("HISTO_ENCODER")
-//    private User histoEncoder; */
-=======
-
-    @Column(name = "HISTO_TUMORSIZE")
-    private int histoTumorSize;
-
-    @Column(name = "HISTO_TUMOREXTENSION")
-    private char histoTumorExtension;
-
-    @Column(name = "HISTO_GRADE")
-    private int histoGrade;
-
-    @Column(name = "HISTO_NODEPOSITIVE")
-    private int histoNodePositive;
-
-    @Column(name = "HISTO_NODEHARVEST")
-    private int histoNodeHarvest;
-
-    @Column(name = "HISTO_MARGINS_NEGATIVE")
-    private char histoMarginsNegative;
-
-    @Column(name = "HISTO_POSITIVEMARGINS")
-    private String histoMarginsPositive;
-
-    @Column(name = "HISTO_STAGE")
-    private String histoStage;
-
-    @Column(name = "HISTO_CREATEDON")
-    private Timestamp histoCreatedOn;
-
-    @Column(name = "HISTO_UPDATEDON")
-    private Timestamp histoUpdatedOn;
-
-
-    //tama ba to
-    @ManyToOne
-    @JoinColumn(name = "HISTO_ENCODER", referencedColumnName = "HISTO_ENCODER")
-    @JsonProperty("HISTO_ENCODER")
-    private User histoEncoder; */
->>>>>>> Stashed changes
+    @Column(name = "DXSTATUS_CREATED_ON")
+    private Timestamp dxstatusCreatedOn;
 }
