@@ -14,3 +14,4 @@ INSERT INTO USERTABLE VALUES (USER_SEQ.nextval, 'Callang', 'Nathan', 'B', 'nbcal
                               'pw', 'Male', 'Single', TO_DATE('08-07-2003', 'mm-dd-yyyy'), 'Oman', 2, 2, 2, 'Y', 'Active', sysdate, sysdate, 1);
 
 SELECT * FROM USERTABLE;
+commit;
