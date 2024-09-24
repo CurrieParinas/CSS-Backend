@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        Map<String, Object> user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (user != null) {
             // User found, handle successful login
             return ResponseEntity.ok(user);

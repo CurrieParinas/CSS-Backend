@@ -99,12 +99,12 @@ public class AddDiseaseStatusRequest {
     public DiseaseStatus mapToDiseaseStatus(){
         DiseaseStatus diseaseStatus = new DiseaseStatus();
 
-        diseaseStatus.setDiseaseStatusAlive(this.diseaseStatusAlive);
-        diseaseStatus.setDiseaseStatusSymptoms(this.diseaseStatusSymptoms);
-        diseaseStatus.setDiseaseStatusRecurrence(this.diseaseStatusRecurrence);
-        diseaseStatus.setDiseaseStatusMetastatic(this.diseaseStatusMetastatic);
-        diseaseStatus.setDiseaseStatusCurative(this.diseaseStatusCurative);
-        diseaseStatus.setDiseaseStatusCreatedOn(Timestamp.valueOf(this.diseaseStatusCreatedOn));
+        diseaseStatus.setDxstatusAlive(this.diseaseStatusAlive);
+        diseaseStatus.setDxstatusAlive(this.diseaseStatusSymptoms);
+        diseaseStatus.setDxstatusRecurrence(this.diseaseStatusRecurrence);
+        diseaseStatus.setDxstatusMetastatic(this.diseaseStatusMetastatic);
+        diseaseStatus.setDxstatusCurative(this.diseaseStatusCurative);
+        diseaseStatus.setDxstatusCreatedOn(Timestamp.valueOf(this.diseaseStatusCreatedOn));
 
         return diseaseStatus;
     }

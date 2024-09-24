@@ -46,7 +46,7 @@ public class Disease {
     private String diseaseLaterality;
 
     @OneToOne
-    @Column(name = "DISEASE_HISTOLOGY")
+    @JoinColumn(name = "DISEASE_HISTOLOGY")
     private Histology diseaseHistology;
 
     @Column(name = "DISEASE_EXTENT")
