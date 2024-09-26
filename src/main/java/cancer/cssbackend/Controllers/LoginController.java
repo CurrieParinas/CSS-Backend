@@ -1,7 +1,6 @@
 package cancer.cssbackend.Controllers;
 
 import cancer.cssbackend.Entities.Requests.LoginRequest;
-import cancer.cssbackend.Entities.User;
 import cancer.cssbackend.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        Map<String, Object> user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        Object user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (user != null) {
             // User found, handle successful login
             return ResponseEntity.ok(user);
