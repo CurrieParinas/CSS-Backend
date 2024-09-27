@@ -1,21 +1,24 @@
 package cancer.cssbackend.Entities.Requests;
 
+import cancer.cssbackend.Entities.Patient;
 import cancer.cssbackend.Entities.RXType;
 import cancer.cssbackend.Entities.User;
+import cancer.cssbackend.Services.PatientService;
 import cancer.cssbackend.Services.UserService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.repository.query.Param;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 public class AddRxTypeRequest {
-    @JsonProperty("RXTYPE_ID")
-    private Long rxtypeId;
+    @JsonProperty("PATIENT_ID")
+    private Long patientId;
 
     @JsonProperty("RXTYPE_SURGERY")
     private char rxtypeSurgery;
@@ -41,9 +44,14 @@ public class AddRxTypeRequest {
     @JsonProperty("RXTYPE_ENCODER")
     private Long encoderId;
 
-    public RXType mapToRxType(UserService userService){
+    public RXType mapToRxType(UserService userService, PatientService patientService){
         RXType rxType = new RXType();
-        rxType.setRxtypeId(this.rxtypeId);
+
+        Patient patient = patientService.findPatient(patientId);
+        if(patient != null){
+            rxType.setPatient(patient);
+        }
+
         rxType.setRxtypeSurgery(this.rxtypeSurgery);
         rxType.setRxtypeChemotherapy(this.rxtypeChemotherapy);
         rxType.setRxtypeRadiotherapy(this.rxtypeRadiotherapy);
