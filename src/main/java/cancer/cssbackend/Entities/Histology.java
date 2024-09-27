@@ -1,6 +1,5 @@
 package cancer.cssbackend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +22,6 @@ public class Histology {
 
     @OneToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
-    @JsonProperty("PATIENT_ID")
     private Patient patient;
 
     @Column(name="HISTO_PATHOLOGY")
@@ -61,6 +59,5 @@ public class Histology {
 
     @ManyToOne
     @JoinColumn(name = "HISTO_ENCODER", referencedColumnName = "USER_ID")
-    @JsonProperty("HISTO_ENCODER")
     private User histoEncoder;
 }

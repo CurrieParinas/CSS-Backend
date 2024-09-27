@@ -1,6 +1,5 @@
 package cancer.cssbackend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Getter
 public class Basis {
     @Id
-    @JsonProperty("BASIS_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "BASIS_SEQ")
     @SequenceGenerator(name = "BASIS_SEQ", sequenceName = "BASIS_SEQ", allocationSize = 1)
     @Column(name = "BASIS_ID", nullable = false)

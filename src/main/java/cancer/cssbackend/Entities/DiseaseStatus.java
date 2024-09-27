@@ -1,6 +1,5 @@
 package cancer.cssbackend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +22,6 @@ public class DiseaseStatus {
 
     @OneToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
-    @JsonProperty("PATIENT_ID")
     private Patient patient;
 
     @Column(name = "DXSTATUS_ALIVE")
