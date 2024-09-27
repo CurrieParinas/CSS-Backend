@@ -1,10 +1,10 @@
 package cancer.cssbackend.Controllers;
 
+import cancer.cssbackend.Entities.Patient;
+import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Services.PatientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -12,4 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/patient")
 public class PatientController {
     private final PatientService patientService;
+
+    @PostMapping("/add")
+    public Patient addPatient(@RequestBody AddPatientRequest addPatientRequest) {
+        return patientService.addPatient(addPatientRequest);
+    }
 }
