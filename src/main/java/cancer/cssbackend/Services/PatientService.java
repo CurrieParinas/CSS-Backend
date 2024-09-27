@@ -6,7 +6,6 @@ import cancer.cssbackend.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.beans.Encoder;
 import java.util.Optional;
 
 @Service
@@ -56,5 +55,10 @@ public class PatientService {
         }
 
         return patient;
+    }
+  
+    public Patient findPatient(Long patientID){
+        Optional<Patient> patient = patientRepository.findById(patientID);
+        return patient.orElseThrow(() -> new RuntimeException("Patient not found with ID " + patientID));
     }
 }
