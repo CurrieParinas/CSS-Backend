@@ -2,6 +2,7 @@ package cancer.cssbackend.Services;
 
 import cancer.cssbackend.Entities.User;
 import cancer.cssbackend.Repositories.DoctorRepository;
+import cancer.cssbackend.Repositories.PatientRepository;
 import cancer.cssbackend.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,16 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
+    private final PatientRepository patientRepository;
 
     public Object loginUser(String email, String password) {
         User userToLogin = userRepository.findByUserEmailAndUserPassword(email, password);
 
-        //if doctor yung user, return kasama yung doctor table infos
         if (userToLogin != null && userToLogin.getUserRole().getRoleId() == 2) {
             return doctorRepository.findByUser(userToLogin);
-        }
-        // if patient
-        //else if (userToLogin != null && userToLogin.getUserRole().getRoleId() == 3) {}
-        // If no valid user or role is found, return null or handle errors
-        else {
+        } else if (userToLogin != null && userToLogin.getUserRole().getRoleId() == 3) {
+            return patientRepository.findByUser(userToLogin);
+        } else {
             return null;
         }
     }

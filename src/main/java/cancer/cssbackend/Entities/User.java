@@ -17,7 +17,6 @@ import java.sql.Date;
 @Getter
 public class User {
     @Id
-    @JsonProperty("USER_ID")
     @GeneratedValue(generator = "USER_SEQ")
     @SequenceGenerator(name="USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
     @Column(name = "USER_ID")
@@ -52,17 +51,14 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "USER_ADDRESS", referencedColumnName = "ADDRESS_ID")
-    @JsonProperty("USER_ADDRESS")
     private Address userAddress;
 
     @ManyToOne
     @JoinColumn(name = "USER_ROLE", referencedColumnName = "ROLE_ID")
-    @JsonProperty("USER_ROLE")
     private Role userRole;
 
     @ManyToOne
     @JoinColumn(name = "USER_ACCESS", referencedColumnName = "ACCESS_ID")
-    @JsonProperty("USER_ACCESS")
     private Access userAccess;
 
     @Column(name = "USER_IS_VERIFIED")
@@ -79,6 +75,5 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "USER_ENCODER", referencedColumnName = "USER_ID")
-    @JsonProperty("USER_ENCODER")
     private User userEncoder;
 }

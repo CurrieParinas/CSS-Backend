@@ -1,6 +1,5 @@
 package cancer.cssbackend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,6 @@ import java.sql.Timestamp;
 @Getter
 public class Patient {
     @Id
-    @JsonProperty("PATIENT_ID")
     @GeneratedValue(generator = "PATIENT_SEQ")
     @SequenceGenerator(name="PATIENT_SEQ", sequenceName = "PATIENT_SEQ", allocationSize = 1)
     @Column(name = "PATIENT_ID")
@@ -24,12 +22,11 @@ public class Patient {
 
     @OneToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
-    @JsonProperty("USER")
     private User user;
 
-    @JsonProperty("PATIENT_CREATED_ON")
+    @Column(name = "PATIENT_CREATED_ON")
     private Timestamp patientCreatedOn;
 
-    @JsonProperty("PATIENT_UPDATED_ON")
+    @Column(name = "PATIENT_UPDATED_ON")
     private Timestamp patientUpdatedOn;
 }

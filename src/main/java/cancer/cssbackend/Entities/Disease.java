@@ -1,6 +1,5 @@
 package cancer.cssbackend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,6 @@ import java.util.List;
 @Getter
 public class Disease {
     @Id
-    @JsonProperty("DISEASE_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "DISEASE_SEQ")
     @SequenceGenerator(name = "DISEASE_SEQ", sequenceName = "DISEASE_SEQ", allocationSize = 1)
     @Column(name = "DISEASE_ID", nullable = false)
@@ -26,12 +24,10 @@ public class Disease {
 
     @OneToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
-    @JsonProperty("PATIENT_ID")
     private Patient patient;
 
     @OneToOne
     @JoinColumn(name = "DISEASE_PRIMARY_SITE", referencedColumnName = "BODYSITE_ID")
-    @JsonProperty("DISEASE_PRIMARY_SITE")
     private BodySite bodySite;
 
     @Column(name = "DISEASE_DIAGNOSIS_DATE")
@@ -39,7 +35,6 @@ public class Disease {
 
     @OneToOne
     @JoinColumn(name = "DISEASE_BASIS", referencedColumnName = "BASIS_ID")
-    @JsonProperty("DISEASE_BASIS")
     private Basis basis;
 
     @Column(name = "DISEASE_LATERALITY")
@@ -63,14 +58,12 @@ public class Disease {
 
     @OneToOne
     @JoinColumn(name = "DISEASE_METASTATIC_SITE", referencedColumnName = "METS_ID")
-    @JsonProperty("DISEASE_METASTATIC_SITE")
     private MetastaticSite metastaticSite;
 
     @Column(name = "DISEASE_MULTIPLE_PRIMARY")
     private int diseaseMultiplePrimary;
 
     @OneToMany
-    @JsonProperty("DISEASE_OTHER_SITE")
     private List<BodySite> otherSites;
 
     @Column(name = "DISEASE_TSTAGE")
@@ -93,7 +86,6 @@ public class Disease {
 
     @OneToOne
     @JoinColumn(name = "DISEASE_STATUS")
-    @JsonProperty("DISEASE_STATUS")
     private DiseaseStatus diseaseStatus;
 
     @Column(name = "DISEASE_CREATED_ON")
@@ -104,6 +96,5 @@ public class Disease {
 
     @ManyToOne
     @JoinColumn(name = "DISEASE_ENCODER", referencedColumnName = "USER_ID")
-    @JsonProperty("DISEASE_ENCODER")
     private User diseaseEncoder;
 }

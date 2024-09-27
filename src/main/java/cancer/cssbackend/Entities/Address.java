@@ -1,12 +1,10 @@
 package cancer.cssbackend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CollectionId;
 
 @Entity(name = "ADDRESS")
 @RequiredArgsConstructor
@@ -15,7 +13,6 @@ import org.hibernate.annotations.CollectionId;
 @Getter
 public class Address {
     @Id
-    @JsonProperty("ADDRESS_ID")
     @GeneratedValue(generator = "ADDRESS_SEQ")
     @SequenceGenerator(name="ADDRESS_SEQ", sequenceName = "ADDRESS_SEQ", allocationSize = 1)
     @Column(name = "ADDRESS_ID", nullable = false)
