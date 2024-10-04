@@ -17,4 +17,9 @@ public class PatientController {
     public Patient addPatient(@RequestBody AddPatientRequest addPatientRequest) {
         return patientService.addPatient(addPatientRequest);
     }
+
+    @GetMapping("/find")
+    public Patient findPatientById(@RequestParam(value="patientID") Long patientID){
+        return this.patientService.findPatient(patientID);
+    }
 }

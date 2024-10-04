@@ -23,14 +23,12 @@ public class PatientService {
         Patient patient = addPatientRequest.mapToPatient();
         Address address = patient.getUser().getUserAddress();
         addressRepository.save(address);
-
         User user = patient.getUser();
         Optional<Role> optionalRole = roleRepository.findById(3L);
         if (optionalRole.isPresent()) {
             Role role = optionalRole.get();
             user.setUserRole(role);
         }
-
         Optional<Access> optionalAccess = accessRepository.findById(1L);
         if (optionalAccess.isPresent()) {
             Access access = optionalAccess.get();
@@ -42,10 +40,8 @@ public class PatientService {
             user.setUserEncoder(encoder);
         }
         userRepository.save(user);
-
         patient.setUser(user);
         patientRepository.save(patient);
-
         if (patient.getUser().getUserEncoder().getUserRole().getRoleId() == 2) {
             Onboard onboard = new Onboard();
             Doctor doctor = doctorRepository.findByUser(patient.getUser().getUserEncoder());
@@ -53,7 +49,6 @@ public class PatientService {
             onboard.setDoctor(doctor);
             onboardRepository.save(onboard);
         }
-
         return patient;
     }
   
