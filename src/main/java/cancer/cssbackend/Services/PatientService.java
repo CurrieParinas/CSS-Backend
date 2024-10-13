@@ -77,6 +77,6 @@ public class PatientService {
 
             return "Successfully deleted the patient's account";
         }
-        return "Deletion unsuccessful";
+        return "Deletion unsuccessful or no patient with that ID exists";
     }
 }
