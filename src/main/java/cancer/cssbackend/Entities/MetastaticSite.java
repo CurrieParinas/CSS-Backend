@@ -64,6 +64,6 @@ public class MetastaticSite {
     private Timestamp metsUpdatedOn;
 
     @ManyToOne
-    @JoinColumn(name = "METS_ENCODER", referencedColumnName = "USER_ID")
-    private User metsEncoder;
+    @JoinColumn(name = "METS_ENCODER", referencedColumnName = "DOCTOR_ID")
+    private Doctor metsEncoder;
 }
