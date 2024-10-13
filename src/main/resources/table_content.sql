@@ -100,22 +100,22 @@ INSERT INTO DOCTOR VALUES (DOCTOR_SEQ.nextval, 6, 4, 2, 1, null, '119034', TO_DA
 INSERT INTO DOCTOR VALUES (DOCTOR_SEQ.nextval, 21, 2, 1, 2, null, '128934', TO_DATE('04/29/2028', 'mm/dd/yyyy'), 9);
 INSERT INTO DOCTOR VALUES (DOCTOR_SEQ.nextval, 13, 3, 2, 5, null, '101997', TO_DATE('05/28/2027', 'mm/dd/yyyy'), 10);
 
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 25, 1, 1, null, 1, null, 1, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 29, 2, null, 1, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 28, 3, null, 2, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 1, 4, 2, 3, null, null, 2, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 4, 5, null, 4, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 10, 6, null, 5, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 2, 7, null, 6, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 9, 8, 3, null, 2, 1, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 11, 9, null, 7, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 15, 10, null, 8, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 18, 11, 4, null, 3, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 5, 12, null, 9, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 3, 13, 5, null, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 30, 14, 6, null, 4, null, 3, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 20, 15, null, 10, null, null, null, sysdate, sysdate);
-INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 24, 16, 7, null, null, null, null, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 25, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 29, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 28, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 1,  sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 4,  sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 10, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 2, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 9, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 11, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 15, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 18, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 5, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 3, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 30, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 20, sysdate, sysdate);
+INSERT INTO PATIENT VALUES (PATIENT_SEQ.nextval, 24, sysdate, sysdate);
 
 INSERT INTO ONBOARD VALUES (ONBOARD_SEQ.nextval, 1, 7, null);
 INSERT INTO ONBOARD VALUES (ONBOARD_SEQ.nextval, 1, 3, null);
