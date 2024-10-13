@@ -1,5 +1,6 @@
 package cancer.cssbackend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -73,6 +74,7 @@ public class User {
     @Column(name = "USER_UPDATED_ON")
     private Timestamp userUpdatedOn;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "USER_ENCODER", referencedColumnName = "USER_ID")
     private User userEncoder;
