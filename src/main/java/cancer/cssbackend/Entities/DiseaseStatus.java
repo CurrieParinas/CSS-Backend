@@ -27,7 +27,6 @@ public class DiseaseStatus {
     @Column(name = "DXSTATUS_ALIVE")
     private char dxstatusAlive;
 
-
     @Column(name = "DXSTATUS_SYMPTOMS")
     private char dxstatusSymptoms;
 

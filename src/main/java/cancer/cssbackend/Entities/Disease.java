@@ -26,14 +26,14 @@ public class Disease {
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
     private Patient patient;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "DISEASE_PRIMARY_SITE", referencedColumnName = "BODYSITE_ID")
     private BodySite bodySite;
 
     @Column(name = "DISEASE_DIAGNOSIS_DATE")
     private Date diseaseDiagnosisDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "DISEASE_BASIS", referencedColumnName = "BASIS_ID")
     private Basis basis;
 
@@ -41,7 +41,7 @@ public class Disease {
     private String diseaseLaterality;
 
     @OneToOne
-    @JoinColumn(name = "DISEASE_HISTOLOGY")
+    @JoinColumn(name = "DISEASE_HISTOLOGY", referencedColumnName = "HISTOLOGY_ID")
     private Histology diseaseHistology;
 
     @Column(name = "DISEASE_EXTENT")
@@ -58,13 +58,10 @@ public class Disease {
 
     @OneToOne
     @JoinColumn(name = "DISEASE_METASTATIC_SITE", referencedColumnName = "METS_ID")
-    private MetastaticSite metastaticSite;
+    private MetastaticSite diseaseMetastaticSite;
 
     @Column(name = "DISEASE_MULTIPLE_PRIMARY")
     private int diseaseMultiplePrimary;
-
-    @OneToMany
-    private List<BodySite> otherSites;
 
     @Column(name = "DISEASE_TSTAGE")
     private int diseaseTstage;
@@ -85,7 +82,7 @@ public class Disease {
     private String diseaseStageType;
 
     @OneToOne
-    @JoinColumn(name = "DISEASE_STATUS")
+    @JoinColumn(name = "DISEASE_STATUS", referencedColumnName = "DXSTATUS_ID")
     private DiseaseStatus diseaseStatus;
 
     @Column(name = "DISEASE_CREATED_ON")
@@ -95,6 +92,6 @@ public class Disease {
     private Timestamp diseaseUpdatedOn;
 
     @ManyToOne
-    @JoinColumn(name = "DISEASE_ENCODER", referencedColumnName = "USER_ID")
-    private User diseaseEncoder;
+    @JoinColumn(name = "DISEASE_ENCODER", referencedColumnName = "DOCTOR_ID")
+    private Doctor diseaseEncoder;
 }

@@ -58,6 +58,6 @@ public class Histology {
     private Timestamp histoUpdatedOn;
 
     @ManyToOne
-    @JoinColumn(name = "HISTO_ENCODER", referencedColumnName = "USER_ID")
-    private User histoEncoder;
+    @JoinColumn(name = "HISTO_ENCODER", referencedColumnName = "DOCTOR_ID")
+    private Doctor histoEncoder;
 }
