@@ -22,4 +22,9 @@ public class PatientController {
     public Patient findPatientById(@RequestParam(value="patientID") Long patientID){
         return this.patientService.findPatient(patientID);
     }
+
+    @DeleteMapping("/delete")
+    public String deletePatientById(@RequestParam(value="patientID") Long patientID){
+        return this.patientService.deletePatient(patientID);
+    }
 }

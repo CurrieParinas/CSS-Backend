@@ -6,6 +6,7 @@ import cancer.cssbackend.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,5 +56,27 @@ public class PatientService {
     public Patient findPatient(Long patientID){
         Optional<Patient> patient = patientRepository.findById(patientID);
         return patient.orElseThrow(() -> new RuntimeException("Patient not found with ID " + patientID));
+    }
+
+    public String deletePatient(Long patientID){
+        Optional<Patient> patientToDelete = patientRepository.findById(patientID);
+
+        if(patientToDelete.isPresent()){
+            //delete muna mga onboard
+            List<Onboard> onboardList = onboardRepository.findByPatient(patientToDelete);
+            onboardRepository.deleteAll(onboardList);
+
+            //find user entry ng patient
+            User userToDelete = userRepository.getUserByPatientID(patientID);
+
+            //then delete patient
+            patientRepository.delete(patientToDelete.get());
+
+            //then call delete user
+            userRepository.delete(userToDelete);
+
+            return "Successfully deleted the patient's account";
+        }
+        return "Deletion unsuccessful or no patient with that ID exists";
     }
 }
