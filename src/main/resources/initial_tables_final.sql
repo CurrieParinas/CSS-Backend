@@ -401,7 +401,7 @@ CREATE TABLE PATHOLOGY_DIM(
                               PATHOLOGY_DIM_LEVEL VARCHAR2(255),
                               TERM VARCHAR2(1000),
                               CODE_REFERENCE VARCHAR2(255),
-                              OBS CHAR(1),
+                              OBS VARCHAR2(10),
                               SEE_ALSO VARCHAR2(255),
                               SEE_NOTE VARCHAR2(1000),
                               INCLUDES VARCHAR2(1000),
