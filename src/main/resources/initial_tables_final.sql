@@ -395,6 +395,21 @@ CREATE TABLE CONSULT (
     CONSTRAINT FK_CONSULT_STATUS FOREIGN KEY (CONSULT_PATIENTSTATUS) REFERENCES DISEASESTATUS(DXSTATUS_ID)
 );
 
+CREATE TABLE PATHOLOGY_DIM(
+                              PATHOLOGY_DIM_ID NUMBER NOT NULL,
+                              ICDO32 VARCHAR2(255),
+                              PATHOLOGY_DIM_LEVEL VARCHAR2(255),
+                              TERM VARCHAR2(1000),
+                              CODE_REFERENCE VARCHAR2(255),
+                              OBS CHAR(1),
+                              SEE_ALSO VARCHAR2(255),
+                              SEE_NOTE VARCHAR2(1000),
+                              INCLUDES VARCHAR2(1000),
+                              EXCLUDES VARCHAR2(1000),
+                              OTHER_TEXT VARCHAR2(1000)
+);
+
+
 CREATE SEQUENCE ADDRESS_SEQ
     INCREMENT BY 1
     START WITH 1
@@ -536,6 +551,12 @@ CREATE SEQUENCE RAD_DETAILS_SEQ
 
 -- Sequence for CONSULT table
 CREATE SEQUENCE CONSULT_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+
+CREATE SEQUENCE PATHOLOGY_DIM_SEQ
     INCREMENT BY 1
     START WITH 1
     MINVALUE 1;
