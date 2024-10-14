@@ -1,12 +1,8 @@
 package cancer.cssbackend.Entities.Requests;
 
 import cancer.cssbackend.Entities.*;
-import cancer.cssbackend.Repositories.DoctorRepository;
-import cancer.cssbackend.Repositories.PatientRepository;
+import cancer.cssbackend.Services.PathologyDimService;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +14,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -190,13 +185,15 @@ public class AddDiseaseRequest {
     @JsonProperty("DISEASE_ENCODER")
     private Long diseaseEncoder;
 
-    public Disease mapToDisease(){
+    public Disease mapToDisease(PathologyDimService pathologyDimService){
         Disease disease = new Disease();
         Histology histology = new Histology();
         MetastaticSite metastaticSite = new MetastaticSite();
         DiseaseStatus diseaseStatus = new DiseaseStatus();
 
-        histology.setHistoPathology(histoPathology);
+        PathologyDim pathologyDim = pathologyDimService.findPathology(histoPathology);
+
+        histology.setHistoPathology(pathologyDim);
         histology.setHistoTumorSize(histoTumorSize);
         histology.setHistoTumorExtension(histoTumorExtension);
         histology.setHistoGrade(histoGrade);
