@@ -24,8 +24,9 @@ public class Histology {
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
     private Patient patient;
 
-    @Column(name="HISTO_PATHOLOGY")
-    private Long histoPathology;
+    @ManyToOne
+    @JoinColumn(name="HISTO_PATHOLOGY")
+    private PathologyDim histoPathology;
 
     @Column(name = "HISTO_TUMOR_SIZE")
     private int histoTumorSize;

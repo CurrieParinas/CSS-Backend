@@ -20,9 +20,10 @@ public class DiseaseService {
     private final BasisRepository basisRepository;
     private final BodySiteRepository bodySiteRepository;
     private final DiseaseOtherSiteRepository diseaseOtherSiteRepository;
+    private final PathologyDimService pathologyDimService;
 
     public Disease addDisease(AddDiseaseRequest addDiseaseRequest) {
-        Disease disease = addDiseaseRequest.mapToDisease();
+        Disease disease = addDiseaseRequest.mapToDisease(pathologyDimService);
         Histology histology = disease.getDiseaseHistology();
         MetastaticSite metastaticSite = disease.getDiseaseMetastaticSite();
         DiseaseStatus diseaseStatus = disease.getDiseaseStatus();
