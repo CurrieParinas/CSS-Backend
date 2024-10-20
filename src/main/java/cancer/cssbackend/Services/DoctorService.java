@@ -5,8 +5,10 @@ import cancer.cssbackend.Entities.Requests.AddDoctorRequest;
 import cancer.cssbackend.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.Doc;
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -27,8 +29,9 @@ public class DoctorService {
         return doctor.orElseThrow(() -> new RuntimeException("Doctor not found with ID " + doctorID));
     }
 
-    public Doctor addDoctor(AddDoctorRequest addDoctorRequest){
+    public Doctor addDoctor(AddDoctorRequest addDoctorRequest, MultipartFile doctorESignature) throws IOException {
         Doctor doctor = addDoctorRequest.mapToDoctor(hospitalService, departmentService, specialtyService);
+        doctor.setDoctorESignature(doctorESignature.getBytes());
         Address address = doctor.getUser().getUserAddress();
         addressRepository.save(address);
 
