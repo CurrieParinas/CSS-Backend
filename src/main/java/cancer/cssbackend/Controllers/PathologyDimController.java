@@ -22,4 +22,5 @@ public class PathologyDimController {
     @GetMapping("/all")
     public List<PathologyDim> getAllPathologyDim(){
         return pathologyDimService.fetchAllPathologyDim();
-    }}
+    }
+}
