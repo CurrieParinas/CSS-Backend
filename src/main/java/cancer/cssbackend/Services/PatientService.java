@@ -67,7 +67,7 @@ public class PatientService {
             onboardRepository.deleteAll(onboardList);
 
             //find user entry ng patient
-            User userToDelete = userRepository.getUserByPatientID(patientID);
+            User userToDelete = patientToDelete.get().getUser();
 
             //then delete patient
             patientRepository.delete(patientToDelete.get());
