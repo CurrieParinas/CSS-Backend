@@ -7,8 +7,10 @@ import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Services.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.Doc;
+import java.io.IOException;
 
 @CrossOrigin
 @RestController
@@ -18,7 +20,7 @@ public class DoctorController {
     private final DoctorService doctorService;
 
     @PostMapping("/add")
-    public Doctor addDoctor(@RequestBody AddDoctorRequest addDoctorRequest) {
-        return doctorService.addDoctor(addDoctorRequest);
+    public Doctor addDoctor(@RequestBody AddDoctorRequest addDoctorRequest, @RequestPart("doctorESig") MultipartFile doctorESignature) throws IOException {
+        return doctorService.addDoctor(addDoctorRequest, doctorESignature);
     }
 }
