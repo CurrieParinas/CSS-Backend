@@ -1,15 +1,16 @@
 CREATE TABLE PATHOLOGY_DIM(
-                              PATHOLOGY_DIM_ID NUMBER NOT NULL,
-                              ICDO32 VARCHAR2(255),
-                              PATHOLOGY_DIM_LEVEL VARCHAR2(255),
-                              TERM VARCHAR2(1000),
-                              CODE_REFERENCE VARCHAR2(255),
-                              OBS VARCHAR2(10),
-                              SEE_ALSO VARCHAR2(255),
-                              SEE_NOTE VARCHAR2(1000),
-                              INCLUDES VARCHAR2(1000),
-                              EXCLUDES VARCHAR2(1000),
-                              OTHER_TEXT VARCHAR2(1000)
+    PATHOLOGY_DIM_ID NUMBER NOT NULL,
+    ICDO32 VARCHAR2(255),
+    PATHOLOGY_DIM_LEVEL VARCHAR2(255),
+    TERM VARCHAR2(1000),
+    CODE_REFERENCE VARCHAR2(255),
+    OBS VARCHAR2(10),
+    SEE_ALSO VARCHAR2(255),
+    SEE_NOTE VARCHAR2(1000),
+    INCLUDES VARCHAR2(1000),
+    EXCLUDES VARCHAR2(1000),
+    OTHER_TEXT VARCHAR2(1000),
+    CONSTRAINT PK_PATHOLOGY PRIMARY KEY (PATHOLOGY_DIM_ID)
 );
 
 CREATE SEQUENCE PATHOLOGY_DIM_SEQ

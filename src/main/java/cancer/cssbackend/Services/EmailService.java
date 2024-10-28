@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -20,14 +21,19 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final ResourceLoader resourceLoader;
 
-    public void sendHtmlEmail(String to, String subject, Long userId, String token) throws MessagingException, IOException {
+    public void sendHtmlEmail(String type, String to, String subject, Long userId, String token) throws MessagingException, IOException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         helper.setTo(to);
         helper.setSubject(subject);
 
-        String htmlBody = loadHtmlTemplate("classpath:verification_email.html");
+        String htmlBody = "";
+        if (type.equals("verification")) {
+            htmlBody = loadHtmlTemplate("classpath:verification_email.html");
+        } else if (type.equals("forgot")) {
+            htmlBody = loadHtmlTemplate("classpath:forgot_password.html");
+        }
         htmlBody = htmlBody.replace("${userId}", userId.toString());
         htmlBody = htmlBody.replace("${token}", token);
 

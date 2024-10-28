@@ -37,7 +37,7 @@ public class VerificationService {
             }
             verification.setToken(token);
             verification.setExpiry(Timestamp.valueOf(expiryDate));
-            emailService.sendHtmlEmail(user.getUserEmail(), "Account Verification", user.getUserId(), token);
+            emailService.sendHtmlEmail("verification", user.getUserEmail(), "Account Verification", user.getUserId(), token);
             verificationRepository.save(verification);
             return "Verification mail sent.";
         }
@@ -51,8 +51,7 @@ public class VerificationService {
             Verification verification = verificationRepository.findByUserAndToken(user, token);
             if (verification == null) {
                 return "Invalid token.";
-            }
-            if (verification.isExpired()) {
+            } else if (verification.isExpired()) {
                 return "Token has expired.";
             }
 
