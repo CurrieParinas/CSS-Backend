@@ -21,39 +21,38 @@ public class ForgotPasswordService {
     private final UserRepository userRepository;
     private final EmailService emailService;
 
-    public String createForgotPassword(Long userId) throws MessagingException, IOException {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            String token = UUID.randomUUID().toString();
-            LocalDateTime expiryDate = LocalDateTime.now().plusMinutes(5);
-            ForgotPassword forgotPassword = forgotPasswordRepository.findByUser(user);
-            if (forgotPassword == null) {
-                forgotPassword = new ForgotPassword();
-                forgotPassword.setUser(user);
-            }
-            forgotPassword.setToken(token);
-            forgotPassword.setExpiry(Timestamp.valueOf(expiryDate));
-            emailService.sendHtmlEmail("forgot", user.getUserEmail(), "Account Verification", user.getUserId(), token);
-            forgotPasswordRepository.save(forgotPassword);
-            return "Password Reset mail sent.";
+    public String createForgotPassword(String email) throws MessagingException, IOException {
+        User user = userRepository.findByUserEmail(email);
+        if (user == null) {
+            return "User does not exist.";
         }
-        return "User does not exist.";
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expiryDate = LocalDateTime.now().plusMinutes(5);
+        ForgotPassword forgotPassword = forgotPasswordRepository.findByUser(user);
+        if (forgotPassword == null) {
+            forgotPassword = new ForgotPassword();
+            forgotPassword.setUser(user);
+        }
+        forgotPassword.setToken(token);
+        forgotPassword.setExpiry(Timestamp.valueOf(expiryDate));
+        emailService.sendHtmlEmail("forgot", email, "Account Verification", user.getUserId(), token);
+        forgotPasswordRepository.save(forgotPassword);
+        return "Password Reset mail sent.";
     }
 
-    public String verifyToken(Long userId, String token) {
+    public Long verifyToken(Long userId, String token) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             ForgotPassword forgotPassword = forgotPasswordRepository.findByUserAndToken(user, token);
             if (forgotPassword == null) {
-                return "Invalid token.";
+                return null;
             } else if (forgotPassword.isExpired()) {
-                return "Token has expired.";
+                return 0L;
             }
-            return "User verified successfully.";
+            return user.getUserId();
         }
-        return "User does not exist.";
+        return null;
     }
 
     public String changePassword(Long userId, String password) {
