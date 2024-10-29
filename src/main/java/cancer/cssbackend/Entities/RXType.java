@@ -1,5 +1,6 @@
 package cancer.cssbackend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class RXType {
     @Column(name = "RXTYPE_ID")
     private Long rxtypeId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID", foreignKey = @ForeignKey(name = "FK_PATIENT_RXTYPE"))
     private Patient patient;
@@ -46,6 +48,7 @@ public class RXType {
     @Column(name = "RXTYPE_NOTES")
     private String rxtypeNotes;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RXTYPE_ENCODER")
     private User encoder;

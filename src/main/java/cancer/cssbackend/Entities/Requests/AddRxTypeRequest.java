@@ -42,7 +42,7 @@ public class AddRxTypeRequest {
     private String rxtypeNotes;
 
     @JsonProperty("RXTYPE_ENCODER")
-    private Long encoderId;
+    private Long rxtypeEncoderId;
 
     public RXType mapToRxType(UserService userService, PatientService patientService){
         RXType rxType = new RXType();
@@ -60,7 +60,7 @@ public class AddRxTypeRequest {
         rxType.setRxtypeOthers(this.rxtypeOthers);
         rxType.setRxtypeNotes(this.rxtypeNotes);
 
-        User encoderUser = userService.getUser(encoderId);
+        User encoderUser = userService.getUser(rxtypeEncoderId);
         if(encoderUser != null){
             rxType.setEncoder(encoderUser);
         }

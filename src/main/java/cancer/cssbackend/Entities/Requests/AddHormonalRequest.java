@@ -15,6 +15,7 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -48,12 +49,6 @@ public class AddHormonalRequest {
     @JsonProperty("hormonalEncoderId")
     private Long hormonalEncoderId;
 
-    @JsonProperty("hormonalCreatedOn")
-    private String hormonalCreatedon;
-
-    @JsonProperty("hormonalUpdatedOn")
-    private String hormonalUpdatedon;
-
     public Hormonal mapToHormonal(PatientService patientService, DoctorService doctorService, UserService userService){
         Hormonal hormonal = new Hormonal();
         Patient patient = patientService.findPatient(patientId);
@@ -61,18 +56,23 @@ public class AddHormonalRequest {
         User encoder = userService.getUser(hormonalEncoderId);
         Doctor doctor = doctorService.findDoctor(hormonalDoctorId);
 
-        hormonal.setPatient(patient);
+        if(patient != null){
+            hormonal.setPatient(patient);
+        }
+        if(doctor != null){
+            hormonal.setHormonalDoctor(doctor);
+        }
+        if(encoder != null){
+            hormonal.setHormonalEncoder(encoder);
+        }
         hormonal.setHormonalDrug(this.hormonalDrug);
         hormonal.setHormonalDose(this.hormonalDose);
         hormonal.setHormonalInitialdate(Date.valueOf(this.hormonalInitialdate));
         hormonal.setHormonalEnddate(Date.valueOf(this.hormonalEnddate));
         hormonal.setHormonalStatus(this.hormonalStatus);
         hormonal.setHormonalRxNotes(this.hormonalRxNotes);
-        hormonal.setHormonalDoctor(doctor);
-        hormonal.setHormonalEncoder(encoder);
-        hormonal.setHormonalCreatedon(Timestamp.valueOf(this.hormonalCreatedon));
-        hormonal.setHormonalUpdatedon(Timestamp.valueOf(this.hormonalUpdatedon));
-
+        hormonal.setHormonalCreatedon(Timestamp.valueOf(LocalDateTime.now()));
+        hormonal.setHormonalUpdatedon(Timestamp.valueOf(LocalDateTime.now()));
 
         return hormonal;
 

@@ -1,10 +1,12 @@
 package cancer.cssbackend.Controllers;
 
+import cancer.cssbackend.Entities.Chemotherapy;
+import cancer.cssbackend.Entities.RXType;
+import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
+import cancer.cssbackend.Entities.Requests.AddRxTypeRequest;
 import cancer.cssbackend.Services.RxTypeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -12,4 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/rxtype")
 public class RxTypeController {
     private final RxTypeService rxTypeService;
+    @PostMapping("/add")
+    public RXType addRXType(@RequestBody AddRxTypeRequest addRxTypeRequest) {
+        return rxTypeService.addRXType(addRxTypeRequest);
+    }
 }

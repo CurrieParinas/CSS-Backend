@@ -14,6 +14,7 @@ import lombok.Setter;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -42,14 +43,8 @@ public class AddSurgeryRequest {
     @JsonProperty("SURGERY_HOSPITAL")
     private Long surgeryHospital; // FK to Hospital
 
-    @JsonProperty("RXTYPE_ENCODER")
-    private Long encoderId; // FK to User
-
-    @JsonProperty("SURGERY_CREATEDON")
-    private String createdOn; // System time
-
-    @JsonProperty("SURGERY_UPDATEDON")
-    private String updatedOn;
+    @JsonProperty("SURGERY_ENCODER")
+    private Long surgeryEncoderId; // FK to User
 
     public Surgery mapToSurgery(PatientService patientService, DoctorService doctorService, HospitalService hospitalService, UserService userService) {
         Surgery surgery = new Surgery();
@@ -74,13 +69,13 @@ public class AddSurgeryRequest {
         if(hospital != null){
             surgery.setSurgeryHospital(hospital);
         }
-        User user = userService.getUser(encoderId);
+        User user = userService.getUser(surgeryEncoderId);
         if(user != null){
             surgery.setEncoder(user);
         }
 
-        surgery.setCreatedOn(Timestamp.valueOf(this.createdOn));
-        surgery.setUpdatedOn(Timestamp.valueOf(this.updatedOn));
+        surgery.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        surgery.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
         return surgery;
     }
 }
