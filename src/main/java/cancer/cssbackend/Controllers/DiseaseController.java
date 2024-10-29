@@ -19,4 +19,9 @@ public class DiseaseController {
     public Disease addDisease(@RequestBody AddDiseaseRequest addDiseaseRequest) {
         return diseaseService.addDisease(addDiseaseRequest);
     }
+
+    @GetMapping("/getbypatientid")
+    public Disease findDiseaseByPatientID(@RequestParam(value="patientID") Long patientID){
+        return diseaseService.findByPatientID(patientID);
+    }
 }

@@ -21,6 +21,7 @@ public class DiseaseService {
     private final BodySiteRepository bodySiteRepository;
     private final DiseaseOtherSiteRepository diseaseOtherSiteRepository;
     private final PathologyDimService pathologyDimService;
+    private final PatientService patientService;
 
     public Disease addDisease(AddDiseaseRequest addDiseaseRequest) {
         Disease disease = addDiseaseRequest.mapToDisease(pathologyDimService);
@@ -83,5 +84,13 @@ public class DiseaseService {
             }
         }
         return disease;
+    }
+
+    public Disease findByPatientID(Long patientID) {
+        Patient patient = patientService.findPatient(patientID);
+        if (patient == null) {
+            throw new RuntimeException("Patient not found with ID " + patientID);
+        }
+        return diseaseRepository.findByPatient(patient);
     }
 }
