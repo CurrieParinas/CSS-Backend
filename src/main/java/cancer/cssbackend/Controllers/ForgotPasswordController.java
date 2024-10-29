@@ -15,16 +15,16 @@ public class ForgotPasswordController {
     private final ForgotPasswordService forgotPasswordService;
 
     @GetMapping("/createForgotPassword")
-    public String createForgotPassword(@RequestParam("userId") Long userId) throws MessagingException, IOException {
-        return forgotPasswordService.createForgotPassword(userId);
+    public String createForgotPassword(@RequestParam("email") String email) throws MessagingException, IOException {
+        return forgotPasswordService.createForgotPassword(email);
     }
     @GetMapping("/verifyUser")
-    public String verifyUser(@RequestParam("userId") Long userId, @RequestParam("token") String token) {
+    public Long verifyUser(@RequestParam("userId") Long userId, @RequestParam("token") String token) {
         return forgotPasswordService.verifyToken(userId, token);
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(@RequestParam("userId") Long userId, @RequestParam("password") String password) {
+    public String changePassword(@RequestParam("email") Long userId, @RequestParam("password") String password) {
         return forgotPasswordService.changePassword(userId, password);
     }
 }

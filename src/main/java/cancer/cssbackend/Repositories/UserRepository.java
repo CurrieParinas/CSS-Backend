@@ -12,4 +12,5 @@ import java.util.Map;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUserEmailAndUserPassword(String email, String password);
+    User findByUserEmail(String email);
 }
