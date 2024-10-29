@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.print.Doc;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -48,13 +49,7 @@ public class AddRadiotherapyRequest {
     private Long radRxDoctor;
 
     @JsonProperty("RADRX_ENCODER")
-    private Long encoder;
-
-    @JsonProperty("RADRX_CREATEDON")
-    private String createdOn;
-
-    @JsonProperty("RADRX_UPDATEDON")
-    private String updatedOn;
+    private Long radRxEncoder;
 
     public Radiotherapy mapToRadiotherapy(PatientService patientService, RadDetailsService radDetailsService, HospitalService hospitalService, DoctorService doctorService, UserService userService) {
         Radiotherapy radiotherapy = new Radiotherapy();
@@ -86,13 +81,13 @@ public class AddRadiotherapyRequest {
             radiotherapy.setRadRxDoctor(doctor);
         }
 
-        User user = userService.getUser(encoder);
+        User user = userService.getUser(radRxEncoder);
         if(user != null){
             radiotherapy.setEncoder(user);
         }
 
-        radiotherapy.setCreatedOn(Timestamp.valueOf(createdOn));
-        radiotherapy.setUpdatedOn(Timestamp.valueOf(updatedOn));
+        radiotherapy.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        radiotherapy.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
 
         return radiotherapy;
     }

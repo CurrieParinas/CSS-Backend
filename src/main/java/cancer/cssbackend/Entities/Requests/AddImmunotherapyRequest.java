@@ -13,6 +13,7 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -49,11 +50,6 @@ public class AddImmunotherapyRequest {
     @JsonProperty("immunorxEncoderId")
     private Long immunorxEncoderId;
 
-    @JsonProperty("immunorxCreatedOn")
-    private String  immunorxCreatedon;
-
-    @JsonProperty("immunorxUpdatedOn")
-    private String immunorxUpdatedon;
 
     public Immunotherapy mapToImmunotherapy(PatientService patientService, DoctorService doctorService, UserService userService, HospitalService hospitalService) {
         Immunotherapy immunotherapy = new Immunotherapy();
@@ -63,18 +59,26 @@ public class AddImmunotherapyRequest {
         User encoder = userService.getUser(immunorxEncoderId);
         Hospital facility = hospitalService.findHospital(immunorxFacilityId);
 
-        immunotherapy.setPatient(patient);
+        if(patient != null){
+            immunotherapy.setPatient(patient);
+        }
+        if(doctor != null){
+            immunotherapy.setImmunorxDoctor(doctor);
+        }
+        if(encoder != null){
+            immunotherapy.setImmunorxEncoder(encoder);
+        }
+        if(facility != null){
+            immunotherapy.setImmunorxFacility(facility);
+        }
         immunotherapy.setImmunorxDrug(this.immunorxDrug);
         immunotherapy.setImmunorxInitialdate(Date.valueOf(this.immunorxInitialdate));
         immunotherapy.setImmunorxEnddate(Date.valueOf(this.immunorxEnddate));
         immunotherapy.setImmunorxStatus(this.immunorxStatus);
         immunotherapy.setImmunorxNotes(this.immunorxNotes);
         immunotherapy.setImmunorxIscompleted(this.immunorxIscompleted);
-        immunotherapy.setImmunorxFacility(facility);
-        immunotherapy.setImmunorxDoctor(doctor);
-        immunotherapy.setImmunorxEncoder(encoder);
-        immunotherapy.setImmunorxCreatedon(Timestamp.valueOf(this.immunorxCreatedon));
-        immunotherapy.setImmunorxUpdatedon(Timestamp.valueOf(this.immunorxUpdatedon));
+        immunotherapy.setImmunorxCreatedon(Timestamp.valueOf(LocalDateTime.now()));
+        immunotherapy.setImmunorxUpdatedon(Timestamp.valueOf(LocalDateTime.now()));
 
         return immunotherapy;
     }

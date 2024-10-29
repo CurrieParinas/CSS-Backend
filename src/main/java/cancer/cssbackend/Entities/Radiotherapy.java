@@ -59,7 +59,7 @@ public class Radiotherapy {
     @JoinColumn(name = "RADRX_ENCODER")
     private User encoder;
 
-    @Column(name = "RADRX_CREATEDON", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "RADRX_CREATEDON")
     private Timestamp createdOn;
 
     @Column(name = "RADRX_UPDATEDON")

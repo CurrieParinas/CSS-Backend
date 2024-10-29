@@ -15,9 +15,9 @@ public class RadDetails {
     @Id
     @GeneratedValue(generator = "RAD_DETAILS_SEQ")
     @SequenceGenerator(name="RAD_DETAILS_SEQ", sequenceName = "RAD_DETAILS_SEQ", allocationSize = 1)
-    @Column(name = "RAD_DETAILS_ID", nullable = false)
+    @Column(name = "RADDETAILS_ID", nullable = false)
     private Long radDetailsId;
 
-    @Column(name = "RAD_DETAILS_PROCEDURE", nullable = false, length = 255)
+    @Column(name = "RADDETAILS_PROCEDURE", nullable = false, length = 255)
     private String radDetailsProcedure;
 }

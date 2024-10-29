@@ -1,5 +1,6 @@
 package cancer.cssbackend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class Treatment {
     @JoinColumn(name = "TREATMENT_PLAN", nullable = false)
     private RXType treatmentPlan; // Foreign key to RXTYPE
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TREATMENT_ENCODER")
     private User encoder; // Foreign key to USER table

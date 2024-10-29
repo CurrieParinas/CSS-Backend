@@ -46,7 +46,7 @@ public class Surgery {
     private Hospital surgeryHospital;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RXTYPE_ENCODER")
+    @JoinColumn(name = "SURGERY_ENCODER")
     private User encoder;
 
     @Column(name = "SURGERY_CREATEDON")
