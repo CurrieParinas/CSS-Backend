@@ -20,7 +20,8 @@ public class DoctorController {
     private final DoctorService doctorService;
 
     @PostMapping("/add")
-    public Doctor addDoctor(@RequestBody AddDoctorRequest addDoctorRequest, @RequestPart("doctorESig") MultipartFile doctorESignature) throws IOException {
+    public Doctor addDoctor(@RequestPart("addDoctorRequest") AddDoctorRequest addDoctorRequest,
+                            @RequestPart("doctorESig") MultipartFile doctorESignature) throws IOException {
         return doctorService.addDoctor(addDoctorRequest, doctorESignature);
     }
 }
