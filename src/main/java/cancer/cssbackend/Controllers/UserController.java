@@ -5,6 +5,8 @@ import cancer.cssbackend.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
@@ -14,4 +16,9 @@ public class UserController {
 
     @GetMapping(path="/{userId}")
     public User getUser(@PathVariable Long userId){return userService.getUser(userId);}
+
+    @GetMapping(path="/allUsers")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
 }

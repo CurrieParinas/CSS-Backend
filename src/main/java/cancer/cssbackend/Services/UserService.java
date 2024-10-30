@@ -40,4 +40,8 @@ public class UserService {
         Optional<User> userToDelete = userRepository.findById(userID);
         userToDelete.ifPresent(userRepository::delete);
     }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }
