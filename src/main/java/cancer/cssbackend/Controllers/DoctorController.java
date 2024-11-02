@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.Doc;
 import java.io.IOException;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -23,5 +24,10 @@ public class DoctorController {
     public Doctor addDoctor(@RequestPart("addDoctorRequest") AddDoctorRequest addDoctorRequest,
                             @RequestPart("doctorESig") MultipartFile doctorESignature) throws IOException {
         return doctorService.addDoctor(addDoctorRequest, doctorESignature);
+    }
+
+    @GetMapping("/all")
+    public List<Doctor> fetchAllDoctors(){
+        return doctorService.fetchAllDoctors();
     }
 }
