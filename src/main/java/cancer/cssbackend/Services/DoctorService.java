@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.print.Doc;
 import javax.swing.text.html.Option;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,5 +62,16 @@ public class DoctorService {
         Hospital hospital = hospitalService.findHospital(hospitalID);
 
         return doctorRepository.findByHospital(hospital);
+    }
+
+    public List<Doctor> findAllSurgeons (){
+        List<Long> surgeonIDs = doctorRepository.findAllSurgeons();
+        List<Doctor> surgeonList = new ArrayList<>();
+        for(Long id : surgeonIDs){
+            Optional<Doctor> x = doctorRepository.findById(id);
+            x.ifPresent(surgeonList::add);
+        }
+
+        return surgeonList;
     }
 }
