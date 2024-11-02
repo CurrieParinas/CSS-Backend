@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.Doc;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -54,5 +55,11 @@ public class DoctorService {
 
     public List<Doctor> fetchAllDoctors(){
         return doctorRepository.findAll();
+    }
+
+    public List<Doctor> findByHospital(Long hospitalID){
+        Hospital hospital = hospitalService.findHospital(hospitalID);
+
+        return doctorRepository.findByHospital(hospital);
     }
 }
