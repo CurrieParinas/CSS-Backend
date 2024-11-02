@@ -35,4 +35,9 @@ public class DoctorController {
     public List<Doctor> fetchDoctorsByHospital(@RequestParam(value="hospitalID") Long hospitalID){
         return doctorService.findByHospital(hospitalID);
     }
+
+    @GetMapping("/findallsurgeons")
+    public List<Doctor> fetchAllSurgeons(){
+        return doctorService.findAllSurgeons();
+    }
 }
