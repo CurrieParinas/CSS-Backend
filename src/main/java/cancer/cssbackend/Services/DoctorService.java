@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.Doc;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,5 +50,9 @@ public class DoctorService {
         doctorRepository.save(doctor);
 
         return doctor;
+    }
+
+    public List<Doctor> fetchAllDoctors(){
+        return doctorRepository.findAll();
     }
 }
