@@ -1,11 +1,16 @@
 package cancer.cssbackend.Repositories;
 
 import cancer.cssbackend.Entities.Doctor;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Doctor findByUser(User user);
+
+    List<Doctor> findByHospital(Hospital hospital);
 }
