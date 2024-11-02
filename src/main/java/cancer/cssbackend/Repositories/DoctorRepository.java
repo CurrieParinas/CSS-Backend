@@ -5,6 +5,7 @@ import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.print.Doc;
@@ -18,4 +19,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query(value = "SELECT DISTINCT d.DOCTOR_ID FROM SURGERY s JOIN DOCTOR d ON s.SURGERY_SURGEON = d.DOCTOR_ID", nativeQuery = true)
     List<Long> findAllSurgeons();
+
+    @Query(value = "SELECT DISTINCT d.DOCTOR_ID FROM DOCTOR d JOIN SURGERY s ON s.SURGERY_SURGEON = d.DOCTOR_ID WHERE d.DOCTOR_HOSPITAL = :hospitalID", nativeQuery = true)
+    List<Long> findSurgeonsByHosp(@Param("hospitalID") Long hospitalID);
 }

@@ -1,15 +1,12 @@
 package cancer.cssbackend.Controllers;
 
 import cancer.cssbackend.Entities.Doctor;
-import cancer.cssbackend.Entities.Patient;
 import cancer.cssbackend.Entities.Requests.AddDoctorRequest;
-import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Services.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.util.List;
 
@@ -39,5 +36,10 @@ public class DoctorController {
     @GetMapping("/findallsurgeons")
     public List<Doctor> fetchAllSurgeons(){
         return doctorService.findAllSurgeons();
+    }
+
+    @GetMapping("/findsurgeonsbyhospital")
+    public List<Doctor> findSurgeonsbyHospital(@RequestParam(value="hospitalID") Long hospitalID){
+        return doctorService.findSurgeonByHospital(hospitalID);
     }
 }

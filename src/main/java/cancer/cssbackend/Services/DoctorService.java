@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.print.Doc;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +71,17 @@ public class DoctorService {
         }
 
         return surgeonList;
+    }
+
+    public List<Doctor> findSurgeonByHospital(Long hospitalID){
+        List<Doctor> surgeonsByHospital = new ArrayList<>();
+        List<Long> surgeonIDs = doctorRepository.findSurgeonsByHosp(hospitalID);
+
+        for(Long id : surgeonIDs){
+            Optional<Doctor> x = doctorRepository.findById(id);
+            x.ifPresent(surgeonsByHospital::add);
+        }
+
+        return surgeonsByHospital;
     }
 }
