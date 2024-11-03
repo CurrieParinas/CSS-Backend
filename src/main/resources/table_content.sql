@@ -140,15 +140,6 @@ INSERT INTO ONBOARD VALUES (ONBOARD_SEQ.nextval, 14, 4, null);
 INSERT INTO ONBOARD VALUES (ONBOARD_SEQ.nextval, 15, 9, null);
 INSERT INTO ONBOARD VALUES (ONBOARD_SEQ.nextval, 16, 8, null);
 
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Death Certificates only', 'Non-Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Clinical Investigation', 'Non-Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Clinical Only', 'Non-Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Specific Tumor Markers', 'Non-Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Cytology or Hematology', 'Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Histology of Metastasis', 'Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Histology of Primary', 'Microscopic');
-INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Unknown', 'Unknown');
-
 INSERT INTO BODYSITE VALUES (BODYSITE_SEQ.nextval, 'Colon');
 INSERT INTO BODYSITE VALUES (BODYSITE_SEQ.nextval, 'Brain');
 INSERT INTO BODYSITE VALUES (BODYSITE_SEQ.nextval, 'Urinary Bladder');
@@ -173,6 +164,64 @@ INSERT INTO BODYSITE VALUES (BODYSITE_SEQ.nextval, 'Prostate');
 INSERT INTO BODYSITE VALUES (BODYSITE_SEQ.nextval, 'Rectum');
 INSERT INTO BODYSITE VALUES (BODYSITE_SEQ.nextval, 'Others');
 
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Death Certificates only', 'Non-Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Clinical Investigation', 'Non-Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Clinical Only', 'Non-Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Specific Tumor Markers', 'Non-Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Cytology or Hematology', 'Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Histology of Metastasis', 'Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Histology of Primary', 'Microscopic');
+INSERT INTO BASIS VALUES (BASIS_SEQ.nextval, 'Unknown', 'Unknown');
+
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 1, 412, 3, 'N', 0, 0, 12, 'Y', 'None', 'II', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 2, 285, 5, 'Y', 1, 3, 15, 'Y', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 4, 73, 4, 'N', 1, 1, 0, 'Y', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 5, 412, 3.5, 'Y', 0, 5, 18, 'Y', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 6, 105, 5.5, 'N', 0, 3, 10, 'Y', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 8, 285, 5, 'N', 1, 2, 13, 'N', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 11, 285, 5.5, 'N', 3, 5, 14, 'Y', 'None', 'IV', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 13, 530, 3.5, 'N', 1, 2, 12, 'Y', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 14, 512, 4, 'N', 1, 2, 11, 'Y', 'None', 'III', sysdate, sysdate, null);
+INSERT INTO HISTOLOGY VALUES (HISTOLOGY_SEQ.nextval, 16, 105, 3.5, 'N', 2, 0, 0, 'N', 'None', 'II', sysdate, sysdate, null);
+
+INSERT INTO METASTATICSITE VALUES (METASTATICSITE_SEQ.nextval, 7, 'N', 'N', 'Y', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'None', sysdate, sysdate, null);
+INSERT INTO METASTATICSITE VALUES (METASTATICSITE_SEQ.nextval, 11, 'N', 'N', 'N', 'Y', 'N', 'N', 'N', 'N', 'N', 'N', 'None', sysdate, sysdate, null);
+INSERT INTO METASTATICSITE VALUES (METASTATICSITE_SEQ.nextval, 12, 'N', 'N', 'Y', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'None', sysdate, sysdate, null);
+
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 1, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 2, 'Y', 'Y', 'N', 'N', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 3, 'Y', 'Y', 'N', 'N', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 4, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 5, 'Y', 'Y', 'N', 'N', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 6, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 7, 'Y', 'N', 'N', 'Y', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 8, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 9, 'Y', 'Y', 'N', 'N', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 10, 'Y', 'N', 'N', 'N', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 11, 'Y', 'N', 'N', 'Y', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 12, 'Y', 'Y', 'N', 'Y', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 13, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 14, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 15, 'Y', 'Y', 'N', 'N', 'N', sysdate);
+INSERT INTO DISEASESTATUS VALUES (DISEASESTATUS_SEQ.nextval, 16, 'Y', 'N', 'N', 'N', 'Y', sysdate);
+
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 1, 9, TO_DATE('08/29/2020', 'MM/DD/YYYY'), 7, 'Left', 1, 'Localized', 3, 0, 'N', null, 0, 2, 0, 0, 0, 'II', 'Pathologic', 1, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 2, 16, TO_DATE('06/19/2016', 'MM/DD/YYYY'), 7, 'Right', 2, 'Direct_Extension', 5, 1, 'N', null, 0, 2, 3, 1, 0, 'III', 'Clinical', 2, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 3, 12, TO_DATE('09/23/2021', 'MM/DD/YYYY'), 2, 'Right', NULL, 'Direct_Extension', 5.1, 1, 'N', null, 0, 2, 3, 1, 0, 'III', 'Clinical', 3, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 4, 9, TO_DATE('10/02/2018', 'MM/DD/YYYY'), 7, 'Right', 3, 'Regional Lymph Node', 4, 2, 'N', null, 0, 2, 2, 2, 0, 'III', 'Pathologic', 4, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 5, 16, TO_DATE('09/28/2023', 'MM/DD/YYYY'), 7, 'Right', 4, 'Direct_Extension and Regional Lymph Node', 3.5, 2, 'N', null, 0, 2, 2, 2, 0, 'III', 'Pathologic', 5, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 6, 19, TO_DATE('02/03/2018', 'MM/DD/YYYY'), 7, 'Left', 5, 'Direct_Extension', 5.5, 1, 'N', null, 0, 2, 3, 1, 0, 'III', 'Clinical', 6, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 7, 12, TO_DATE('05/06/2020', 'MM/DD/YYYY'), 2, 'Bilateral', NULL, 'Distant Metastasis', 6, 2, 'Y', 1, 0, 2, 3, 2, 1, 'IV', 'Clinical', 7, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 8, 1, TO_DATE('09/24/2022', 'MM/DD/YYYY'), 7, 'Right', 6, 'Regional Lymph Node', 5, 1, 'N', null, 0, 2, 3, 1, 0, 'III', 'Pathologic', 8, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 9, 7, TO_DATE('08/19/2019', 'MM/DD/YYYY'), 2, 'Right', NULL, 'Direct_Extension', 6, 0, 'N', null, 0, 2, 3, 0, 0, 'II', 'Clinical', 9, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 10, 10, TO_DATE('10/19/2018', 'MM/DD/YYYY'), 5, 'Not Stated', NULL, 'Regional Lymph Node', 5, 1, 'N', null, 0, 2, 3, 1, 0, 'II', 'Clinical', 10, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 11, 16, TO_DATE('11/19/2023', 'MM/DD/YYYY'), 7, 'Right', 7, 'Distant Metastasis', 5.5, 2, 'Y', 2, 0, 2, 3, 2, 1, 'IV', 'Clinical', 11, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 12, 12, TO_DATE('12/02/2018', 'MM/DD/YYYY'), 2, 'Right', NULL, 'Distant Metastasis', 3, 2, 'Y', 3, 0, 2, 2, 2, 1, 'IV', 'Clinical', 12, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 13, 5, TO_DATE('03/04/2019', 'MM/DD/YYYY'), 5, 'Right', 8, 'Regional Lymph Node', 3.5, 1, 'N', null, 0, 2, 2, 1, 0, 'III', 'Clinical', 13, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 14, 9, TO_DATE('02/02/2017', 'MM/DD/YYYY'), 7, 'Left', 9, 'Regional Lymph Node', 4, 1, 'N', null, 0, 2, 2, 1, 0, 'III', 'Clinical', 14, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 15, 13, TO_DATE('12/30/2017', 'MM/DD/YYYY'), 7, 'Right', NULL, 'Regional Lymph Node', 4, 1, 'N', null, 0, 2, 2, 1, 0, 'III', 'Clinical', 15, sysdate, sysdate, null);
+INSERT INTO DISEASE VALUES (DISEASE_SEQ.nextval, 16, 15, TO_DATE('03/17/2019', 'MM/DD/YYYY'), 7, 'Left', 10, 'In-Situ', 3.5, 0, 'N', null, 0, 2, 2, 0, 0, 'II', 'Clinical', 16, sysdate, sysdate, null);
+
 COMMIT;
 
-SELECT * FROM SPECIALTY;
+SELECT * FROM PATHOLOGY_DIM;
