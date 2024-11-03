@@ -67,7 +67,6 @@ public class DiseaseService {
         diseaseStatusRepository.save(diseaseStatus);
         diseaseRepository.save(disease);
 
-        // Handle diseaseOtherSites
         if (addDiseaseRequest.getDiseaseOtherSites() != null) {
             for (Long bodySiteId : addDiseaseRequest.getDiseaseOtherSites()) {
                 DiseaseOtherSite diseaseOtherSite = new DiseaseOtherSite();
@@ -77,8 +76,6 @@ public class DiseaseService {
                 if (optionalOtherBodySite.isPresent()) {
                     BodySite otherBodySite = optionalOtherBodySite.get();
                     diseaseOtherSite.setBodySite(otherBodySite);
-                    // Save each DiseaseOtherSite as needed
-                    // You may need to create a repository for DiseaseOtherSite if it doesn't exist
                     diseaseOtherSiteRepository.save(diseaseOtherSite);
                 }
             }
