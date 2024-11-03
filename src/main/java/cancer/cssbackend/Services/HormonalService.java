@@ -2,9 +2,11 @@ package cancer.cssbackend.Services;
 
 import cancer.cssbackend.Entities.Doctor;
 import cancer.cssbackend.Entities.Hormonal;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.Requests.AddHormonalRequest;
 import cancer.cssbackend.Repositories.DoctorRepository;
 import cancer.cssbackend.Repositories.HormonalRepository;
+import cancer.cssbackend.Repositories.HospitalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HormonalService {
     private final HormonalRepository hormonalRepository;
+    private final HospitalRepository hospitalRepository;
     private final DoctorRepository doctorRepository;
     private final PatientService patientService;
     private final DoctorService doctorService;
@@ -37,5 +40,17 @@ public class HormonalService {
         }
 
         return doctorList;
+    }
+
+    public List<Hospital> fetchHormonalHospitals(){
+        List<Long> facilityIDs = hormonalRepository.fetchHormonalHospitals();
+        List<Hospital> hospitalList = new ArrayList<>();
+
+        for(Long id : facilityIDs){
+            Optional<Hospital> x = hospitalRepository.findById(id);
+            x.ifPresent(hospitalList::add);
+        }
+
+        return hospitalList;
     }
 }

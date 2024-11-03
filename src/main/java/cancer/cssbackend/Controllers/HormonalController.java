@@ -3,6 +3,7 @@ package cancer.cssbackend.Controllers;
 import cancer.cssbackend.Entities.Chemotherapy;
 import cancer.cssbackend.Entities.Doctor;
 import cancer.cssbackend.Entities.Hormonal;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
 import cancer.cssbackend.Entities.Requests.AddHormonalRequest;
 import cancer.cssbackend.Services.HormonalService;
@@ -27,5 +28,10 @@ public class HormonalController {
     @GetMapping("/findalldoctors")
     public List<Doctor> fetchAllHormonalDoctors(){
         return hormonalService.fetchAllHormonalDoctors();
+    }
+
+    @GetMapping("/hospitals")
+    public List<Hospital> fetchHormonalHospitals(){
+        return hormonalService.fetchHormonalHospitals();
     }
 }
