@@ -1,12 +1,15 @@
 package cancer.cssbackend.Controllers;
 
 import cancer.cssbackend.Entities.Chemotherapy;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
 import cancer.cssbackend.Entities.Requests.AddSurgeryRequest;
 import cancer.cssbackend.Entities.Surgery;
 import cancer.cssbackend.Services.SurgeryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -17,5 +20,10 @@ public class SurgeryController {
     @PostMapping("/add")
     public Surgery addSurgery(@RequestBody AddSurgeryRequest addSurgeryRequest) {
         return surgeryService.addSurgery(addSurgeryRequest);
+    }
+
+    @GetMapping("/hospitals")
+    public List<Hospital> fetchSurgeryHospitals(){
+        return surgeryService.fetchSurgeryHospitals();
     }
 }
