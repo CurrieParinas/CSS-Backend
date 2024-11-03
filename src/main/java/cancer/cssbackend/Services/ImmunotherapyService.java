@@ -1,10 +1,12 @@
 package cancer.cssbackend.Services;
 
 import cancer.cssbackend.Entities.Doctor;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.Immunotherapy;
 import cancer.cssbackend.Entities.Patient;
 import cancer.cssbackend.Entities.Requests.AddImmunotherapyRequest;
 import cancer.cssbackend.Repositories.DoctorRepository;
+import cancer.cssbackend.Repositories.HospitalRepository;
 import cancer.cssbackend.Repositories.ImmunotherapyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ImmunotherapyService {
     private final ImmunotherapyRepository immunotherapyRepository;
+    private final HospitalRepository hospitalRepository;
     private final DoctorRepository doctorRepository;
     private final PatientService patientService;
     private final DoctorService doctorService;
@@ -52,5 +55,17 @@ public class ImmunotherapyService {
         }
 
         return doctorList;
+    }
+
+    public List<Hospital> fetchImmunotherapyFacilities(){
+        List<Long> facilityIDs = immunotherapyRepository.fetchImmunotherapyFacilities();
+        List<Hospital> hospitalList = new ArrayList<>();
+
+        for(Long id : facilityIDs){
+            Optional<Hospital> x = hospitalRepository.findById(id);
+            x.ifPresent(hospitalList::add);
+        }
+
+        return hospitalList;
     }
 }
