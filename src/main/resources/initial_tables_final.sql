@@ -568,3 +568,231 @@ CREATE SEQUENCE CONSULT_SEQ
     INCREMENT BY 1
     START WITH 1
     MINVALUE 1;
+
+
+-- NOTIFICATIONTYPE Table
+CREATE TABLE NOTIFICATIONTYPE (
+                                  NOTIFTYPE_ID NUMBER PRIMARY KEY,
+                                  NOTIFICATIONTYPE_NAME VARCHAR2(200) NOT NULL
+);
+-- NOTIFICATIONSTATUS Table
+CREATE TABLE NOTIFICATIONSTATUS (
+                                    NOTIFSTATUS_ID NUMBER PRIMARY KEY,
+                                    NOTIFSTATUS_NAME VARCHAR2(200) NOT NULL
+);
+
+CREATE TABLE NOTIFICATIONLOG (
+                                 NOTIFLOG_ID NUMBER PRIMARY KEY,
+                                 NOTIFICATION_DATE DATE,
+                                 NOTIFICATION_TYPE NUMBER,
+                                 NOTIFICATION_STATUS NUMBER,
+                                 NOTIFICATION_RECEIVER NUMBER,
+                                 NOTIFICATION_SENDER NUMBER,
+                                 NOTIFICATION_NOTES VARCHAR2(2000),
+                                 NOTIFICATION_UPDATEDON TIMESTAMP,
+                                 FOREIGN KEY (NOTIFICATION_TYPE) REFERENCES NOTIFICATIONTYPE(NOTIFTYPE_ID),
+                                 FOREIGN KEY (NOTIFICATION_STATUS) REFERENCES NOTIFICATIONSTATUS(NOTIFSTATUS_ID),
+                                 FOREIGN KEY (NOTIFICATION_RECEIVER) REFERENCES PATIENT(PATIENT_ID),
+                                 FOREIGN KEY (NOTIFICATION_SENDER) REFERENCES DOCTOR(DOCTOR_ID)
+);
+
+-- SYMPTOMCATEGORY Table
+CREATE TABLE SYMPTOMCATEGORY (
+                                 SYMPTOMCATEGORY_ID NUMBER PRIMARY KEY,
+                                 SYMPTOM_CATEGORY VARCHAR2(200) NOT NULL
+);
+
+CREATE TABLE SYMPTOMSURVEY (
+                               SYMPTOMSURVEY_ID NUMBER PRIMARY KEY,
+                               CANCER_TYPE NUMBER,
+                               SYMPTOM_NAME VARCHAR2(200) NOT NULL,
+                               SYMPTOM_MEDICALTERM VARCHAR2(200),
+                               SYMPTOM_CATEGORY NUMBER,
+                               SYMPTOM_FILIPINO VARCHAR2(100),
+                               SYMPTOM_ALERTABLE CHAR(1),
+                               FOREIGN KEY (CANCER_TYPE) REFERENCES BODYSITE(BODYSITE_ID),
+                               FOREIGN KEY (SYMPTOM_CATEGORY) REFERENCES SYMPTOMCATEGORY(SYMPTOMCATEGORY_ID)
+);
+
+
+-- SURVEYRESPONSE Table
+CREATE TABLE SURVEYRESPONSE (
+                                SURVEYRESPONSE_ID NUMBER PRIMARY KEY,
+                                PATIENT_ID NUMBER,
+                                DOCTOR_ID NUMBER,
+                                SURVEYRESPONSE_DATE TIMESTAMP,
+                                SYMPTOMSURVEY_ID NUMBER,
+                                RESPONSE_NOTE VARCHAR2(254),
+                                FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
+                                FOREIGN KEY (DOCTOR_ID) REFERENCES DOCTOR(DOCTOR_ID),
+                                FOREIGN KEY (SYMPTOMSURVEY_ID) REFERENCES SYMPTOMSURVEY(SYMPTOMSURVEY_ID)
+);
+
+-- WORKUP Table
+CREATE TABLE WORKUP (
+                        WORKUP_ID NUMBER PRIMARY KEY,
+                        WORKUP_NAME VARCHAR2(200) NOT NULL
+);
+
+-- LABMONITOR Table
+CREATE TABLE LABMONITOR (
+                            LABMONITOR_ID NUMBER PRIMARY KEY,
+                            CANCER_TYPE NUMBER,
+                            WORKUP_NAME NUMBER,
+                            WORKUP_FREQUENCY NUMBER,
+                            WORKUP_TYPE NUMBER,
+                            WORKUP_INDICATION VARCHAR2(1000),
+                            WORKUP_DURATION NUMBER,
+                            WORKUP_REFERRAL VARCHAR2(1000),
+                            FOREIGN KEY (CANCER_TYPE) REFERENCES BODYSITE(BODYSITE_ID),
+                            FOREIGN KEY (WORKUP_NAME) REFERENCES WORKUP(WORKUP_ID)
+);
+--worktype fk
+
+
+-- LABSDOWNLOAD Table
+CREATE TABLE LABSDOWNLOAD (
+                              LABREQ_ID NUMBER PRIMARY KEY,
+                              LABREQ_DATE TIMESTAMP,
+                              PATIENT_ID NUMBER,
+                              WORKUP_NAME NUMBER,
+                              FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
+                              FOREIGN KEY (WORKUP_NAME) REFERENCES WORKUP(WORKUP_ID)
+);
+
+-- LABSUBMITTED Table
+CREATE TABLE LABSUBMITTED (
+                              LABSUBMITTED_ID NUMBER PRIMARY KEY,
+                              PATIENT_ID NUMBER,
+                              DOCTOR_ID NUMBER,
+                              LABSUBMISSION_DATE TIMESTAMP,
+                              WORKUP_NAME NUMBER,
+                              LABFILELOCATION VARCHAR2(1000) NOT NULL,
+                              LABSUBMISSION_NOTES VARCHAR2(2000),
+                              FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
+                              FOREIGN KEY (DOCTOR_ID) REFERENCES DOCTOR(DOCTOR_ID),
+                              FOREIGN KEY (WORKUP_NAME) REFERENCES WORKUP(WORKUP_ID)
+);
+
+-- CHECKUPSTATUS Table
+CREATE TABLE CHECKUPSTATUS (
+                               CHECKUPSTATUS_ID NUMBER PRIMARY KEY,
+                               NOTIFSTATUS_NAME VARCHAR2(100) NOT NULL
+);
+
+-- CHECKUPSCHEDULE Table
+CREATE TABLE CHECKUPSCHEDULE (
+                                 CHECKUPSCHED_ID NUMBER PRIMARY KEY,
+                                 PATIENT_ID NUMBER,
+                                 DOCTOR_ID NUMBER,
+                                 CHECKUPREQUEST_DATE DATE,
+                                 CHECKUPCONFIRMED_DATE DATE,
+                                 CHECKUP_STARTTIME TIMESTAMP,
+                                 CHECKUP_ENDTIME TIMESTAMP,
+                                 CHECKUP_STATUS NUMBER,
+                                 CHECKUP_UPDATEDON TIMESTAMP,
+                                 FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
+                                 FOREIGN KEY (DOCTOR_ID) REFERENCES DOCTOR(DOCTOR_ID),
+                                 FOREIGN KEY (CHECKUP_STATUS) REFERENCES CHECKUPSTATUS(CHECKUPSTATUS_ID)
+);
+
+
+
+
+-- CHECKUP Table
+CREATE TABLE CHECKUP (
+                         CHECKUP_ID NUMBER PRIMARY KEY,
+                         PATIENT_ID NUMBER,
+                         DOCTOR_ID NUMBER,
+                         CHECKUP_DATE TIMESTAMP,
+                         CHECKUP_SUBJECTIVE VARCHAR2(1000) NOT NULL,
+                         CHECKUP_OBJECTIVE VARCHAR2(1000) NOT NULL,
+                         CHECKUP_ASSESSMENT VARCHAR2(1000) NOT NULL,
+                         CHECKUP_PLAN VARCHAR2(1000) NOT NULL,
+                         CHECKUP_SURVWORKUP VARCHAR2(1000) NOT NULL,
+                         CHECKUP_PATIENTSTATUS NUMBER,
+                         CHECKUP_SCHEDULE NUMBER,
+                         FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID),
+                         FOREIGN KEY (DOCTOR_ID) REFERENCES DOCTOR(DOCTOR_ID),
+                         FOREIGN KEY (CHECKUP_PATIENTSTATUS) REFERENCES DISEASESTATUS(DXSTATUS_ID),
+                         FOREIGN KEY (CHECKUP_SCHEDULE) REFERENCES CHECKUPSCHEDULE(CHECKUPSCHED_ID)
+);
+
+
+-- Sequence for NOTIFICATIONLOG Table
+CREATE SEQUENCE NOTIFICATIONLOG_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for NOTIFICATIONTYPE Table
+CREATE SEQUENCE NOTIFICATIONTYPE_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for NOTIFICATIONSTATUS Table
+CREATE SEQUENCE NOTIFICATIONSTATUS_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for SYMPTOMSURVEY Table
+CREATE SEQUENCE SYMPTOMSURVEY_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for SYMPTOMCATEGORY Table
+CREATE SEQUENCE SYMPTOMCATEGORY_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for SURVEYRESPONSE Table
+CREATE SEQUENCE SURVEYRESPONSE_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for LABMONITOR Table
+CREATE SEQUENCE LABMONITOR_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for WORKUP Table
+CREATE SEQUENCE WORKUP_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for LABSDOWNLOAD Table
+CREATE SEQUENCE LABSDOWNLOAD_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for LABSUBMITTED Table
+CREATE SEQUENCE LABSUBMITTED_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for CHECKUP Table
+CREATE SEQUENCE CHECKUP_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for CHECKUPSCHEDULE Table
+CREATE SEQUENCE CHECKUPSCHEDULE_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
+
+-- Sequence for CHECKUPSTATUS Table
+CREATE SEQUENCE CHECKUPSTATUS_SEQ
+    INCREMENT BY 1
+    START WITH 1
+    MINVALUE 1;
