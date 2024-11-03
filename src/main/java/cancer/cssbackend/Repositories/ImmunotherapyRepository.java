@@ -16,4 +16,7 @@ public interface ImmunotherapyRepository extends JpaRepository<Immunotherapy, Lo
 
     @Query(value = "SELECT DISTINCT d.DOCTOR_ID FROM DOCTOR d JOIN IMMUNOTHERAPY i ON i.IMMUNORX_DOCTOR = d.DOCTOR_ID WHERE i.IMMUNORX_FACILITY= :facilityID", nativeQuery = true)
     public List<Long> fetchImmunotherapyDoctorsByFacility(@Param("facilityID") Long facilityID);
+
+    @Query(value = "SELECT DISTINCT H.HOSPITAL_ID FROM HOSPITAL H JOIN IMMUNOTHERAPY I ON H.HOSPITAL_ID = I.IMMUNORX_FACILITY", nativeQuery = true)
+    public List<Long> fetchImmunotherapyFacilities();
 }

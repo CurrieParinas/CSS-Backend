@@ -2,6 +2,7 @@ package cancer.cssbackend.Controllers;
 
 import cancer.cssbackend.Entities.Chemotherapy;
 import cancer.cssbackend.Entities.Doctor;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.Immunotherapy;
 import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
 import cancer.cssbackend.Entities.Requests.AddImmunotherapyRequest;
@@ -31,5 +32,10 @@ public class ImmunotherapyController {
     @GetMapping("/fetchdoctorsbyfacility")
     public List<Doctor> fetchDoctorsByFacility(@RequestParam("facilityID") Long facilityID){
         return immunotherapyService.fetchDoctorsByFacility(facilityID);
+    }
+
+    @GetMapping("/facilities")
+    public List<Hospital> fetchImmunotherapyFacilities(){
+        return immunotherapyService.fetchImmunotherapyFacilities();
     }
 }
