@@ -17,4 +17,7 @@ public interface RadiotherapyRepository extends JpaRepository<Radiotherapy, Long
 
     @Query(value = "SELECT DISTINCT d.DOCTOR_ID FROM DOCTOR d JOIN RADIOTHERAPY r ON r.RADRX_DOCTOR = d.DOCTOR_ID WHERE r.RADRX_FACILITY= :facilityID ", nativeQuery = true)
     List<Long> fetchRadiotherapyDoctorsByFacility(@Param("facilityID") Long facilityID);
+
+    @Query(value = "SELECT DISTINCT H.HOSPITAL_ID FROM HOSPITAL H JOIN RADIOTHERAPY R ON H.HOSPITAL_ID = R.RADRX_FACILITY", nativeQuery = true)
+    List<Long> fetchRadiotherapyFacilities();
 }
