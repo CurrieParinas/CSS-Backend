@@ -3,9 +3,11 @@ package cancer.cssbackend.Services;
 import cancer.cssbackend.Entities.Chemoprotocol;
 import cancer.cssbackend.Entities.Chemotherapy;
 import cancer.cssbackend.Entities.Doctor;
+import cancer.cssbackend.Entities.Hospital;
 import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
 import cancer.cssbackend.Repositories.ChemotherapyRepository;
 import cancer.cssbackend.Repositories.DoctorRepository;
+import cancer.cssbackend.Repositories.HospitalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ChemotherapyService {
     private final ChemotherapyRepository chemotherapyRepository;
+    private final HospitalRepository hospitalRepository;
     private final PatientService patientService;
     private final ChemoprotocolService chemoprotocolService;
     private final HospitalService hospitalService;
@@ -53,5 +56,17 @@ public class ChemotherapyService {
         }
 
         return doctorList;
+    }
+
+    public List<Hospital> fetchChemotherapyFacilities(){
+        List<Long> facilityIDs = chemotherapyRepository.fetchChemotherapyFacilities();
+        List<Hospital> hospitalList = new ArrayList<>();
+
+        for(Long id : facilityIDs){
+            Optional<Hospital> x = hospitalRepository.findById(id);
+            x.ifPresent(hospitalList::add);
+        }
+
+        return hospitalList;
     }
 }
