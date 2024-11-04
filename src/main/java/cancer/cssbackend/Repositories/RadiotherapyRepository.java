@@ -1,5 +1,6 @@
 package cancer.cssbackend.Repositories;
 
+import cancer.cssbackend.Entities.Patient;
 import cancer.cssbackend.Entities.Radiotherapy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,6 @@ public interface RadiotherapyRepository extends JpaRepository<Radiotherapy, Long
 
     @Query(value = "SELECT DISTINCT H.HOSPITAL_ID FROM HOSPITAL H JOIN RADIOTHERAPY R ON H.HOSPITAL_ID = R.RADRX_FACILITY", nativeQuery = true)
     List<Long> fetchRadiotherapyFacilities();
+
+    List<Radiotherapy> findByPatient(Patient patient);
 }

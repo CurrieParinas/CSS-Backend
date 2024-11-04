@@ -38,4 +38,9 @@ public class ImmunotherapyController {
     public List<Hospital> fetchImmunotherapyFacilities(){
         return immunotherapyService.fetchImmunotherapyFacilities();
     }
+
+    @GetMapping("/findbypatient")
+    public List<Immunotherapy> findByPatient(@RequestParam(value="patientID") Long patientID){
+        return immunotherapyService.findByPatientID(patientID);
+    }
 }

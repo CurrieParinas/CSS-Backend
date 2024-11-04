@@ -38,4 +38,9 @@ public class ChemotherapyController {
     public List<Hospital> fetchChemotherapyFacilities(){
         return chemotherapyService.fetchChemotherapyFacilities();
     }
+
+    @GetMapping("/findbypatient")
+    public List<Chemotherapy> findByPatient(@RequestParam(value="patientID") Long patientID){
+        return chemotherapyService.findByPatientID(patientID);
+    }
 }

@@ -1,12 +1,10 @@
 package cancer.cssbackend.Services;
 
-import cancer.cssbackend.Entities.Doctor;
-import cancer.cssbackend.Entities.Hospital;
-import cancer.cssbackend.Entities.RadDetails;
-import cancer.cssbackend.Entities.Radiotherapy;
+import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddRadiotherapyRequest;
 import cancer.cssbackend.Repositories.DoctorRepository;
 import cancer.cssbackend.Repositories.HospitalRepository;
+import cancer.cssbackend.Repositories.PatientRepository;
 import cancer.cssbackend.Repositories.RadiotherapyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,7 @@ public class RadiotherapyService {
     private final HospitalService hospitalService;
     private final DoctorService doctorService;
     private final UserService userService;
+    private final PatientRepository patientRepository;
 
     public Radiotherapy addRadiotherapy(AddRadiotherapyRequest addRadiotherapyRequest){
         Radiotherapy radiotherapy = addRadiotherapyRequest.mapToRadiotherapy(patientService, radDetailsService, hospitalService, doctorService, userService);
@@ -68,5 +67,15 @@ public class RadiotherapyService {
         }
 
         return hospitalList;
+    }
+
+    public List<Radiotherapy> findByPatientID(Long patientID){
+        Optional<Patient> patient = patientRepository.findById(patientID);
+
+        if (patient.isPresent()){
+            return radiotherapyRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Radiotherapy records not found with patient ID " + patientID);
+        }
     }
 }

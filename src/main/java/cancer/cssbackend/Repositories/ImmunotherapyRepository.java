@@ -2,6 +2,7 @@ package cancer.cssbackend.Repositories;
 
 import cancer.cssbackend.Entities.Doctor;
 import cancer.cssbackend.Entities.Immunotherapy;
+import cancer.cssbackend.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +20,6 @@ public interface ImmunotherapyRepository extends JpaRepository<Immunotherapy, Lo
 
     @Query(value = "SELECT DISTINCT H.HOSPITAL_ID FROM HOSPITAL H JOIN IMMUNOTHERAPY I ON H.HOSPITAL_ID = I.IMMUNORX_FACILITY", nativeQuery = true)
     public List<Long> fetchImmunotherapyFacilities();
+
+    List<Immunotherapy> findByPatient(Patient patient);
 }

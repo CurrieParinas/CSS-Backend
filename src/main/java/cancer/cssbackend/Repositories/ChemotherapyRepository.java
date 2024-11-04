@@ -1,6 +1,7 @@
 package cancer.cssbackend.Repositories;
 
 import cancer.cssbackend.Entities.Chemotherapy;
+import cancer.cssbackend.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +20,5 @@ public interface ChemotherapyRepository extends JpaRepository<Chemotherapy, Long
     @Query(value = "SELECT DISTINCT H.HOSPITAL_ID FROM HOSPITAL H JOIN CHEMOTHERAPY C ON H.HOSPITAL_ID = C.CHEMO_FACILITY", nativeQuery = true)
     public List<Long> fetchChemotherapyFacilities();
 
+    List<Chemotherapy> findByPatient(Patient patient);
 }

@@ -38,4 +38,9 @@ public class RadiotherapyController {
     public List<Hospital> fetchRadiotherapyFacilities(){
         return radiotherapyService.fetchRadiotherapyFacilities();
     }
+
+    @GetMapping("/findbypatient")
+    public List<Radiotherapy> findByPatient(@RequestParam(value="patientID") Long patientID){
+        return radiotherapyService.findByPatientID(patientID);
+    }
 }

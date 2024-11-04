@@ -1,13 +1,11 @@
 package cancer.cssbackend.Services;
 
-import cancer.cssbackend.Entities.Doctor;
-import cancer.cssbackend.Entities.Hospital;
-import cancer.cssbackend.Entities.Immunotherapy;
-import cancer.cssbackend.Entities.Patient;
+import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddImmunotherapyRequest;
 import cancer.cssbackend.Repositories.DoctorRepository;
 import cancer.cssbackend.Repositories.HospitalRepository;
 import cancer.cssbackend.Repositories.ImmunotherapyRepository;
+import cancer.cssbackend.Repositories.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +24,7 @@ public class ImmunotherapyService {
     private final DoctorService doctorService;
     private final UserService userService;
     private final HospitalService hospitalService;
+    private final PatientRepository patientRepository;
 
     public Immunotherapy addImmunotherapy(AddImmunotherapyRequest addImmunotherapyRequest){
         Immunotherapy immunotherapy = addImmunotherapyRequest.mapToImmunotherapy(patientService, doctorService, userService, hospitalService);
@@ -67,5 +66,15 @@ public class ImmunotherapyService {
         }
 
         return hospitalList;
+    }
+
+    public List<Immunotherapy> findByPatientID(Long patientID){
+        Optional<Patient> patient = patientRepository.findById(patientID);
+
+        if (patient.isPresent()){
+            return immunotherapyRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Immunotherapy records not found with patient ID " + patientID);
+        }
     }
 }
