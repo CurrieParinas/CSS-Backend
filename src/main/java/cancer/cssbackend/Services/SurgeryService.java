@@ -1,10 +1,9 @@
 package cancer.cssbackend.Services;
 
-import cancer.cssbackend.Entities.Hospital;
+import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddSurgeryRequest;
-import cancer.cssbackend.Entities.Surgery;
-import cancer.cssbackend.Entities.User;
 import cancer.cssbackend.Repositories.HospitalRepository;
+import cancer.cssbackend.Repositories.PatientRepository;
 import cancer.cssbackend.Repositories.SurgeryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,7 @@ public class SurgeryService {
     private final DoctorService doctorService;
     private final UserService userService;
     private final HospitalService hospitalService;
+    private final PatientRepository patientRepository;
 
     public Surgery addSurgery(AddSurgeryRequest addSurgeryRequest){
         Surgery surgery = addSurgeryRequest.mapToSurgery(patientService, doctorService, hospitalService, userService);
@@ -40,5 +40,15 @@ public class SurgeryService {
         }
 
         return hospitalList;
+    }
+
+    public List<Surgery> findByPatientID(Long patientID){
+        Optional<Patient> patient = patientRepository.findById(patientID);
+
+        if (patient.isPresent()){
+            return surgeryRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Surgery records not found with patient ID " + patientID);
+        }
     }
 }

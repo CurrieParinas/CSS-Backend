@@ -1,6 +1,7 @@
 package cancer.cssbackend.Repositories;
 
 import cancer.cssbackend.Entities.Hormonal;
+import cancer.cssbackend.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,6 @@ public interface HormonalRepository extends JpaRepository<Hormonal, Long> {
 
     @Query(value = "SELECT DISTINCT H.HOSPITAL_ID FROM HOSPITAL H JOIN DOCTOR D ON H.HOSPITAL_ID = D.DOCTOR_HOSPITAL JOIN HORMONAL HM ON D.DOCTOR_ID = HM.HORMONAL_DOCTOR", nativeQuery = true)
     List<Long> fetchHormonalHospitals();
+
+    List<Hormonal> findByPatient(Patient patient);
 }

@@ -34,4 +34,9 @@ public class HormonalController {
     public List<Hospital> fetchHormonalHospitals(){
         return hormonalService.fetchHormonalHospitals();
     }
+
+    @GetMapping("/findbypatient")
+    public List<Hormonal> findByPatient(@RequestParam(value="patientID") Long patientID){
+        return hormonalService.findByPatientID(patientID);
+    }
 }

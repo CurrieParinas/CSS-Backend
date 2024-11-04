@@ -1,13 +1,11 @@
 package cancer.cssbackend.Services;
 
-import cancer.cssbackend.Entities.Chemoprotocol;
-import cancer.cssbackend.Entities.Chemotherapy;
-import cancer.cssbackend.Entities.Doctor;
-import cancer.cssbackend.Entities.Hospital;
+import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
 import cancer.cssbackend.Repositories.ChemotherapyRepository;
 import cancer.cssbackend.Repositories.DoctorRepository;
 import cancer.cssbackend.Repositories.HospitalRepository;
+import cancer.cssbackend.Repositories.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ChemotherapyService {
     private final ChemotherapyRepository chemotherapyRepository;
+    private final PatientRepository patientRepository;
     private final HospitalRepository hospitalRepository;
     private final PatientService patientService;
     private final ChemoprotocolService chemoprotocolService;
@@ -68,5 +67,15 @@ public class ChemotherapyService {
         }
 
         return hospitalList;
+    }
+
+    public List<Chemotherapy> findByPatientID(Long patientID){
+        Optional<Patient> patient = patientRepository.findById(patientID);
+
+        if (patient.isPresent()){
+            return chemotherapyRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Chemotherapy records not found with patient ID " + patientID);
+        }
     }
 }

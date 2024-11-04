@@ -1,12 +1,11 @@
 package cancer.cssbackend.Services;
 
-import cancer.cssbackend.Entities.Doctor;
-import cancer.cssbackend.Entities.Hormonal;
-import cancer.cssbackend.Entities.Hospital;
+import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddHormonalRequest;
 import cancer.cssbackend.Repositories.DoctorRepository;
 import cancer.cssbackend.Repositories.HormonalRepository;
 import cancer.cssbackend.Repositories.HospitalRepository;
+import cancer.cssbackend.Repositories.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +19,7 @@ import java.util.Optional;
 public class HormonalService {
     private final HormonalRepository hormonalRepository;
     private final HospitalRepository hospitalRepository;
+    private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
     private final PatientService patientService;
     private final DoctorService doctorService;
@@ -52,5 +52,15 @@ public class HormonalService {
         }
 
         return hospitalList;
+    }
+
+    public List<Hormonal> findByPatientID(Long patientID){
+        Optional<Patient> patient = patientRepository.findById(patientID);
+
+        if (patient.isPresent()){
+            return hormonalRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Hormonal records not found with patient ID " + patientID);
+        }
     }
 }

@@ -26,4 +26,9 @@ public class SurgeryController {
     public List<Hospital> fetchSurgeryHospitals(){
         return surgeryService.fetchSurgeryHospitals();
     }
+
+    @GetMapping("/findbypatient")
+    public List<Surgery> findByPatient(@RequestParam(value="patientID") Long patientID){
+        return surgeryService.findByPatientID(patientID);
+    }
 }
