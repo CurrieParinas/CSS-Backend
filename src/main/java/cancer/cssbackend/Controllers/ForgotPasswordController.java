@@ -24,7 +24,7 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(@RequestParam("email") Long userId, @RequestParam("password") String password) {
+    public String changePassword(@RequestParam("userId") Long userId, @RequestParam("password") String password) {
         return forgotPasswordService.changePassword(userId, password);
     }
 }
