@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,23 @@ public class ChemotherapyService {
             return chemotherapyRepository.findByPatient(patient.get());
         } else {
             throw new RuntimeException("Chemotherapy records not found with patient ID " + patientID);
+        }
+    }
+
+    public Chemotherapy fetchLatestByPatient(Long patientID){
+        List<Long> treatmentIDs = chemotherapyRepository.fetchLatestByPatient(patientID);
+        treatmentIDs.sort(Comparator.reverseOrder());
+
+        if(treatmentIDs.isEmpty()){
+            throw new RuntimeException("Chemotherapy records not found with patient ID " + patientID);
+        }
+
+        Optional<Chemotherapy> latest = chemotherapyRepository.findById(treatmentIDs.get(0));
+
+        if(latest.isPresent()) {
+            return latest.get();
+        } else {
+            throw new RuntimeException("Surgery records not found with patient ID " + patientID);
         }
     }
 }

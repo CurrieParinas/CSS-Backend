@@ -22,4 +22,8 @@ public interface ImmunotherapyRepository extends JpaRepository<Immunotherapy, Lo
     public List<Long> fetchImmunotherapyFacilities();
 
     List<Immunotherapy> findByPatient(Patient patient);
+
+    @Query(value="SELECT IMMUNORX_ID FROM IMMUNOTHERAPY WHERE PATIENT_ID = :patientID", nativeQuery = true)
+    List<Long> fetchLatestByPatient(@Param("patientID") Long patientID);
+
 }

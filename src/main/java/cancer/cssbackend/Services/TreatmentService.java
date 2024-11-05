@@ -10,6 +10,7 @@ import cancer.cssbackend.Repositories.TreatmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,23 @@ public class TreatmentService {
 
         if (patient.isPresent()){
             return treatmentRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Treatment records not found with patient ID " + patientID);
+        }
+    }
+
+    public Treatment fetchLatestByPatient(Long patientID){
+        List<Long> treatmentIDs = treatmentRepository.fetchLatestByPatient(patientID);
+        treatmentIDs.sort(Comparator.reverseOrder());
+
+        if(treatmentIDs.isEmpty()){
+            throw new RuntimeException("Treatment records not found with patient ID " + patientID);
+        }
+
+        Optional<Treatment> latestTreatment = treatmentRepository.findById(treatmentIDs.get(0));
+
+        if(latestTreatment.isPresent()) {
+            return latestTreatment.get();
         } else {
             throw new RuntimeException("Treatment records not found with patient ID " + patientID);
         }

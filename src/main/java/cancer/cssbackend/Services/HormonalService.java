@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,23 @@ public class HormonalService {
 
         if (patient.isPresent()){
             return hormonalRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Hormonal records not found with patient ID " + patientID);
+        }
+    }
+
+    public Hormonal fetchLatestByPatient(Long patientID){
+        List<Long> treatmentIDs = hormonalRepository.fetchLatestByPatient(patientID);
+        treatmentIDs.sort(Comparator.reverseOrder());
+
+        if(treatmentIDs.isEmpty()){
+            throw new RuntimeException("Hormonal records not found with patient ID " + patientID);
+        }
+
+        Optional<Hormonal> latest = hormonalRepository.findById(treatmentIDs.get(0));
+
+        if(latest.isPresent()) {
+            return latest.get();
         } else {
             throw new RuntimeException("Hormonal records not found with patient ID " + patientID);
         }

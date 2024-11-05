@@ -21,4 +21,8 @@ public interface ChemotherapyRepository extends JpaRepository<Chemotherapy, Long
     public List<Long> fetchChemotherapyFacilities();
 
     List<Chemotherapy> findByPatient(Patient patient);
+
+    @Query(value="SELECT CHEMO_ID FROM CHEMOTHERAPY WHERE PATIENT_ID = :patientID", nativeQuery = true)
+    List<Long> fetchLatestByPatient(@Param("patientID") Long patientID);
+
 }

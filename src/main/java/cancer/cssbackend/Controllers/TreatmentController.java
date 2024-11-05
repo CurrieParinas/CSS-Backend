@@ -26,4 +26,9 @@ public class TreatmentController {
     public List<Treatment> findByPatient(@RequestParam(value="patientID") Long patientID){
         return treatmentService.findByPatientID(patientID);
     }
+
+    @GetMapping("/findbypatient/latest")
+    public Treatment findLatestByPatient(@RequestParam(value="patientID") Long patientID){
+        return treatmentService.fetchLatestByPatient(patientID);
+    }
 }
