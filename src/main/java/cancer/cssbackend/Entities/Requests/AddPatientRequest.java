@@ -30,9 +30,6 @@ public class AddPatientRequest {
     @JsonProperty("USER_EMAIL")
     private String userEmail;
 
-    @JsonProperty("USER_PASSWORD")
-    private String userPassword;
-
     @JsonProperty("USER_GENDER")
     private String userGender;
 
@@ -98,7 +95,6 @@ public class AddPatientRequest {
         user.setUserFirstname(userFirstname);
         user.setUserMiddlename(userMiddlename);
         user.setUserEmail(userEmail);
-        user.setUserPassword(userPassword);
         user.setUserGender(userGender);
         user.setUserMaritalStatus(userMaritalStatus);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

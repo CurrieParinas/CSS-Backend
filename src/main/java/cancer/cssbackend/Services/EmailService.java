@@ -42,6 +42,22 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
+    public void sendTempPassEmail(String to, String subject, Long userId, String token, String temporaryPassword) throws MessagingException, IOException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        helper.setTo(to);
+        helper.setSubject(subject);
+        String htmlBody = loadHtmlTemplate("classpath:temporary_password.html");
+        htmlBody = htmlBody.replace("${userId}", userId.toString());
+        htmlBody = htmlBody.replace("${token}", token);
+        htmlBody = htmlBody.replace("${temporaryPassword}", temporaryPassword);
+
+        helper.setText(htmlBody, true);
+
+        javaMailSender.send(message);
+    }
+
     private String loadHtmlTemplate(String path) throws IOException {
         Resource resource = resourceLoader.getResource(path);
         StringBuilder contentBuilder = new StringBuilder();

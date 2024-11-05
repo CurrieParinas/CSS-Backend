@@ -3,8 +3,11 @@ package cancer.cssbackend.Controllers;
 import cancer.cssbackend.Entities.Patient;
 import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Services.PatientService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @CrossOrigin
 @RestController
@@ -14,7 +17,7 @@ public class PatientController {
     private final PatientService patientService;
 
     @PostMapping("/add")
-    public Patient addPatient(@RequestBody AddPatientRequest addPatientRequest) {
+    public Patient addPatient(@RequestBody AddPatientRequest addPatientRequest) throws MessagingException, IOException {
         return patientService.addPatient(addPatientRequest);
     }
 
