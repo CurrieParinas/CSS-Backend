@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,23 @@ public class SurgeryService {
 
         if (patient.isPresent()){
             return surgeryRepository.findByPatient(patient.get());
+        } else {
+            throw new RuntimeException("Surgery records not found with patient ID " + patientID);
+        }
+    }
+
+    public Surgery fetchLatestByPatient(Long patientID){
+        List<Long> treatmentIDs = surgeryRepository.fetchLatestByPatient(patientID);
+        treatmentIDs.sort(Comparator.reverseOrder());
+
+        if(treatmentIDs.isEmpty()){
+            throw new RuntimeException("Surgery records not found with patient ID " + patientID);
+        }
+
+        Optional<Surgery> latest = surgeryRepository.findById(treatmentIDs.get(0));
+
+        if(latest.isPresent()) {
+            return latest.get();
         } else {
             throw new RuntimeException("Surgery records not found with patient ID " + patientID);
         }

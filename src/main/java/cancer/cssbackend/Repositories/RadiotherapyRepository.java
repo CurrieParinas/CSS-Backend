@@ -23,4 +23,8 @@ public interface RadiotherapyRepository extends JpaRepository<Radiotherapy, Long
     List<Long> fetchRadiotherapyFacilities();
 
     List<Radiotherapy> findByPatient(Patient patient);
+
+    @Query(value="SELECT RADRX_ID FROM RADIOTHERAPY WHERE PATIENT_ID = :patientID", nativeQuery = true)
+    List<Long> fetchLatestByPatient(@Param("patientID") Long patientID);
+
 }

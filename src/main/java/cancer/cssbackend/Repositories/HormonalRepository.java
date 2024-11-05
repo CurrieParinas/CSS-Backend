@@ -4,6 +4,7 @@ import cancer.cssbackend.Entities.Hormonal;
 import cancer.cssbackend.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface HormonalRepository extends JpaRepository<Hormonal, Long> {
     List<Long> fetchHormonalHospitals();
 
     List<Hormonal> findByPatient(Patient patient);
+
+    @Query(value="SELECT HORMONAL_ID FROM HORMONAL WHERE PATIENT_ID = :patientID", nativeQuery = true)
+    List<Long> fetchLatestByPatient(@Param("patientID") Long patientID);
+
 }

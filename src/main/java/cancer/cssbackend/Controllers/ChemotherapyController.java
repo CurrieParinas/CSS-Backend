@@ -1,9 +1,6 @@
 package cancer.cssbackend.Controllers;
 
-import cancer.cssbackend.Entities.Chemotherapy;
-import cancer.cssbackend.Entities.Doctor;
-import cancer.cssbackend.Entities.Hospital;
-import cancer.cssbackend.Entities.Patient;
+import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddChemotherapyRequest;
 import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Services.ChemotherapyService;
@@ -42,5 +39,10 @@ public class ChemotherapyController {
     @GetMapping("/findbypatient")
     public List<Chemotherapy> findByPatient(@RequestParam(value="patientID") Long patientID){
         return chemotherapyService.findByPatientID(patientID);
+    }
+
+    @GetMapping("/findbypatient/latest")
+    public Chemotherapy findLatestByPatient(@RequestParam(value="patientID") Long patientID){
+        return chemotherapyService.fetchLatestByPatient(patientID);
     }
 }
