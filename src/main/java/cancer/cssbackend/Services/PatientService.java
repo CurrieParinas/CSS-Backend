@@ -3,11 +3,16 @@ package cancer.cssbackend.Services;
 import cancer.cssbackend.Entities.*;
 import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Repositories.*;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +24,10 @@ public class PatientService {
     private final AddressRepository addressRepository;
     private final OnboardRepository onboardRepository;
     private final DoctorRepository doctorRepository;
+    private final ForgotPasswordRepository forgotPasswordRepository;
+    private final EmailService emailService;
 
-    public Patient addPatient(AddPatientRequest addPatientRequest) {
+    public Patient addPatient(AddPatientRequest addPatientRequest) throws MessagingException, IOException {
         Patient patient = addPatientRequest.mapToPatient();
         Address address = patient.getUser().getUserAddress();
         addressRepository.save(address);
@@ -40,6 +47,9 @@ public class PatientService {
             User encoder = optionalEncoder.get();
             user.setUserEncoder(encoder);
         }
+        String temporaryPassword = TemporaryPasswordService.generateTemporaryPassword();
+        user.setUserPassword(temporaryPassword);
+
         userRepository.save(user);
         patient.setUser(user);
         patientRepository.save(patient);
@@ -50,6 +60,16 @@ public class PatientService {
             onboard.setDoctor(doctor);
             onboardRepository.save(onboard);
         }
+
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expiryDate = LocalDateTime.now().plusHours(24);
+        ForgotPassword forgotPassword = new ForgotPassword();
+        forgotPassword.setUser(user);
+        forgotPassword.setToken(token);
+        forgotPassword.setExpiry(Timestamp.valueOf(expiryDate));
+        emailService.sendTempPassEmail(addPatientRequest.getUserEmail(), "Welcome to Cancer Surveillance System", user.getUserId(), token, temporaryPassword);
+        forgotPasswordRepository.save(forgotPassword);
+
         return patient;
     }
   
