@@ -32,8 +32,8 @@ public class PatientController {
         return this.patientService.deletePatient(patientID);
     }
 
-    @GetMapping("/getADOCRH/{patientId}")
-    public Map<String, Object> getADOCRH(@PathVariable Long patientId){
-        return patientService.getADOCRH(patientId);
+    @GetMapping("/getConsultInfo/{patientId}")
+    public Map<String, Object> getConsultInfo(@PathVariable Long patientId){
+        return patientService.getConsultInfo(patientId);
     }
 }

@@ -31,6 +31,8 @@ public class PatientService {
     private final ChemotherapyRepository chemotherapyRepository;
     private final RadiotherapyRepository radiotherapyRepository;
     private final HormonalRepository hormonalRepository;
+    private final ConsultRepository consultRepository;
+    private final LabSubmittedRepository labSubmittedRepository;
 
     public Patient addPatient(AddPatientRequest addPatientRequest) throws MessagingException, IOException {
         Patient patient = addPatientRequest.mapToPatient();
@@ -105,34 +107,42 @@ public class PatientService {
         return "Deletion unsuccessful or no patient with that ID exists";
     }
 
-    public Map<String, Object> getADOCRH(Long patientId) {
+    public Map<String, Object> getConsultInfo(Long patientId) {
         Optional<Patient> optionalPatient = patientRepository.findById(patientId);
         if (optionalPatient.isPresent()) {
             Map<String, Object> response = new HashMap<>();
             Patient patient = optionalPatient.get();
-            Disease disease = new Disease();
-            if (diseaseRepository.findByPatient(patient) != null) {
-                disease = diseaseRepository.findByPatient(patient);
-            }
-            Surgery surgery = new Surgery();
-            if (!surgeryRepository.findByPatient(patient).isEmpty()) {
-                surgery = surgeryRepository.findByPatient(patient).get(0);
-            }
+            Disease disease = diseaseRepository.findByPatient(patient);
+            List<Surgery> surgeryList = surgeryRepository.findByPatient(patient);
             List<Chemotherapy> chemotherapyList = chemotherapyRepository.findByPatient(patient);
             List<Radiotherapy> radiotherapyList = radiotherapyRepository.findByPatient(patient);
             List<Hormonal> hormonalList = hormonalRepository.findByPatient(patient);
+            List<Consult> consultList = consultRepository.findByPatient(patient);
+            List<LabSubmitted> labSubmittedList = labSubmittedRepository.findByPatient(patient);
+
+            Map<String, Object> nameMap = new HashMap<>();
+            nameMap.put("LASTNAME", patient.getUser().getUserLastname());
+            nameMap.put("FIRSTNAME", patient.getUser().getUserFirstname());
+            nameMap.put("MIDDLENAME", patient.getUser().getUserMiddlename());
+            response.put("NAME", nameMap);
 
             response.put("AGE", Period.between(patient.getUser().getUserBirthdate().toLocalDate(), LocalDate.now()).getYears());
 
             Map<String, Object> diagnosisMap = new HashMap<>();
-            diagnosisMap.put("DATE", disease.getDiseaseDiagnosisDate());
-            diagnosisMap.put("STAGE", disease.getDiseaseStage());
-            diagnosisMap.put("LATERALITY", disease.getDiseaseLaterality());
+            diagnosisMap.put("DATE", disease != null ? disease.getDiseaseDiagnosisDate() : null);
+            diagnosisMap.put("STAGE", disease != null ? disease.getDiseaseStage() : null);
+            diagnosisMap.put("LATERALITY", disease != null ? disease.getDiseaseLaterality() : null);
             response.put("DIAGNOSIS", diagnosisMap);
 
             Map<String, Object> operationMap = new HashMap<>();
-            operationMap.put("SURGERY", surgery.getSurgeryOperation());
-            operationMap.put("DATE", surgery.getSurgeryDate());
+            if (!surgeryList.isEmpty()) {
+                Surgery surgery = surgeryList.get(0);
+                operationMap.put("SURGERY", surgery.getSurgeryOperation());
+                operationMap.put("DATE", surgery.getSurgeryDate());
+            } else {
+                operationMap.put("SURGERY", null);
+                operationMap.put("DATE", null);
+            }
             response.put("OPERATION", operationMap);
 
             Map<String, Object> chemotherapyMap = new HashMap<>();
@@ -201,6 +211,28 @@ public class PatientService {
             }
             response.put("HORMONAL_THERAPY", hormonalTherapyMap);
 
+            response.put("STATUS", patient.getUser().getUserStatus());
+
+            Timestamp latestDate = null;
+            for (Consult consult : consultList) {
+                Timestamp consultDate = consult.getConsultDate();
+                if (latestDate == null || consultDate.after(latestDate)) {
+                    latestDate = consultDate;
+                }
+            }
+            response.put("LATEST_CONSULT_DATE", latestDate);
+
+
+            LabSubmitted latestLabSubmitted = null;
+            for (LabSubmitted labSubmitted : labSubmittedList) {
+                if (latestLabSubmitted == null || labSubmitted.getLabSubmissionDate().after(latestLabSubmitted.getLabSubmissionDate())) {
+                    latestLabSubmitted = labSubmitted;
+                }
+            }
+            response.put("LATEST_LAB_SUBMITTED", latestLabSubmitted != null ? latestLabSubmitted.getWorkupName().getWorkupName() : null);
+            response.put("LATEST_LAB_DATE", latestLabSubmitted != null ? latestLabSubmitted.getLabSubmissionDate() : null);
+            response.put("PATIENT_SISX_REPORT", null);
+            response.put("PATIENT_REPORT_DATE", null);
             return response;
         }
         return null;
