@@ -18,6 +18,6 @@ public class NotificationType {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "NOTIFICATIONTYPE_SEQ")
     private Long notifTypeId;
 
-    @Column(nullable = false, length = 200)
+    @Column(name="NOTIFICATIONTYPE_NAME", nullable = false, length = 200)
     private String notificationTypeName;
 }
