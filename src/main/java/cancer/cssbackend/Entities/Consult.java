@@ -36,6 +36,9 @@ public class Consult {
     @Column(name = "CONSULT_SURVWORKUP", nullable = false)
     private String consultSurvworkup;
 
+    @Column(name = "CONSULT_ASSESSMENT", nullable = false)
+    private String consultAssessment;
+
     @Column(name = "CONSULT_RXPLAN", nullable = false)
     private String consultRxplan;
 

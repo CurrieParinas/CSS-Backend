@@ -38,6 +38,9 @@ public class AddConsultRequest {
     @JsonProperty("CONSULT_RXPLAN")
     private String consultRxplan;
 
+    @JsonProperty("CONSULT_ASSESSMENT")
+    private String consultAssessment;
+
     @JsonProperty("CONSULT_PATIENTSTATUS")
     private Long consultPatientstatus;
 
@@ -49,6 +52,7 @@ public class AddConsultRequest {
         consult.setConsultObjective(consultObjective);
         consult.setConsultSurvworkup(consultSurvworkup);
         consult.setConsultRxplan(consultRxplan);
+        consult.setConsultAssessment(consultAssessment);
 
         return consult;
     }
