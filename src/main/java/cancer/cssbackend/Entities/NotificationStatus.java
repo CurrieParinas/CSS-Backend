@@ -19,6 +19,6 @@ public class NotificationStatus {
     private Long notifStatusID;
 
 
-    @Column(nullable = false, length = 200)
+    @Column(name="NOTIFSTATUS_NAME", nullable = false, length = 200)
     private String notifStatusName;
 }
