@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class NotificationLogService {
     private final NotificationLogRepository notificationLogRepository;
+
+    public int countUnreadByPatient(Long patientID){
+        return notificationLogRepository.countUnreadByPatient(patientID);
+    }
 }
