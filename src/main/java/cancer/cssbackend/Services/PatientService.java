@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.Period;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +26,11 @@ public class PatientService {
     private final DoctorRepository doctorRepository;
     private final ForgotPasswordRepository forgotPasswordRepository;
     private final EmailService emailService;
+    private final DiseaseRepository diseaseRepository;
+    private final SurgeryRepository surgeryRepository;
+    private final ChemotherapyRepository chemotherapyRepository;
+    private final RadiotherapyRepository radiotherapyRepository;
+    private final HormonalRepository hormonalRepository;
 
     public Patient addPatient(AddPatientRequest addPatientRequest) throws MessagingException, IOException {
         Patient patient = addPatientRequest.mapToPatient();
@@ -98,5 +103,106 @@ public class PatientService {
             return "Successfully deleted the patient's account";
         }
         return "Deletion unsuccessful or no patient with that ID exists";
+    }
+
+    public Map<String, Object> getADOCRH(Long patientId) {
+        Optional<Patient> optionalPatient = patientRepository.findById(patientId);
+        if (optionalPatient.isPresent()) {
+            Map<String, Object> response = new HashMap<>();
+            Patient patient = optionalPatient.get();
+            Disease disease = new Disease();
+            if (diseaseRepository.findByPatient(patient) != null) {
+                disease = diseaseRepository.findByPatient(patient);
+            }
+            Surgery surgery = new Surgery();
+            if (!surgeryRepository.findByPatient(patient).isEmpty()) {
+                surgery = surgeryRepository.findByPatient(patient).get(0);
+            }
+            List<Chemotherapy> chemotherapyList = chemotherapyRepository.findByPatient(patient);
+            List<Radiotherapy> radiotherapyList = radiotherapyRepository.findByPatient(patient);
+            List<Hormonal> hormonalList = hormonalRepository.findByPatient(patient);
+
+            response.put("AGE", Period.between(patient.getUser().getUserBirthdate().toLocalDate(), LocalDate.now()).getYears());
+
+            Map<String, Object> diagnosisMap = new HashMap<>();
+            diagnosisMap.put("DATE", disease.getDiseaseDiagnosisDate());
+            diagnosisMap.put("STAGE", disease.getDiseaseStage());
+            diagnosisMap.put("LATERALITY", disease.getDiseaseLaterality());
+            response.put("DIAGNOSIS", diagnosisMap);
+
+            Map<String, Object> operationMap = new HashMap<>();
+            operationMap.put("SURGERY", surgery.getSurgeryOperation());
+            operationMap.put("DATE", surgery.getSurgeryDate());
+            response.put("OPERATION", operationMap);
+
+            Map<String, Object> chemotherapyMap = new HashMap<>();
+            if (!chemotherapyList.isEmpty()) {
+                boolean notCompletedFound = false;
+                for (Chemotherapy chemo : chemotherapyList) {
+                    if ("N".equals(chemo.getChemoIsCompleted())) {
+                        chemotherapyMap.put("YN", "Yes");
+                        chemotherapyMap.put("COMPLETION", "Not Completed");
+                        notCompletedFound = true;
+                        break;
+                    }
+                }
+
+                if (!notCompletedFound) {
+                    chemotherapyMap.put("YN", "Yes");
+                    chemotherapyMap.put("COMPLETION", "Completed");
+                }
+            } else {
+                chemotherapyMap.put("YN", "No");
+                chemotherapyMap.put("COMPLETION", null);
+            }
+            response.put("CHEMOTHERAPY", chemotherapyMap);
+
+            Map<String, Object> radiotherapyMap = new HashMap<>();
+            if (!radiotherapyList.isEmpty()) {
+                boolean notCompletedFound = false;
+                for (Radiotherapy radio : radiotherapyList) {
+                    if ("N".equals(radio.getRadRxIsCompleted())) {
+                        radiotherapyMap.put("YN", "Yes");
+                        radiotherapyMap.put("COMPLETION", "Not Completed");
+                        notCompletedFound = true;
+                        break;
+                    }
+                }
+
+                if (!notCompletedFound) {
+                    radiotherapyMap.put("YN", "Yes");
+                    radiotherapyMap.put("COMPLETION", "Completed");
+                }
+            } else {
+                radiotherapyMap.put("YN", "No");
+                radiotherapyMap.put("COMPLETION", null);
+            }
+            response.put("RADIOTHERAPY", radiotherapyMap);
+
+            Map<String, Object> hormonalTherapyMap = new HashMap<>();
+            if (!hormonalList.isEmpty()) {
+                boolean notCompletedFound = false;
+                for (Hormonal hormonal : hormonalList) {
+                    if ("Non-compliant".equals(hormonal.getHormonalStatus())) {
+                        hormonalTherapyMap.put("YN", "Yes");
+                        hormonalTherapyMap.put("COMPLIANCE", "Non-compliant");
+                        notCompletedFound = true;
+                        break;
+                    }
+                }
+
+                if (!notCompletedFound) {
+                    hormonalTherapyMap.put("YN", "Yes");
+                    hormonalTherapyMap.put("COMPLIANCE", "Compliant");
+                }
+            } else {
+                hormonalTherapyMap.put("YN", "No");
+                hormonalTherapyMap.put("COMPLIANCE", null);
+            }
+            response.put("HORMONAL_THERAPY", hormonalTherapyMap);
+
+            return response;
+        }
+        return null;
     }
 }

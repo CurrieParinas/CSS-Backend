@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -29,5 +30,10 @@ public class PatientController {
     @DeleteMapping("/delete")
     public String deletePatientById(@RequestParam(value="patientID") Long patientID){
         return this.patientService.deletePatient(patientID);
+    }
+
+    @GetMapping("/getADOCRH/{patientId}")
+    public Map<String, Object> getADOCRH(@PathVariable Long patientId){
+        return patientService.getADOCRH(patientId);
     }
 }
