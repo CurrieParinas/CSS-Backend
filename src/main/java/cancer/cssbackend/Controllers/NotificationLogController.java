@@ -30,13 +30,13 @@ public class NotificationLogController {
         }
     }
 
-    @GetMapping("/{patientID}/all")
-    public List<NotificationLog> fetchAllNotifsByPatient(@PathVariable Long patientID){
-        return notificationLogService.fetchAllNotifsByPatient(patientID);
+    @GetMapping("/{userID}/all")
+    public List<NotificationLog> fetchAllNotifsByPatient(@PathVariable Long userID){
+        return notificationLogService.fetchAllNotifsByPatient(userID);
     }
 
-    @GetMapping("/{patientID}/unread")
-    public List<NotificationLog> fetchUnreadByPatient(@PathVariable Long patientID){
-        return notificationLogService.fetchUnreadByPatient(patientID);
+    @GetMapping("/{userID}/unread")
+    public List<NotificationLog> fetchUnreadByPatient(@PathVariable Long userID){
+        return notificationLogService.fetchUnreadByPatient(userID);
     }
 }

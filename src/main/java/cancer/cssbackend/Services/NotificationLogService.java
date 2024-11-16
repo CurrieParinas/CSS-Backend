@@ -17,8 +17,8 @@ public class NotificationLogService {
     private final NotificationLogRepository notificationLogRepository;
     private final NotificationStatusRepository notificationStatusRepository;
 
-    public int countUnreadByPatient(Long patientID){
-        return notificationLogRepository.countUnreadByPatient(patientID);
+    public int countUnreadByPatient(Long userID){
+        return notificationLogRepository.countUnreadByUser(userID);
     }
 
     public String updateReadStatus(Long notifLogID){
@@ -32,20 +32,20 @@ public class NotificationLogService {
         return "Successfully updated Read status.";
     }
 
-    public List<NotificationLog> fetchUnreadByPatient(Long patientID){
-        List<NotificationLog> notifs = notificationLogRepository.fetchUnreadByPatient(patientID);
+    public List<NotificationLog> fetchUnreadByPatient(Long userID){
+        List<NotificationLog> notifs = notificationLogRepository.fetchUnreadByUser(userID);
 
         if (notifs == null) {
-            throw new IllegalStateException("No unread notifications found for patient with ID: " + patientID);
+            throw new IllegalStateException("No unread notifications found for user with ID: " + userID);
         } else {
             return notifs;
         }
     }
-    public List<NotificationLog> fetchAllNotifsByPatient(Long patientID){
-        List<NotificationLog> notifs = notificationLogRepository.fetchAllNotifsByPatient(patientID);
+    public List<NotificationLog> fetchAllNotifsByPatient(Long userID){
+        List<NotificationLog> notifs = notificationLogRepository.fetchAllNotifsByUser(userID);
 
         if (notifs == null) {
-            throw new IllegalStateException("No notifications found for patient with ID: " + patientID);
+            throw new IllegalStateException("No notifications found for user with ID: " + userID);
         } else {
             return notifs;
         }
