@@ -35,6 +35,7 @@ public class EmailService {
     private final DoctorRepository doctorRepository;
     private final NotificationStatusRepository notificationStatusRepository;
     private final NotificationTypeRepository notificationTypeRepository;
+    private final UserRepository userRepository;
 
     public void sendHtmlEmail(String type, String to, String subject, Long userId, String token) throws MessagingException, IOException {
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -104,13 +105,13 @@ public class EmailService {
         NotificationLog notificationLog = new NotificationLog();
         notificationLog.setNotificationDate(Date.valueOf(LocalDate.now()));
 
-        Patient patient = patientRepository.findById((long) sendMessageRequest.getRecieverID())
-                .orElseThrow(() -> new IllegalArgumentException("No patient found with ID: " + sendMessageRequest.getRecieverID()));
-        notificationLog.setNotificationReceiver(patient);
+        User reciever = userRepository.findById((long) sendMessageRequest.getRecieverID())
+                .orElseThrow(() -> new IllegalArgumentException("Receiver Error. No user found with ID: " + sendMessageRequest.getRecieverID()));
+        notificationLog.setNotificationReceiver(reciever);
 
-        Doctor doctor = doctorRepository.findById((long) sendMessageRequest.getSenderID())
-                .orElseThrow(() -> new IllegalArgumentException("No doctor found with ID: " + sendMessageRequest.getSenderID()));
-        notificationLog.setNotificationSender(doctor);
+        User sender = userRepository.findById((long) sendMessageRequest.getSenderID())
+                .orElseThrow(() -> new IllegalArgumentException("Sender error. No user found with ID: " + sendMessageRequest.getSenderID()));
+        notificationLog.setNotificationSender(sender);
 
         notificationLog.setNotificationNotes(sendMessageRequest.getMessage());
         notificationLog.setNotificationUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
