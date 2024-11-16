@@ -8,6 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class NotificationLogService {
@@ -27,5 +30,24 @@ public class NotificationLogService {
         notificationLog.setNotificationStatus(notificationStatus);
         notificationLogRepository.save(notificationLog);
         return "Successfully updated Read status.";
+    }
+
+    public List<NotificationLog> fetchUnreadByPatient(Long patientID){
+        List<NotificationLog> notifs = notificationLogRepository.fetchUnreadByPatient(patientID);
+
+        if (notifs == null) {
+            throw new IllegalStateException("No unread notifications found for patient with ID: " + patientID);
+        } else {
+            return notifs;
+        }
+    }
+    public List<NotificationLog> fetchAllNotifsByPatient(Long patientID){
+        List<NotificationLog> notifs = notificationLogRepository.fetchAllNotifsByPatient(patientID);
+
+        if (notifs == null) {
+            throw new IllegalStateException("No notifications found for patient with ID: " + patientID);
+        } else {
+            return notifs;
+        }
     }
 }

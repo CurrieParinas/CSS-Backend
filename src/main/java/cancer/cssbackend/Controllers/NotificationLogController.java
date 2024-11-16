@@ -1,11 +1,14 @@
 package cancer.cssbackend.Controllers;
 
+import cancer.cssbackend.Entities.NotificationLog;
 import cancer.cssbackend.Services.NotificationLogService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -27,4 +30,13 @@ public class NotificationLogController {
         }
     }
 
+    @GetMapping("/{patientID}/all")
+    public List<NotificationLog> fetchAllNotifsByPatient(@PathVariable Long patientID){
+        return notificationLogService.fetchAllNotifsByPatient(patientID);
+    }
+
+    @GetMapping("/{patientID}/unread")
+    public List<NotificationLog> fetchUnreadByPatient(@PathVariable Long patientID){
+        return notificationLogService.fetchUnreadByPatient(patientID);
+    }
 }
