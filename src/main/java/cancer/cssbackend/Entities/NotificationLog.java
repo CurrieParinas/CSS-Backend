@@ -34,12 +34,12 @@ public class NotificationLog {
     private NotificationStatus notificationStatus;
 
     @OneToOne
-    @JoinColumn(name = "NOTIFICATION_RECEIVER", referencedColumnName = "PATIENT_ID")
-    private Patient notificationReceiver;
+    @JoinColumn(name = "NOTIFICATION_RECEIVER", referencedColumnName = "USER_ID")
+    private User notificationReceiver;
 
     @OneToOne
-    @JoinColumn(name = "NOTIFICATION_SENDER", referencedColumnName = "DOCTOR_ID")
-    private Doctor notificationSender;
+    @JoinColumn(name = "NOTIFICATION_SENDER", referencedColumnName = "USER_ID")
+    private User notificationSender;
 
     @Column(name = "NOTIFICATION_NOTES", length = 2000)
     private String notificationNotes;
