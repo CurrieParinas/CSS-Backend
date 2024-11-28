@@ -227,9 +227,85 @@ VALUES (NOTIFICATIONSTATUS_SEQ.NEXTVAL, 'Read');
 INSERT INTO NOTIFICATIONSTATUS (NOTIFSTATUS_ID, NOTIFSTATUS_NAME)
 VALUES (NOTIFICATIONSTATUS_SEQ.NEXTVAL, 'Unread');
 
-INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (1, 'Symptom');
-INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (2, 'Laboratory');
-INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (3, 'Checkup');
+INSERT INTO BODYSITE(BODYSITE_ID, BODYSITE_NAME) VALUES (BODYSITE_SEQ.nextval, 'Negative') ;
+INSERT INTO BODYSITE(BODYSITE_ID, BODYSITE_NAME) VALUES (BODYSITE_SEQ.nextval, 'All') ;
+
+
+INSERT INTO SYMPTOMCATEGORY(SYMPTOMCATEGORY_ID, SYMPTOM_CATEGORY) VALUES (SYMPTOMCATEGORY_SEQ.nextval, 'Local Symptom');
+INSERT INTO SYMPTOMCATEGORY(SYMPTOMCATEGORY_ID, SYMPTOM_CATEGORY) VALUES (SYMPTOMCATEGORY_SEQ.nextval, 'Systemic Symptom');
+INSERT INTO SYMPTOMCATEGORY(SYMPTOMCATEGORY_ID, SYMPTOM_CATEGORY) VALUES (SYMPTOMCATEGORY_SEQ.nextval, 'Quality of Life');
+INSERT INTO SYMPTOMCATEGORY(SYMPTOMCATEGORY_ID, SYMPTOM_CATEGORY) VALUES (SYMPTOMCATEGORY_SEQ.nextval, 'Treatment Side Effect');
+
+INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (1, 'Symptom Survey');
+INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (2, 'Laboratory Submission');
+INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (3, 'Checkup Scheduling');
+INSERT INTO NOTIFICATIONTYPE (NOTIFTYPE_ID, NOTIFICATIONTYPE_NAME) VALUES (4, 'Treatment Info Update');
+
+
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,24,'No new local symptom',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,24,'No new systemic symptom',NULL,2,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,24,'Good function in daily living',NULL,3,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,24,'No observed side effects',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Breast pain',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Arm swelling',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Skin thickening',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Breast mass',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Nipple discharge',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Bone pain',NULL,2,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Fatigue',NULL,2,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Weight loss',NULL,2,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Shortness of breath',NULL,2,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Persistent cough',NULL,2,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Abdominal pain',NULL,2,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Jaundice',NULL,2,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Personality or behavioral change',NULL,2,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Depression',NULL,3,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,25,'Anxiety',NULL,3,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Arms and legs numbness',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,9,'Easy fatiguability',NULL,4,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Neck mass',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Hoarseness',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Voice changes',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Difficulty swallowing (dysphagia)',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Neck tightness',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Cold intolerance',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Constipation',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Dry skin and hair',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Memory or concentration issues',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Heart palpitation',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,5,'Tremors',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Sensation food stuck after swallowing',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Pain on swallowing',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Regurgitation of food',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Chest pain',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Voice changes',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Chronic cough',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Frequent hiccups',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Muscle weakness',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Tingling of hands and feet',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Balance problem in walking',NULL,4,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Memory loss concentration problem',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Shortness of breath',NULL,4,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Recurrent lips ulcer',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,13,'Sore tongue',NULL,4,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Upper abdominal pain',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Nausea',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Vomiting after food intake',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Early satiety',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Heartburn',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Difficulty swallowing',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Black stools',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,16,'Vomiting blood',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Abdominal pain',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Abdominal mass',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Smaller caliber stool',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Bloody stools',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Incomplete bowel evacuation',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Vomiting',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Bloating',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Severe constipation',NULL,1,NULL,NULL);
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Abdominal enlargement',NULL,1,NULL,'1');
+INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Watery stools',NULL,1,NULL,'1');
 
 COMMIT;
 
