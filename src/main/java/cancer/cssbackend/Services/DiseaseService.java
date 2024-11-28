@@ -6,6 +6,7 @@ import cancer.cssbackend.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -88,6 +89,8 @@ public class DiseaseService {
         if (patient == null) {
             throw new RuntimeException("Patient not found with ID " + patientID);
         }
+        List<Disease> diseases = diseaseRepository.findByPatient(patient);
+
         return diseaseRepository.findByPatient(patient);
     }
 }
