@@ -85,12 +85,10 @@ public class DiseaseService {
     }
 
     public Disease findByPatientID(Long patientID) {
-        Patient patient = patientService.findPatient(patientID);
-        if (patient == null) {
-            throw new RuntimeException("Patient not found with ID " + patientID);
-        }
-        List<Disease> diseases = diseaseRepository.findByPatient(patient);
-
-        return diseaseRepository.findByPatient(patient);
+//        Patient patient = patientService.findPatient(patientID);
+//        if (patient == null) {
+//            throw new RuntimeException("Patient not found with ID " + patientID);
+//        }
+        return diseaseRepository.fetchByPatientID(patientID);
     }
 }
