@@ -307,6 +307,67 @@ INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_fili
 INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Abdominal enlargement',NULL,1,NULL,'1');
 INSERT INTO SYMPTOMSURVEY(SYMPTOMSURVEY_ID,cancer_type,symptom_name,symptom_filipino,symptom_category,symptom_medicalTerm,symptom_alertable) VALUES (SYMPTOMSURVEY_SEQ.nextval,1,'Watery stools',NULL,1,NULL,'1');
 
+
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Mammogram');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'MRI Breast');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Bone Density');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, '2D Echo');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Thyroglobulin');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Neck Ultrasound');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Thyroid stimulating hormone');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Free T4');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'RAI Scan');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Bone Density Testing');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, '12L-ECG');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Esophagogastroduodenoscopy');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Chest CT scan with IV contrast');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'CT scan abdomen and chest with contrast');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Nutritional assessment');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Complete Blood Count (CBC)');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Creatine');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'AST');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'ALT');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'CT');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Abdominopelvic CT with oral and IV contrast');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Carcinoembryonic Antigen (CEA)');
+INSERT INTO WORKUP(WORKUP_ID, WORKUP_NAME) VALUES (WORKUP_SEQ.nextval, 'Colonoscopy');
+
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (1,9,1,12,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (2,9,2,0,'imaging','high-risk',0,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (3,9,2,0,'imaging','genetic mutation',0,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (4,9,3,0,'imaging','aromatase inhibitor',0,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (5,9,4,0,'imaging','post-treatment  trastuzumab',0,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (6,9,4,0,'imaging','doxorubicin post-treatment',0,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (7,5,5,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (8,5,6,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (9,5,7,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (10,5,8,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (11,5,9,12,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (12,5,10,0,'imaging','TSH suppression medication',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (13,5,11,0,'cardiac test','hyperthyroidism symptom',0,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (14,13,12,6,'endoscopy','routine',24,'gastroenterologist');
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (15,13,13,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (16,13,14,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (17,13,15,6,'clinicalTest','routine',24,'nutritionist');
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (18,13,16,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (19,13,17,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (20,13,18,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (21,13,19,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (22,16,14,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (23,16,16,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (24,16,18,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (25,16,19,6,'blood_testing','routine', 24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (26,16,13,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (27,16,21,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (28,16,12,6,'endoscopy','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (29,1,21,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (30,1,14,6,'imaging','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (31,1,22,3,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (32,1,16,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (33,1,18,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (34,1,19,6,'blood_testing','routine',24,NULL);
+INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (35,1,23,12,'endosocpy','routine',24,'gastroenterology');
+
 COMMIT;
 
 SELECT * FROM USERTABLE;
