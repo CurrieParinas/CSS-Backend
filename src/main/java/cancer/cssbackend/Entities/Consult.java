@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity(name = "CONSULT")
@@ -25,7 +26,7 @@ public class Consult {
     private Patient patient;
 
     @Column(name = "CONSULT_DATE")
-    private Timestamp consultDate;
+    private Date consultDate;
 
     @Column(name = "CONSULT_SUBJECTIVE", nullable = false)
     private String consultSubjective;

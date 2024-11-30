@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +26,9 @@ import java.time.format.DateTimeFormatter;
 public class AddConsultRequest {
     @JsonProperty("PATIENT_ID")
     private Long patientID;
+
+    @JsonProperty("CONSULT_DATE")
+    private String consultDate;
 
     @JsonProperty("CONSULT_SUBJECTIVE")
     private String consultSubjective;
@@ -47,7 +51,9 @@ public class AddConsultRequest {
     public Consult mapToConsult() {
         Consult consult = new Consult();
 
-        consult.setConsultDate(Timestamp.valueOf(LocalDateTime.now()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(consultDate, formatter);
+        consult.setConsultDate(Date.valueOf(localDate));
         consult.setConsultSubjective(consultSubjective);
         consult.setConsultObjective(consultObjective);
         consult.setConsultSurvworkup(consultSurvworkup);
