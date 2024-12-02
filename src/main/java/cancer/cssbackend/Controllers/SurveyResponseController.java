@@ -1,10 +1,12 @@
 package cancer.cssbackend.Controllers;
 
+import cancer.cssbackend.Entities.Requests.AddSurveyResponseRequest;
+import cancer.cssbackend.Entities.Requests.AddTreatmentRequest;
+import cancer.cssbackend.Entities.SurveyResponse;
+import cancer.cssbackend.Entities.Treatment;
 import cancer.cssbackend.Services.SurveyResponseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -12,4 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/surveyresponse")
 public class SurveyResponseController {
     private final SurveyResponseService surveyResponseService;
+
+    @PostMapping("/add")
+    public SurveyResponse addSurveyResponse(@RequestBody AddSurveyResponseRequest addSurveyResponseRequest) {
+        return surveyResponseService.addSurveyResponse(addSurveyResponseRequest);
+    }
 }

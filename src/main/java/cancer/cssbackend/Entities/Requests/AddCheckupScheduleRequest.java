@@ -46,10 +46,17 @@ public class AddCheckupScheduleRequest {
         CheckupSchedule checkupSchedule = new CheckupSchedule();
 
         Optional<Patient> patient = patientRepository.findById(patientId);
-        patient.ifPresent(checkupSchedule::setPatient);
-
+        if(patient.isPresent()){
+            checkupSchedule.setPatient(patient.get());
+        } else{
+            throw new RuntimeException("Patient not found with ID " + patientId);
+        }
         Optional<Doctor> doctor = doctorRepository.findById(doctorId);
-        doctor.ifPresent(checkupSchedule::setDoctor);
+        if(doctor.isPresent()){
+            checkupSchedule.setDoctor(doctor.get());
+        } else{
+            throw new RuntimeException("Doctor not found with ID " + doctorId);
+        }
 
         checkupSchedule.setCheckupRequestDate(Date.valueOf(this.checkupRequestDate));
         checkupSchedule.setCheckupConfirmedDate(Date.valueOf(this.checkupConfirmedDate));
