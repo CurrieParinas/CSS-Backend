@@ -213,9 +213,10 @@ public class PatientService {
 
             response.put("STATUS", patient.getUser().getUserStatus());
 
-            Timestamp latestDate = null;
+            //from timestamp ginawa ko na date -nathan
+            Date latestDate = null;
             for (Consult consult : consultList) {
-                Timestamp consultDate = consult.getConsultDate();
+                Date consultDate = consult.getConsultDate();
                 if (latestDate == null || consultDate.after(latestDate)) {
                     latestDate = consultDate;
                 }
@@ -237,4 +238,14 @@ public class PatientService {
         }
         return null;
     }
+
+    public Patient fetchLatestCreatedPatient(Long doctorID) {
+        Patient patient = patientRepository.fetchLatestCreatedPatient(doctorID);
+        if (patient != null) {
+            return patient;
+        } else {
+            throw new RuntimeException("Patient not found");
+        }
+    }
+
 }
