@@ -368,6 +368,11 @@ INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,wo
 INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (34,1,19,6,'blood_testing','routine',24,NULL);
 INSERT INTO LABMONITOR(LABMONITOR_ID,cancer_type,workup_name,workup_frequency,workup_type,workup_indication,workup_duration,workup_referral) VALUES (35,1,23,12,'endosocpy','routine',24,'gastroenterology');
 
+insert into CHECKUPSTATUS(checkupstatus_id, notifstatus_name) VALUES (CHECKUPSTATUS_SEQ.nextval, 'Request');
+insert into CHECKUPSTATUS(checkupstatus_id, notifstatus_name) VALUES (CHECKUPSTATUS_SEQ.nextval, 'Confirmed');
+insert into CHECKUPSTATUS(checkupstatus_id, notifstatus_name) VALUES (CHECKUPSTATUS_SEQ.nextval, 'Done');
+insert into CHECKUPSTATUS(checkupstatus_id, notifstatus_name) VALUES (CHECKUPSTATUS_SEQ.nextval, 'Cancelled');
+
 COMMIT;
 
 SELECT * FROM USERTABLE;
