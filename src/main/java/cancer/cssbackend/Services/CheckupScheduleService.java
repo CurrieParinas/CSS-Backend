@@ -2,12 +2,11 @@ package cancer.cssbackend.Services;
 
 import cancer.cssbackend.Entities.CheckupSchedule;
 import cancer.cssbackend.Entities.Requests.AddCheckupScheduleRequest;
-import cancer.cssbackend.Repositories.CheckupScheduleRepository;
-import cancer.cssbackend.Repositories.CheckupStatusRepository;
-import cancer.cssbackend.Repositories.DoctorRepository;
-import cancer.cssbackend.Repositories.PatientRepository;
+import cancer.cssbackend.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +20,13 @@ public class CheckupScheduleService {
         CheckupSchedule checkupSchedule = addCheckupScheduleRequest.mapToCheckupSchedule(patientRepository, doctorRepository, checkupStatusRepository);
         checkupScheduleRepository.save(checkupSchedule);
         return checkupSchedule;
+    }
+
+    public List<CheckupSchedule> fetchAllByDoctor(Long doctorID){
+        return checkupScheduleRepository.fetchAllByDoctor(doctorID);
+    }
+
+    public List<CheckupSchedule> fetchAllByDoctorAndDate(Long doctorID, String date){
+        return checkupScheduleRepository.fetchAllByDoctorAndDate(doctorID, date);
     }
 }
