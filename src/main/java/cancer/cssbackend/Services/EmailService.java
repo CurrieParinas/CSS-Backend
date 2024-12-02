@@ -94,14 +94,51 @@ public class EmailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-        String finalMessage = "From: " + sendMessageRequest.getSenderEmail() + "\n" + sendMessageRequest.getMessage();
+        // Build the HTML content with the specified structure
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<!DOCTYPE html>");
+        htmlContent.append("<html lang=\"en\">");
+        htmlContent.append("<head>");
+        htmlContent.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+        htmlContent.append("<title>Password Reset Request</title>");
+        htmlContent.append("<style>");
+        htmlContent.append("body { font-family: 'Tahoma', sans-serif; margin: 0; padding: 20px; background-color: #e9ecef; }");
+        htmlContent.append(".background { width: 90%; padding: 40px; background-color: #ffffff; }");
+        htmlContent.append(".container { border: 1px solid #a1a1aa; max-width: 600px; margin: auto; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); text-align: center; border-top: 8px solid #742a2a; }");
+        htmlContent.append("h1 { color: #333; font-size: 28px; margin-bottom: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }");
+        htmlContent.append("p { color: #555; line-height: 1.8; font-size: 16px; margin: 10px 0; }");
+        htmlContent.append("a { display: inline-block; margin: 30px 0; padding: 14px 30px; background: linear-gradient(90deg, #742a2a, #703535); color: #ffffff; text-decoration: none; border-radius: 30px; transition: background 0.3s ease, transform 0.3s ease; font-size: 18px; }");
+        htmlContent.append("a:hover { background: linear-gradient(90deg, #4a1b1b, #542828); transform: scale(1.05); transition: background 1s ease, transform 1s ease; }");
+        htmlContent.append(".footer { margin-top: 30px; font-size: 14px; color: #777; line-height: 1.6; }");
+        htmlContent.append(".divider { margin: 30px 0; border-top: 1px solid #eaeaea; }");
+        htmlContent.append(".note { font-size: 14px; color: #888; margin-top: 15px; }");
+        htmlContent.append("</style>");
+        htmlContent.append("</head>");
+        htmlContent.append("<body>");
+        htmlContent.append("<div class=\"container\">");
+        htmlContent.append("<h1>From: <span style=\"color: white;\">")
+                .append(sendMessageRequest.getSenderEmail())
+                .append("</span></h1>");
+        // Split the message into sentences and wrap each in <p> tags
+        String[] sentences = sendMessageRequest.getMessage().split("\\. ");
+        for (String sentence : sentences) {
+            htmlContent.append("<p>").append(sentence.trim()).append(".</p>");
+        }
 
+        htmlContent.append("<div class=\"footer\">");
+        htmlContent.append("<p class=\"note\">This is an automated message. Please do not reply.</p>");
+        htmlContent.append("</div>");
+        htmlContent.append("</div>");
+        htmlContent.append("</body>");
+        htmlContent.append("</html>");
+
+        // Set email properties
         helper.setTo(sendMessageRequest.getReceieverEmail());
         helper.setFrom(sendMessageRequest.getSenderEmail());
         helper.setSubject(sendMessageRequest.getSubject());
-        helper.setText(finalMessage);
+        helper.setText(htmlContent.toString(), true); // Set HTML content
 
-
+        // Create and save the notification log
         NotificationLog notificationLog = new NotificationLog();
         notificationLog.setNotificationDate(Date.valueOf(LocalDate.now()));
 
@@ -120,11 +157,13 @@ public class EmailService {
                 .orElseThrow(() -> new IllegalArgumentException("No notification type found with ID: " + sendMessageRequest.getNotifType()));
         notificationLog.setNotificationType(notificationType);
 
-        //naka set to default na
+        // Set default notification status
         NotificationStatus notificationStatus = notificationStatusRepository.findByNotifStatusName("Unread");
         notificationLog.setNotificationStatus(notificationStatus);
 
         notificationLogRepository.save(notificationLog);
+
+        // Send the email
         javaMailSender.send(message);
         return notificationLog;
     }
