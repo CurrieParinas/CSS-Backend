@@ -36,4 +36,9 @@ public class PatientController {
     public Map<String, Object> getConsultInfo(@PathVariable Long patientId){
         return patientService.getConsultInfo(patientId);
     }
+
+    @GetMapping("/get/latest")
+    public Patient fetchLatestCreated(@RequestParam(value="doctorID") Long doctorID){
+        return this.patientService.fetchLatestCreatedPatient(doctorID);
+    }
 }
