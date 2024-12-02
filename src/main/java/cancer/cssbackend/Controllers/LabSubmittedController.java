@@ -1,10 +1,15 @@
 package cancer.cssbackend.Controllers;
 
+import cancer.cssbackend.Entities.LabSubmitted;
+import cancer.cssbackend.Entities.Requests.AddDoctorRequest;
+import cancer.cssbackend.Entities.Requests.AddLabSubmittedRequest;
 import cancer.cssbackend.Services.LabSubmittedService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @CrossOrigin
 @RestController
@@ -12,4 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/lab/submit")
 public class LabSubmittedController {
     private final LabSubmittedService labSubmittedService;
+
+    @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public LabSubmitted addLabSubmitted(@RequestPart("addLabSubmittedRequest") AddLabSubmittedRequest addLabSubmittedRequest,
+                                        @RequestPart("labFileLocation") MultipartFile labFileLocation) throws IOException {
+        return labSubmittedService.addLabSubmtited(addLabSubmittedRequest, labFileLocation);
+    }
 }

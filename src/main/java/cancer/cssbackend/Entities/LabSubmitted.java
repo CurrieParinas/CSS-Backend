@@ -37,7 +37,7 @@ public class LabSubmitted {
     private Workup workupName;
 
     @Column(name = "LABFILELOCATION", nullable = false)
-    private String labFileLocation;
+    private byte[] labFileLocation;
 
     @Column(name = "LABSUBMISSION_NOTES")
     private String labSubmissionNotes;
