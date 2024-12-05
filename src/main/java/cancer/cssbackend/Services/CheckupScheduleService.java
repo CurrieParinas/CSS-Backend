@@ -4,9 +4,12 @@ import cancer.cssbackend.Entities.CheckupSchedule;
 import cancer.cssbackend.Entities.Requests.AddCheckupScheduleRequest;
 import cancer.cssbackend.Repositories.*;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Check;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,17 @@ public class CheckupScheduleService {
         CheckupSchedule checkupSchedule = addCheckupScheduleRequest.mapToCheckupSchedule(patientRepository, doctorRepository, checkupStatusRepository);
         checkupScheduleRepository.save(checkupSchedule);
         return checkupSchedule;
+    }
+
+    public CheckupSchedule editConfirmedDate(Long checkupSchedulID, String date){
+        Optional<CheckupSchedule> checkupSchedule = checkupScheduleRepository.findById(checkupSchedulID);
+
+        if(checkupSchedule.isPresent()){
+            checkupSchedule.get().setCheckupConfirmedDate(Date.valueOf(date));
+            return checkupSchedule.get();
+        } else {
+            throw new RuntimeException("No Checkup Schedule with ID: " + checkupSchedulID);
+        }
     }
 
     public List<CheckupSchedule> fetchAllByDoctor(Long doctorID){
