@@ -44,4 +44,9 @@ public class CheckupScheduleController {
     public List<CheckupSchedule> fetchAllByPatientAndDate(@RequestParam(value="patientID") Long patientID, @RequestParam(value="date") String date){
         return checkupScheduleService.fetchAllByPatientAndDate(patientID, date);
     }
+
+    @PutMapping("/editconfirmeddate")
+    public CheckupSchedule editConfirmedDate(@RequestParam(value="checkupScheduleID") Long checkupsScheduleID, @RequestParam(value="date") String date){
+        return checkupScheduleService.editConfirmedDate(checkupsScheduleID, date);
+    }
 }
