@@ -7,6 +7,7 @@ import cancer.cssbackend.Entities.Requests.AddPatientRequest;
 import cancer.cssbackend.Services.CheckupScheduleService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Check;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -32,5 +33,15 @@ public class CheckupScheduleController {
     @GetMapping("/fetchbydoctoranddate")
     public List<CheckupSchedule> fetchAllByDoctorAndDate(@RequestParam(value="doctorID") Long doctorID, @RequestParam(value="date") String date){
         return checkupScheduleService.fetchAllByDoctorAndDate(doctorID, date);
+    }
+
+    @GetMapping("/fetchbypatient")
+    public List<CheckupSchedule> fetchAllByPatient(@RequestParam(value="patientID") Long patientID){
+        return checkupScheduleService.fetchAllByPatient(patientID);
+    }
+
+    @GetMapping("/fetchbypatientanddate")
+    public List<CheckupSchedule> fetchAllByPatientAndDate(@RequestParam(value="patientID") Long patientID, @RequestParam(value="date") String date){
+        return checkupScheduleService.fetchAllByPatientAndDate(patientID, date);
     }
 }

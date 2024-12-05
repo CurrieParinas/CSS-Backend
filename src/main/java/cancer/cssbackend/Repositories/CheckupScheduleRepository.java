@@ -15,4 +15,10 @@ public interface CheckupScheduleRepository extends JpaRepository<CheckupSchedule
 
     @Query(value="SELECT * FROM CHECKUPSCHEDULE WHERE DOCTOR_ID = :doctorID AND CHECKUPCONFIRMED_DATE = TO_DATE(:date, 'YYYY-MM-DD')", nativeQuery = true)
     List<CheckupSchedule> fetchAllByDoctorAndDate(@Param(("doctorID")) Long doctorID, @Param("date") String date);
+
+    @Query(value = "select * from CHECKUPSCHEDULE where PATIENT_ID = :patientID", nativeQuery = true)
+    List<CheckupSchedule> fetchAllByPatient(@Param("patientID") Long patientID);
+
+    @Query(value="SELECT * FROM CHECKUPSCHEDULE WHERE PATIENT_ID = :patientID AND CHECKUPCONFIRMED_DATE = TO_DATE(:date, 'YYYY-MM-DD')", nativeQuery = true)
+    List<CheckupSchedule> fetchAllByPatientAndDate(@Param(("patientID")) Long patientID, @Param("date") String date);
 }
