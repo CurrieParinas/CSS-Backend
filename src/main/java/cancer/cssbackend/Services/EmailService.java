@@ -31,8 +31,6 @@ public class EmailService {
     private final ResourceLoader resourceLoader;
 
     private final NotificationLogRepository notificationLogRepository;
-    private final PatientRepository patientRepository;
-    private final DoctorRepository doctorRepository;
     private final NotificationStatusRepository notificationStatusRepository;
     private final NotificationTypeRepository notificationTypeRepository;
     private final UserRepository userRepository;
@@ -73,6 +71,25 @@ public class EmailService {
 
         javaMailSender.send(message);
     }
+
+    public void sendLabEmail(String to, String subject, String patient, String doctor, String type, String workup) throws MessagingException, IOException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        helper.setTo(to);
+        helper.setSubject(subject);
+        String htmlBody = loadHtmlTemplate("classpath:lab_submit_reminder.html");
+        htmlBody = htmlBody.replace("${patient}", patient);
+        htmlBody = htmlBody.replace("${doctor}", doctor);
+        htmlBody = htmlBody.replace("${type}", type);
+        htmlBody = htmlBody.replace("${workup}", workup);
+
+        helper.setText(htmlBody, true);
+
+        javaMailSender.send(message);
+    }
+
+
 
     private String loadHtmlTemplate(String path) throws IOException {
         Resource resource = resourceLoader.getResource(path);

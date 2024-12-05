@@ -30,7 +30,7 @@ drop table WORKUP;
 drop table CHECKUP;
 drop table DISEASESTATUS;
 drop table CHECKUPSCHEDULE;
-drop table PATIENT
+drop table PATIENT;
 drop table DOCTOR;
 drop table HOSPITAL;
 drop table DEPARTMENT;
@@ -40,7 +40,6 @@ drop table ADDRESS;
 drop table ACCESSTABLE;
 drop table ROLE;
 drop table CHECKUPSTATUS;
-
 
 DROP SEQUENCE ACCESS_SEQ;
 DROP SEQUENCE ADDRESS_SEQ;
