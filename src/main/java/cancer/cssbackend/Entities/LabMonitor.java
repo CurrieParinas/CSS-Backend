@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Entity(name = "LABMONITOR")
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -18,26 +20,13 @@ public class LabMonitor {
     @Column(name = "LABMONITOR_ID")
     private Long labMonitorID;
 
-    @ManyToOne
-    @JoinColumn(name = "CANCER_TYPE")
-    private BodySite cancerType;
+    @OneToOne
+    @JoinColumn(name = "LAB_SUBMITTED_ID")
+    private LabSubmitted labSubmitted;
 
-    @ManyToOne
-    @JoinColumn(name = "WORKUP_NAME")
-    private Workup workup;
+    @Column(name = "END_DATE")
+    private Date endDate;
 
-    @Column(name = "WORKUP_FREQUENCY")
-    private Integer workupFrequency;
-
-    @Column(name = "WORKUP_TYPE")
-    private Long workupType;
-
-    @Column(name = "WORKUP_INDICATION")
-    private String workupIndication;
-
-    @Column(name = "WORKUP_DURATION")
-    private Integer workupDuration;
-
-    @Column(name = "WORKUP_REFERRAL")
-    private String workupReferral;
+    @Column(name = "STATUS")
+    private String status;
 }

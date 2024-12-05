@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Submission Reminder</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e9ecef;
+        }
+
+        .background {
+            width: 90%;
+            padding: 40px;
+            background-color: #ffffff;
+        }
+
+        .container {
+            border: 1px solid #a1a1aa;
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            border-top: 8px solid #742a2a;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        a {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 14px 30px;
+            background: linear-gradient(90deg, #742a2a, #703535);
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 18px;
+        }
+
+        a:hover {
+            background: linear-gradient(90deg, #4a1b1b, #542828);
+            transform: scale(1.05);
+            transition: background 1s ease, transform 1s ease;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .divider {
+            margin: 30px 0;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .note {
+            font-size: 14px;
+            color: #888;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="background">
+    <div class="container">
+        <h1>Lab Submission Reminder</h1>
+        <p>Dear ${patient},</p>
+        <p>This is a reminder to submit the lab workup for your cancer treatment to Dr. ${doctor}. The workup for the ${type} (Workup Name: ${workup}) is important for your ongoing care.</p>
+        <p class="note">Please make sure to submit the workup as soon as possible to avoid delays in your treatment process.</p>
+        <div class="divider"></div>
+        <p>If you have any questions, please reach out to your doctor or our office.</p>
+        <p class="footer">Best regards,<br>Cancer Surveillance System</p>
+    </div>
+</div>
+</body>
+
+</html>
