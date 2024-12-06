@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -93,6 +95,18 @@ public class ImmunotherapyService {
             return latest.get();
         } else {
             throw new RuntimeException("Immunotherapy records not found with patient ID " + patientID);
+        }
+    }
+
+    public Immunotherapy updateIsCompleted(Long immunotherapyID ,char completed){
+        Optional<Immunotherapy> immunotherapy = immunotherapyRepository.findById(immunotherapyID);
+
+        if(immunotherapy.isPresent()){
+            immunotherapy.get().setImmunorxIscompleted(completed);
+            immunotherapy.get().setImmunorxUpdatedon(Timestamp.valueOf(LocalDateTime.now()));
+            return immunotherapy.get();
+        } else {
+            throw new RuntimeException("Immunotherapy records not found with ID " + immunotherapyID);
         }
     }
 }

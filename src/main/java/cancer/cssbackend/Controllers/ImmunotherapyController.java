@@ -45,4 +45,9 @@ public class ImmunotherapyController {
     public Immunotherapy findLatestByPatient(@RequestParam(value="patientID") Long patientID){
         return immunotherapyService.fetchLatestByPatient(patientID);
     }
+
+    @PostMapping("/updatecompletedstatus")
+    public Immunotherapy updateIsCompleted(@RequestParam(value="immunotherapyID") Long immunotherapyID, @RequestParam(value="completed") char completed){
+        return immunotherapyService.updateIsCompleted(immunotherapyID, completed);
+    }
 }
