@@ -1,10 +1,11 @@
 package cancer.cssbackend.Controllers;
 
+import cancer.cssbackend.Entities.Projections.WorkupProjection;
 import cancer.cssbackend.Services.WorkupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -12,4 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/workup")
 public class WorkupController {
     private final WorkupService workupService;
+
+    @GetMapping("/fetchbycancertype")
+    public List<WorkupProjection> getWorkupProjection(@RequestParam(value="cancerType") Long cancerType){
+        return workupService.getWorkupProjections(cancerType);
+    }
 }
