@@ -8,6 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +31,7 @@ public class NotificationLogService {
         NotificationStatus notificationStatus = notificationStatusRepository.findByNotifStatusName("Read");
 
         notificationLog.setNotificationStatus(notificationStatus);
+        notificationLog.setNotificationUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
         notificationLogRepository.save(notificationLog);
         return "Successfully updated Read status.";
     }
