@@ -35,5 +35,5 @@ public class SymptomSurvey {
     private String symptomFilipino;
 
     @Column(name = "SYMPTOM_ALERTABLE")
-    private char symptomAlertable;
+    private String symptomAlertable;
 }
