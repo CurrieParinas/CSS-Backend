@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,5 +35,9 @@ public class LabSubmittedService {
         labMonitor.setEndDate(endDate);
         labMonitorRepository.save(labMonitor);
         return labSubmitted;
+    }
+
+    public List<LabSubmitted> getAllSubmissions() {
+        return labSubmittedRepository.findAll();
     }
 }

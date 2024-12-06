@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -22,5 +23,10 @@ public class LabSubmittedController {
     public LabSubmitted addLabSubmitted(@RequestPart("addLabSubmittedRequest") AddLabSubmittedRequest addLabSubmittedRequest,
                                         @RequestPart("labFileLocation") MultipartFile labFileLocation) throws IOException {
         return labSubmittedService.addLabSubmtited(addLabSubmittedRequest, labFileLocation);
+    }
+
+    @GetMapping(value = "/all")
+    public List<LabSubmitted> getAllSubmissions() {
+        return labSubmittedService.getAllSubmissions();
     }
 }
