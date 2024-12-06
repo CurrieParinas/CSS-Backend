@@ -22,4 +22,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query(value = "SELECT DISTINCT d.DOCTOR_ID FROM DOCTOR d JOIN SURGERY s ON s.SURGERY_SURGEON = d.DOCTOR_ID WHERE d.DOCTOR_HOSPITAL = :hospitalID", nativeQuery = true)
     List<Long> findSurgeonsByHosp(@Param("hospitalID") Long hospitalID);
+
+    @Query(value="SELECT DISTINCT D.DOCTOR_ID FROM DOCTOR D INNER JOIN ONBOARD O ON D.DOCTOR_ID = O.DOCTOR_ID WHERE O.PATIENT_ID = :patientID", nativeQuery = true)
+    List<Long> fetchDoctorsOfAPatient(@Param("patientID") Long patientID);
 }

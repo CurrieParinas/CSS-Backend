@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.print.Doc;
 import java.io.IOException;
 import java.util.List;
 
@@ -41,5 +42,10 @@ public class DoctorController {
     @GetMapping("/findsurgeonsbyhospital")
     public List<Doctor> findSurgeonsbyHospital(@RequestParam(value="hospitalID") Long hospitalID){
         return doctorService.findSurgeonByHospital(hospitalID);
+    }
+
+    @GetMapping("/finddoctorsbypatient")
+    public List<Doctor> fetchDoctorsOfAPatient(@RequestParam(value="patientID") Long patientID){
+        return doctorService.fetchDoctorsOfAPatient(patientID);
     }
 }

@@ -84,4 +84,16 @@ public class DoctorService {
 
         return surgeonsByHospital;
     }
+
+    public List<Doctor> fetchDoctorsOfAPatient(Long patientID){
+        List<Doctor> doctorsByPatient = new ArrayList<>();
+        List<Long> doctorIDs = doctorRepository.fetchDoctorsOfAPatient(patientID);
+
+        for(Long id : doctorIDs){
+            Optional<Doctor> x = doctorRepository.findById(id);
+            x.ifPresent(doctorsByPatient::add);
+        }
+
+        return doctorsByPatient;
+    }
 }
