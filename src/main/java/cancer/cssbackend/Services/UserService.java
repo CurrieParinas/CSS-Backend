@@ -8,6 +8,9 @@ import cancer.cssbackend.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,5 +46,18 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public String editStatus(Long userID, String userStatus){
+        Optional<User> user = userRepository.findById(userID);
+
+        if(user.isPresent()){
+            user.get().setUserStatus(userStatus);
+            user.get().setUserUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+            userRepository.save(user.get());
+            return "Successfully updated User's Status";
+        } else{
+            throw new RuntimeException("User not found with ID: " + userID);
+        }
     }
 }

@@ -21,4 +21,9 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @PutMapping(path="/editstatus")
+    public String editStatus(@RequestParam(value="userID") Long userID, @RequestParam(value="userStatus") String userStatus){
+        return userService.editStatus(userID, userStatus);
+    }
 }
