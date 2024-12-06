@@ -8,6 +8,8 @@ import org.hibernate.annotations.Check;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,7 @@ public class CheckupScheduleService {
 
         if(checkupSchedule.isPresent()){
             checkupSchedule.get().setCheckupConfirmedDate(Date.valueOf(date));
+            checkupSchedule.get().setCheckupUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
             return checkupSchedule.get();
         } else {
             throw new RuntimeException("No Checkup Schedule with ID: " + checkupSchedulID);
