@@ -31,10 +31,6 @@ public class SurveyResponse {
     @Column(name = "SURVEYRESPONSE_DATE")
     private Timestamp surveyResponseDate;
 
-    @ManyToOne
-    @JoinColumn(name = "SYMPTOMSURVEY_ID")
-    private SymptomSurvey symptomSurvey;
-
     @Column(name = "RESPONSE_NOTE")
     private String responseNote;
 }

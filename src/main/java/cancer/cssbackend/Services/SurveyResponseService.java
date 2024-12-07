@@ -23,4 +23,8 @@ public class SurveyResponseService {
         surveyResponseRepository.save(surveyResponse);
         return surveyResponse;
     }
+
+    public SurveyResponse fetchExistingSurveyResponse(Long patientID, Long doctorID){
+        return surveyResponseRepository.fetchExistingSurveyResponse(patientID, doctorID);
+    }
 }

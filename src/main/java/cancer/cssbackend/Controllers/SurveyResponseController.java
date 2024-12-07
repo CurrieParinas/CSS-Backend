@@ -19,4 +19,9 @@ public class SurveyResponseController {
     public SurveyResponse addSurveyResponse(@RequestBody AddSurveyResponseRequest addSurveyResponseRequest) {
         return surveyResponseService.addSurveyResponse(addSurveyResponseRequest);
     }
+
+    @GetMapping("/existing")
+    public SurveyResponse fetchExistingSurveyResponse(@RequestParam(value="patientID") Long patientID, @RequestParam(value="doctorID") Long doctorID){
+        return surveyResponseService.fetchExistingSurveyResponse(patientID, doctorID);
+    }
 }
