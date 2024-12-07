@@ -29,7 +29,7 @@ public class Workup {
     private Integer workupFrequency;
 
     @Column(name = "WORKUP_TYPE")
-    private Long workupType;
+    private String workupType;
 
     @Column(name = "WORKUP_INDICATION")
     private String workupIndication;
