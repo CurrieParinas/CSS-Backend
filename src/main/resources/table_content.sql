@@ -28,6 +28,9 @@ INSERT INTO SPECIALTY VALUES (SPECIALTY_SEQ.nextval, 'Radiation Oncology', 'Doct
 INSERT INTO SPECIALTY VALUES (SPECIALTY_SEQ.nextval, 'Pathology', 'Doctor specialized in identifying pathology from tissue samples');
 INSERT INTO SPECIALTY VALUES (SPECIALTY_SEQ.nextval, 'Colorectal Surgery', 'Surgeon specialized in colon and rectal cancer');
 
+
+INSERT INTO USERTABLE VALUES (0, 'Admin', 'Admin', 'Admin', 'cancersurveillancesystem@gmail.com',
+                              'Adminpassword', 'Male', 'Single', TO_DATE('12/12/2024', 'mm/dd/yyyy'), 'Manila', 2, 9239929384, 3, 1, 'Y', 'Active', sysdate, sysdate, null);
 INSERT INTO USERTABLE VALUES (USER_SEQ.nextval, 'Smith', 'James', 'Gomez', 'smithjames@gmail.com',
                               'smj022078', 'Male', 'Single', TO_DATE('02/20/1978', 'mm/dd/yyyy'), 'Manila', 2, 9239929384, 3, 1, 'Y', 'Active', sysdate, sysdate, null);
 INSERT INTO USERTABLE VALUES (USER_SEQ.nextval, 'Johnson', 'Micheal', 'Phillips', 'jmphilips@gmail.com',

@@ -4,6 +4,7 @@ import cancer.cssbackend.Entities.LabSubmitted;
 import cancer.cssbackend.Entities.Requests.AddDoctorRequest;
 import cancer.cssbackend.Entities.Requests.AddLabSubmittedRequest;
 import cancer.cssbackend.Services.LabSubmittedService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class LabSubmittedController {
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public LabSubmitted addLabSubmitted(@RequestPart("addLabSubmittedRequest") AddLabSubmittedRequest addLabSubmittedRequest,
-                                        @RequestPart("labFileLocation") MultipartFile labFileLocation) throws IOException {
+                                        @RequestPart("labFileLocation") MultipartFile labFileLocation) throws IOException, MessagingException {
         return labSubmittedService.addLabSubmtited(addLabSubmittedRequest, labFileLocation);
     }
 
