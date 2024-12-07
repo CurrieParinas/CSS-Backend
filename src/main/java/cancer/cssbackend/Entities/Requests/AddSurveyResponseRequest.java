@@ -22,9 +22,6 @@ public class AddSurveyResponseRequest {
     @JsonProperty("survey_response_date")
     public String surveyResponseDate;
 
-    @JsonProperty("symptom_survey_id")
-    public Long symptomSurveyId;
-
     @JsonProperty("response_note")
     public String responseNote;
 
@@ -46,9 +43,6 @@ public class AddSurveyResponseRequest {
         }
 
         surveyResponse.setSurveyResponseDate(Timestamp.valueOf(this.surveyResponseDate));
-
-        Optional<SymptomSurvey> symptomSurvey = symptomSurveyRepository.findById(symptomSurveyId);
-        symptomSurvey.ifPresent(surveyResponse::setSymptomSurvey);
 
         surveyResponse.setResponseNote(this.responseNote);
 
