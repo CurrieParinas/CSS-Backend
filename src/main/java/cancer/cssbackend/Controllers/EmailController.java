@@ -1,6 +1,7 @@
 package cancer.cssbackend.Controllers;
 
 import cancer.cssbackend.Entities.Doctor;
+import cancer.cssbackend.Entities.NotificationLog;
 import cancer.cssbackend.Entities.Requests.AddDoctorRequest;
 import cancer.cssbackend.Entities.Requests.SendMessageRequest;
 import cancer.cssbackend.Services.EmailService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.management.Notification;
 import java.io.IOException;
 
 @CrossOrigin
@@ -21,13 +23,13 @@ public class EmailController {
     private final EmailService emailService;
     private final NotificationLogService notificationLogService;
     @PostMapping("/send")
-    public ResponseEntity<String> sendEmail(@RequestBody SendMessageRequest sendMessageRequest) {
+    public NotificationLog sendEmail(@RequestBody SendMessageRequest sendMessageRequest) {
         try {
-            emailService.sendEmail(sendMessageRequest);
-            return ResponseEntity.ok("Email sent successfully!");
+            return emailService.sendEmail(sendMessageRequest);
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body("Failed to send email: " + e.getMessage());
+            throw new RuntimeException("Failed to send email.");
+            //return ResponseEntity.status(500).body("Failed to send email: " + e.getMessage());
         }
     }
 
