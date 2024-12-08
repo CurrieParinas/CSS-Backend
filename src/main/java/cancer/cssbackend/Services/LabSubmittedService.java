@@ -43,6 +43,7 @@ public class LabSubmittedService {
         LocalDateTime endDateTime = labSubmitted.getLabSubmissionDate().toLocalDateTime().plusMonths(labSubmitted.getWorkupName().getWorkupDuration());
         Date endDate = Date.valueOf(endDateTime.toLocalDate());
         labMonitor.setEndDate(endDate);
+        labMonitor.setStatus("ONGOING");
         labMonitorRepository.save(labMonitor);
 
         //send email

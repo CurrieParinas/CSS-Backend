@@ -30,8 +30,8 @@ public class LabMonitorService {
             long monthsSinceStart = ChronoUnit.MONTHS.between(monitor.getLabSubmitted().getLabSubmissionDate().toLocalDateTime().toLocalDate(), today);
 
             // Check if it's time to send an email
-            if (monthsSinceStart % monitor.getLabSubmitted().getWorkupName().getWorkupFrequency() == 0) {
-                emailService.sendLabEmail(monitor.getLabSubmitted().getPatient().getUser().getUserEmail(), "Lab Submission Reminder", monitor.getLabSubmitted().getPatient().getUser().getUserLastname(), monitor.getLabSubmitted().getDoctor().getUser().getUserLastname(), monitor.getLabSubmitted().getWorkupName().getCancerType().getBodysiteName(), monitor.getLabSubmitted().getWorkupName().getWorkupName());
+            if (monthsSinceStart % monitor.getLabSubmitted().getWorkupName().getWorkupFrequency() == 0 && monitor.getLabSubmitted().getLabSubmissionDate().toLocalDateTime().toLocalDate() != today) {
+                emailService.sendLabEmail(monitor.getLabSubmitted().getPatient().getUser().getUserEmail(), "Lab Submission Reminder", monitor.getLabSubmitted().getPatient().getUser().getUserFirstname() + monitor.getLabSubmitted().getPatient().getUser().getUserLastname(), monitor.getLabSubmitted().getDoctor().getUser().getUserLastname(), monitor.getLabSubmitted().getWorkupName().getCancerType().getBodysiteName(), monitor.getLabSubmitted().getWorkupName().getWorkupName());
 
                 // Check if the current date is equal to or after the end date
                 if (!today.isBefore(monitor.getEndDate().toLocalDate())) { // today >= endDate
