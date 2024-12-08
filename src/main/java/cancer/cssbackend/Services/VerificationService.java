@@ -37,7 +37,7 @@ public class VerificationService {
             }
             verification.setToken(token);
             verification.setExpiry(Timestamp.valueOf(expiryDate));
-            emailService.sendHtmlEmail("verification", user.getUserEmail(), "Account Verification", user.getUserId(), token);
+            emailService.sendHtmlEmail('v', user.getUserEmail(), "Account Verification", user.getUserId(), token);
             verificationRepository.save(verification);
             return "Verification mail sent.";
         }

@@ -35,7 +35,7 @@ public class ForgotPasswordService {
         }
         forgotPassword.setToken(token);
         forgotPassword.setExpiry(Timestamp.valueOf(expiryDate));
-        emailService.sendHtmlEmail("forgot", email, "Account Verification", user.getUserId(), token);
+        emailService.sendHtmlEmail('f', email, "Account Verification", user.getUserId(), token);
         forgotPasswordRepository.save(forgotPassword);
         return "Password Reset mail sent.";
     }
