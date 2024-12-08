@@ -29,13 +29,12 @@ import java.util.Optional;
 public class EmailService {
     private final JavaMailSender javaMailSender;
     private final ResourceLoader resourceLoader;
-
     private final NotificationLogRepository notificationLogRepository;
     private final NotificationStatusRepository notificationStatusRepository;
     private final NotificationTypeRepository notificationTypeRepository;
     private final UserRepository userRepository;
 
-    public void sendHtmlEmail(String type, String to, String subject, Long userId, String token) throws MessagingException, IOException {
+    public void sendHtmlEmail(char type, String to, String subject, Long userId, String token) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -43,11 +42,12 @@ public class EmailService {
         helper.setSubject(subject);
 
         String htmlBody = "";
-        if (type.equals("verification")) {
+        if (type == 'v') {
             htmlBody = loadHtmlTemplate("classpath:verification_email.html");
-        } else if (type.equals("forgot")) {
+        } else if (type == 'f') {
             htmlBody = loadHtmlTemplate("classpath:forgot_password.html");
         }
+
         htmlBody = htmlBody.replace("${userId}", userId.toString());
         htmlBody = htmlBody.replace("${token}", token);
 
@@ -56,7 +56,7 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
-    public void sendTempPassEmail(String to, String subject, Long userId, String token, String temporaryPassword) throws MessagingException, IOException {
+    public void sendTempPassEmail(String to, String subject, Long userId, String token, String temporaryPassword) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -72,16 +72,23 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
-    public void sendLabEmail(String to, String subject, String patient, String doctor, String type, String workup) throws MessagingException, IOException {
+    public void sendLabEmail(char type, String to, String subject, String patient, String doctor, String cancerType, String workup) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         helper.setTo(to);
         helper.setSubject(subject);
-        String htmlBody = loadHtmlTemplate("classpath:lab_submit_reminder.html");
+
+        String htmlBody = "";
+        if (type == 'n') {
+            htmlBody = loadHtmlTemplate("classpath:lab_submit_notice.html");
+        } else if (type == 'r') {
+            htmlBody = loadHtmlTemplate("classpath:lab_submit_reminder.html");
+        }
+
         htmlBody = htmlBody.replace("${patient}", patient);
         htmlBody = htmlBody.replace("${doctor}", doctor);
-        htmlBody = htmlBody.replace("${type}", type);
+        htmlBody = htmlBody.replace("${cancerType}", cancerType);
         htmlBody = htmlBody.replace("${workup}", workup);
 
         helper.setText(htmlBody, true);
@@ -89,9 +96,7 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
-
-
-    private String loadHtmlTemplate(String path) throws IOException {
+    private String loadHtmlTemplate(String path) {
         Resource resource = resourceLoader.getResource(path);
         StringBuilder contentBuilder = new StringBuilder();
 
