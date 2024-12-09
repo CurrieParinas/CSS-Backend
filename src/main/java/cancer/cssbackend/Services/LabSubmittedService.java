@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -77,7 +78,7 @@ public class LabSubmittedService {
         return labSubmitted;
     }
 
-    public LabSubmitted addLabSubmtitedNoMonitoring(AddLabSubmittedRequest addLabSubmittedRequest, MultipartFile labFileLocation) throws IOException, MessagingException {
+    public LabSubmitted addLabSubmittedNoMonitoring(AddLabSubmittedRequest addLabSubmittedRequest, MultipartFile labFileLocation) throws IOException, MessagingException {
         LabSubmitted labSubmitted = addLabSubmittedRequest.mapToLabSubmitted(patientRepository, doctorRepository, workupRepository);
         labSubmitted.setLabFileLocation(labFileLocation.getBytes());
         labSubmittedRepository.save(labSubmitted);
@@ -114,5 +115,14 @@ public class LabSubmittedService {
 
     public List<LabSubmitted> getAllSubmissions() {
         return labSubmittedRepository.findAll();
+    }
+
+    public List<LabSubmitted> getSubmissionByDoctor(Long doctorId) {
+        Optional<Doctor> optionalDoctor = doctorRepository.findById(doctorId);
+        if (optionalDoctor.isPresent()) {
+            Doctor doctor = optionalDoctor.get();
+            return labSubmittedRepository.findByDoctor(doctor);
+        }
+        return null;
     }
 }

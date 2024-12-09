@@ -26,8 +26,19 @@ public class LabSubmittedController {
         return labSubmittedService.addLabSubmtited(addLabSubmittedRequest, labFileLocation);
     }
 
+    @PostMapping(value = "/addNoMonitoring", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public LabSubmitted addLabSubmittedNoMonitoring(@RequestPart("addLabSubmittedRequest") AddLabSubmittedRequest addLabSubmittedRequest,
+                                        @RequestPart("labFileLocation") MultipartFile labFileLocation) throws IOException, MessagingException {
+        return labSubmittedService.addLabSubmittedNoMonitoring(addLabSubmittedRequest, labFileLocation);
+    }
+
     @GetMapping(value = "/all")
     public List<LabSubmitted> getAllSubmissions() {
         return labSubmittedService.getAllSubmissions();
+    }
+
+    @GetMapping(value = "/getSubmissionByDoctor/{doctorId}")
+    public List<LabSubmitted> getSubmissionByDoctor(@PathVariable Long doctorId) {
+        return labSubmittedService.getSubmissionByDoctor(doctorId);
     }
 }
