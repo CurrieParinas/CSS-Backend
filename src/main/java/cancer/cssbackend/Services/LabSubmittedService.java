@@ -35,7 +35,7 @@ public class LabSubmittedService {
     private final UserRepository userRepository;
     private final EmailService emailService;
 
-    public LabSubmitted addLabSubmtited(AddLabSubmittedRequest addLabSubmittedRequest, MultipartFile labFileLocation) throws IOException, MessagingException {
+    public LabSubmitted addLabSubmitted(AddLabSubmittedRequest addLabSubmittedRequest, MultipartFile labFileLocation) throws IOException, MessagingException {
         LabSubmitted labSubmitted = addLabSubmittedRequest.mapToLabSubmitted(patientRepository, doctorRepository, workupRepository);
         labSubmitted.setLabFileLocation(labFileLocation.getBytes());
         labSubmittedRepository.save(labSubmitted);
@@ -52,9 +52,9 @@ public class LabSubmittedService {
         NotificationLog notificationLog = new NotificationLog();
         notificationLog.setNotificationDate(Date.valueOf(LocalDate.now()));
 
-        User reciever = userRepository.findById((long) labSubmitted.getDoctor().getUser().getUserId())
+        User receiver = userRepository.findById((long) labSubmitted.getDoctor().getUser().getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Receiver Error. No user found with ID: " + labSubmitted.getDoctor().getUser().getUserId()));
-        notificationLog.setNotificationReceiver(reciever);
+        notificationLog.setNotificationReceiver(receiver);
 
         User sender = userRepository.findById((long) 0)
                 .orElseThrow(() -> new IllegalArgumentException("Sender error. No user found with ID: " + 0));
@@ -87,9 +87,9 @@ public class LabSubmittedService {
         NotificationLog notificationLog = new NotificationLog();
         notificationLog.setNotificationDate(Date.valueOf(LocalDate.now()));
 
-        User reciever = userRepository.findById((long) labSubmitted.getDoctor().getUser().getUserId())
+        User receiver = userRepository.findById((long) labSubmitted.getDoctor().getUser().getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Receiver Error. No user found with ID: " + labSubmitted.getDoctor().getUser().getUserId()));
-        notificationLog.setNotificationReceiver(reciever);
+        notificationLog.setNotificationReceiver(receiver);
 
         User sender = userRepository.findById((long) 0)
                 .orElseThrow(() -> new IllegalArgumentException("Sender error. No user found with ID: " + 0));

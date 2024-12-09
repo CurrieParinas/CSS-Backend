@@ -23,7 +23,7 @@ public class LabSubmittedController {
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public LabSubmitted addLabSubmitted(@RequestPart("addLabSubmittedRequest") AddLabSubmittedRequest addLabSubmittedRequest,
                                         @RequestPart("labFileLocation") MultipartFile labFileLocation) throws IOException, MessagingException {
-        return labSubmittedService.addLabSubmtited(addLabSubmittedRequest, labFileLocation);
+        return labSubmittedService.addLabSubmitted(addLabSubmittedRequest, labFileLocation);
     }
 
     @PostMapping(value = "/addNoMonitoring", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
