@@ -44,6 +44,7 @@ public class LabSubmittedService {
         Date endDate = Date.valueOf(endDateTime.toLocalDate());
         labMonitor.setEndDate(endDate);
         labMonitor.setStatus("ONGOING");
+        labMonitor.setEmailStatus("SENT");
         labMonitorRepository.save(labMonitor);
 
         // Create and save the notification log
@@ -58,7 +59,7 @@ public class LabSubmittedService {
                 .orElseThrow(() -> new IllegalArgumentException("Sender error. No user found with ID: " + 0));
         notificationLog.setNotificationSender(sender);
 
-        notificationLog.setNotificationNotes(labSubmitted.getPatient().getUser().getUserFirstname() + labSubmitted.getPatient().getUser().getUserLastname() + "has submitted their lab results.");
+        notificationLog.setNotificationNotes(labSubmitted.getPatient().getUser().getUserFirstname() + " " + labSubmitted.getPatient().getUser().getUserLastname() + "has submitted their lab results.");
         notificationLog.setNotificationUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
 
         NotificationType notificationType = notificationTypeRepository.findById((long) 2)
@@ -71,7 +72,42 @@ public class LabSubmittedService {
 
         notificationLogRepository.save(notificationLog);
 
-        emailService.sendLabEmail('n', labSubmitted.getPatient().getUser().getUserEmail(), "Notice - Patient Lab Submission", labSubmitted.getPatient().getUser().getUserLastname(), labSubmitted.getDoctor().getUser().getUserLastname(), labSubmitted.getWorkupName().getCancerType().getBodysiteName(), labSubmitted.getWorkupName().getWorkupName());
+        emailService.sendLabEmail('n', labSubmitted.getPatient().getUser().getUserEmail(), "Notice - Patient Lab Submission", labSubmitted.getPatient().getUser().getUserFirstname() + " " + labSubmitted.getPatient().getUser().getUserLastname(), labSubmitted.getDoctor().getUser().getUserFirstname() + " " + labSubmitted.getDoctor().getUser().getUserLastname(), labSubmitted.getWorkupName().getCancerType().getBodysiteName(), labSubmitted.getWorkupName().getWorkupName());
+
+        return labSubmitted;
+    }
+
+    public LabSubmitted addLabSubmtitedNoMonitoring(AddLabSubmittedRequest addLabSubmittedRequest, MultipartFile labFileLocation) throws IOException, MessagingException {
+        LabSubmitted labSubmitted = addLabSubmittedRequest.mapToLabSubmitted(patientRepository, doctorRepository, workupRepository);
+        labSubmitted.setLabFileLocation(labFileLocation.getBytes());
+        labSubmittedRepository.save(labSubmitted);
+
+        // Create and save the notification log
+        NotificationLog notificationLog = new NotificationLog();
+        notificationLog.setNotificationDate(Date.valueOf(LocalDate.now()));
+
+        User reciever = userRepository.findById((long) labSubmitted.getDoctor().getUser().getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("Receiver Error. No user found with ID: " + labSubmitted.getDoctor().getUser().getUserId()));
+        notificationLog.setNotificationReceiver(reciever);
+
+        User sender = userRepository.findById((long) 0)
+                .orElseThrow(() -> new IllegalArgumentException("Sender error. No user found with ID: " + 0));
+        notificationLog.setNotificationSender(sender);
+
+        notificationLog.setNotificationNotes(labSubmitted.getPatient().getUser().getUserFirstname() + " " + labSubmitted.getPatient().getUser().getUserLastname() + "has submitted their lab results.");
+        notificationLog.setNotificationUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+
+        NotificationType notificationType = notificationTypeRepository.findById((long) 2)
+                .orElseThrow(() -> new IllegalArgumentException("No notification type found with ID: " + 2));
+        notificationLog.setNotificationType(notificationType);
+
+        // Set default notification status
+        NotificationStatus notificationStatus = notificationStatusRepository.findByNotifStatusName("Unread");
+        notificationLog.setNotificationStatus(notificationStatus);
+
+        notificationLogRepository.save(notificationLog);
+
+        emailService.sendLabEmail('n', labSubmitted.getPatient().getUser().getUserEmail(), "Notice - Patient Lab Submission", labSubmitted.getPatient().getUser().getUserFirstname() + " " + labSubmitted.getPatient().getUser().getUserLastname(), labSubmitted.getDoctor().getUser().getUserFirstname() + " " + labSubmitted.getDoctor().getUser().getUserLastname(), labSubmitted.getWorkupName().getCancerType().getBodysiteName(), labSubmitted.getWorkupName().getWorkupName());
 
         return labSubmitted;
     }

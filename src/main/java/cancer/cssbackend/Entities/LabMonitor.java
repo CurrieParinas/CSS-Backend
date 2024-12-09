@@ -29,4 +29,7 @@ public class LabMonitor {
 
     @Column(name = "STATUS")
     private String status;
+
+    @Column(name = "EMAIL_STATUS")
+    private String emailStatus;
 }
