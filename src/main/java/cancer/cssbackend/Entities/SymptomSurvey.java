@@ -18,8 +18,9 @@ public class SymptomSurvey {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SYMPTOMSURVEY_SEQ")
     private Long symptomSurveyID;
 
-    @Column(name = "CANCER_TYPE")
-    private Long cancerType;
+    @ManyToOne
+    @JoinColumn(name = "CANCER_TYPE", referencedColumnName = "BODYSITE_ID")
+    private BodySite cancerType;
 
     @Column(name = "SYMPTOM_NAME", nullable = false, length = 200)
     private String symptomName;
@@ -28,7 +29,7 @@ public class SymptomSurvey {
     private String symptomMedicalTerm;
 
     @ManyToOne
-    @JoinColumn(name = "symptomCategory", referencedColumnName = "SYMPTOMCATEGORY_ID")
+    @JoinColumn(name = "SYMPTOM_CATEGORY", referencedColumnName = "SYMPTOMCATEGORY_ID")
     private SymptomCategory symptomCategory;
 
     @Column(name = "SYMPTOM_FILIPINO", length = 100)
