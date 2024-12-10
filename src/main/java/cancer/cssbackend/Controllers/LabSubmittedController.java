@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -33,12 +34,12 @@ public class LabSubmittedController {
     }
 
     @GetMapping(value = "/all")
-    public List<LabSubmitted> getAllSubmissions() {
+    public List<Map<String, Object>> getAllSubmissions() {
         return labSubmittedService.getAllSubmissions();
     }
 
     @GetMapping(value = "/getSubmissionByDoctor/{doctorId}")
-    public List<LabSubmitted> getSubmissionByDoctor(@PathVariable Long doctorId) {
+    public List<Map<String, Object>> getSubmissionByDoctor(@PathVariable Long doctorId) {
         return labSubmittedService.getSubmissionByDoctor(doctorId);
     }
 }
