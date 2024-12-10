@@ -18,8 +18,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -113,16 +112,59 @@ public class LabSubmittedService {
         return labSubmitted;
     }
 
-    public List<LabSubmitted> getAllSubmissions() {
-        return labSubmittedRepository.findAll();
+    public List<Map<String, Object>> getAllSubmissions() {
+        List<LabSubmitted> labSubmittedList = labSubmittedRepository.findAll();
+        List<Map<String, Object>> responses = new ArrayList<>();
+
+        if (!labSubmittedList.isEmpty()) {
+            for (LabSubmitted labSubmitted : labSubmittedList) {
+                Map<String, Object> response = new HashMap<>();
+
+                Map<String, Object> nameMap = new HashMap<>();
+                nameMap.put("LASTNAME", labSubmitted.getPatient().getUser().getUserLastname());
+                nameMap.put("FIRSTNAME", labSubmitted.getPatient().getUser().getUserFirstname());
+                nameMap.put("MIDDLENAME", labSubmitted.getPatient().getUser().getUserMiddlename());
+                response.put("NAME", nameMap);
+
+                response.put("DIAGNOSIS", labSubmitted.getWorkupName().getCancerType().getBodysiteName());
+                response.put("SUBMISSION_DATE", labSubmitted.getLabSubmissionDate());
+                response.put("LABORATORY", labSubmitted.getWorkupName().getWorkupName());
+                response.put("ENCOUNTER_DATE", labSubmitted.getLabSubmissionDate());
+
+                responses.add(response);
+            }
+        }
+
+        return responses;
     }
 
-    public List<LabSubmitted> getSubmissionByDoctor(Long doctorId) {
+    public List<Map<String, Object>> getSubmissionByDoctor(Long doctorId) {
+        List<Map<String, Object>> responses = new ArrayList<>();
         Optional<Doctor> optionalDoctor = doctorRepository.findById(doctorId);
+
         if (optionalDoctor.isPresent()) {
             Doctor doctor = optionalDoctor.get();
-            return labSubmittedRepository.findByDoctor(doctor);
+            List<LabSubmitted> labSubmittedList = labSubmittedRepository.findByDoctor(doctor);
+
+            if (!labSubmittedList.isEmpty()) {
+                for (LabSubmitted labSubmitted : labSubmittedList) {
+                    Map<String, Object> response = new HashMap<>();
+
+                    Map<String, Object> nameMap = new HashMap<>();
+                    nameMap.put("LASTNAME", labSubmitted.getPatient().getUser().getUserLastname());
+                    nameMap.put("FIRSTNAME", labSubmitted.getPatient().getUser().getUserFirstname());
+                    nameMap.put("MIDDLENAME", labSubmitted.getPatient().getUser().getUserMiddlename());
+                    response.put("NAME", nameMap);
+
+                    response.put("DIAGNOSIS", labSubmitted.getWorkupName().getCancerType().getBodysiteName());
+                    response.put("SUBMISSION_DATE", labSubmitted.getLabSubmissionDate());
+                    response.put("LABORATORY", labSubmitted.getWorkupName().getWorkupName());
+                    response.put("ENCOUNTER_DATE", labSubmitted.getLabSubmissionDate());
+
+                    responses.add(response);
+                }
+            }
         }
-        return null;
+        return responses;
     }
 }
