@@ -131,7 +131,6 @@ public class AddPatientRequest {
         user.setUserBirthdate(Date.valueOf(localDate));
         user.setUserBirthplace(userBirthplace);
         user.setUserAddress(address);
-        user.setUserStatus("Active");
         user.setUserCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
         user.setUserUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
 
