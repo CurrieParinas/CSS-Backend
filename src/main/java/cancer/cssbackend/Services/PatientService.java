@@ -34,7 +34,7 @@ public class PatientService {
     private final ConsultRepository consultRepository;
     private final LabSubmittedRepository labSubmittedRepository;
 
-    public Patient addPatient(AddPatientRequest addPatientRequest) throws MessagingException, IOException {
+    public Patient addPatient(AddPatientRequest addPatientRequest) throws MessagingException {
         Patient patient = addPatientRequest.mapToPatient();
         Address address = patient.getUser().getUserAddress();
         addressRepository.save(address);
@@ -78,6 +78,29 @@ public class PatientService {
         forgotPasswordRepository.save(forgotPassword);
 
         return patient;
+    }
+
+    public Patient updatePatient(AddPatientRequest addPatientRequest, Long patientId) {
+        Optional<Patient> optionalPatient = patientRepository.findById(patientId);
+        if (optionalPatient.isPresent()) {
+            Patient patient = optionalPatient.get();
+            patient = addPatientRequest.mapToPatient(patient, patient.getUser().getUserAddress(), patient.getUser());
+            Address address = patient.getUser().getUserAddress();
+            addressRepository.save(address);
+            User user = patient.getUser();
+
+            Optional<User> optionalEncoder = userRepository.findById(addPatientRequest.getUserEncoder());
+            if (optionalEncoder.isPresent()) {
+                User encoder = optionalEncoder.get();
+                user.setUserEncoder(encoder);
+            }
+
+            userRepository.save(user);
+            patient.setUser(user);
+            patientRepository.save(patient);
+            return patient;
+        }
+        return null;
     }
   
     public Patient findPatient(Long patientID){

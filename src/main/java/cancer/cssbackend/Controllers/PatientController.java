@@ -18,8 +18,13 @@ public class PatientController {
     private final PatientService patientService;
 
     @PostMapping("/add")
-    public Patient addPatient(@RequestBody AddPatientRequest addPatientRequest) throws MessagingException, IOException {
+    public Patient addPatient(@RequestBody AddPatientRequest addPatientRequest) throws MessagingException {
         return patientService.addPatient(addPatientRequest);
+    }
+
+    @PutMapping("/update/{patientId}")
+    public Patient updatePatient(@RequestBody AddPatientRequest addPatientRequest, @PathVariable Long patientId) {
+        return patientService.updatePatient(addPatientRequest, patientId);
     }
 
     @GetMapping("/find")

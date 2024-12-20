@@ -112,4 +112,32 @@ public class AddPatientRequest {
         patient.setPatientUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
         return patient;
     }
+
+    public Patient mapToPatient(Patient patient, Address address, User user){
+        address.setAddressNumber(addressNumber);
+        address.setAddressStreet(addressStreet);
+        address.setAddressCity(addressCity);
+        address.setAddressRegion(addressRegion);
+        address.setAddressZipcode(addressZipcode);
+
+        user.setUserLastname(userLastname);
+        user.setUserFirstname(userFirstname);
+        user.setUserMiddlename(userMiddlename);
+        user.setUserEmail(userEmail);
+        user.setUserGender(userGender);
+        user.setUserMaritalStatus(userMaritalStatus);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(userBirthdate, formatter);
+        user.setUserBirthdate(Date.valueOf(localDate));
+        user.setUserBirthplace(userBirthplace);
+        user.setUserAddress(address);
+        user.setUserStatus("Active");
+        user.setUserCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        user.setUserUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+
+        patient.setUser(user);
+        patient.setPatientCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        patient.setPatientUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        return patient;
+    }
 }
