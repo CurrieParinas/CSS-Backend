@@ -248,4 +248,63 @@ public class AddDiseaseRequest {
         disease.setDiseaseUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
         return disease;
     }
+
+    public Disease mapToDisease(PathologyDimService pathologyDimService, Disease disease, Histology histology, MetastaticSite metastaticSite, DiseaseStatus diseaseStatus)  {
+        PathologyDim pathologyDim = pathologyDimService.findPathology(histoPathology);
+
+        histology.setHistoPathology(pathologyDim);
+        histology.setHistoTumorSize(histoTumorSize);
+        histology.setHistoTumorExtension(histoTumorExtension);
+        histology.setHistoGrade(histoGrade);
+        histology.setHistoNodePositive(histoNodePositive);
+        histology.setHistoNodeHarvest(histoNodeHarvest);
+        histology.setHistoMarginsNegative(histoMarginsNegative);
+        histology.setHistoMarginsPositive(histoMarginsPositive);
+        histology.setHistoStage(histoStage);
+        histology.setHistoCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        histology.setHistoUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+
+        metastaticSite.setMetsDistantln(metsDistantln);
+        metastaticSite.setMetsBone(metsBone);
+        metastaticSite.setMetsLiver(metsLiver);
+        metastaticSite.setMetsLung(metsLung);
+        metastaticSite.setMetsBrain(metsBrain);
+        metastaticSite.setMetsOvary(metsOvary);
+        metastaticSite.setMetsSkin(metsSkin);
+        metastaticSite.setMetsIntestine(metsIntestine);
+        metastaticSite.setMetsOthers(metsOthers);
+        metastaticSite.setMetsUnknown(metsUnknown);
+        metastaticSite.setMetsNotes(metsNotes);
+        metastaticSite.setMetsCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        metastaticSite.setMetsUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+
+        diseaseStatus.setDxstatusAlive(dxstatusAlive);
+        diseaseStatus.setDxstatusSymptoms(dxstatusSymptoms);
+        diseaseStatus.setDxstatusRecurrence(dxstatusRecurrence);
+        diseaseStatus.setDxstatusMetastatic(dxstatusMetastatic);
+        diseaseStatus.setDxstatusCurative(dxstatusCurative);
+        diseaseStatus.setDxstatusCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(diseaseDiagnosisDate, formatter);
+        disease.setDiseaseDiagnosisDate(Date.valueOf(localDate));
+        disease.setDiseaseLaterality(diseaseLaterality);
+        disease.setDiseaseHistology(histology);
+        disease.setDiseaseExtent(diseaseExtent);
+        disease.setDiseaseTumorSize(diseaseTumorSize);
+        disease.setDiseaseLymphNode(diseaseLymphNode);
+        disease.setDiseaseMetastatic(diseaseMetastatic);
+        disease.setDiseaseMetastaticSite(metastaticSite);
+        disease.setDiseaseMultiplePrimary(diseaseMultiplePrimary);
+        disease.setDiseaseTstage(diseaseTstage);
+        disease.setDiseaseNstage(diseaseNstage);
+        disease.setDiseaseMstage(diseaseMstage);
+        disease.setDiseaseGstage(diseaseGstage);
+        disease.setDiseaseStage(diseaseStage);
+        disease.setDiseaseStageType(diseaseStageType);
+        disease.setDiseaseStatus(diseaseStatus);
+        disease.setDiseaseCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        disease.setDiseaseUpdatedOn(Timestamp.valueOf(LocalDateTime.now()));
+        return disease;
+    }
 }
