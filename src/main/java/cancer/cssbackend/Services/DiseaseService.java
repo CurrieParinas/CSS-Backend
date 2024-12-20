@@ -84,6 +84,65 @@ public class DiseaseService {
         return disease;
     }
 
+    public Disease updateDisease(AddDiseaseRequest addDiseaseRequest, Long diseaseId) {
+        Optional<Disease> optionalDisease = diseaseRepository.findById(diseaseId);
+        if (optionalDisease.isPresent()) {
+            Disease disease = optionalDisease.get();
+            disease = addDiseaseRequest.mapToDisease(pathologyDimService, disease, disease.getDiseaseHistology(), disease.getDiseaseMetastaticSite(), disease.getDiseaseStatus());
+            Histology histology = disease.getDiseaseHistology();
+            MetastaticSite metastaticSite = disease.getDiseaseMetastaticSite();
+            DiseaseStatus diseaseStatus = disease.getDiseaseStatus();
+
+            Optional<Doctor> optionalDoctor = doctorRepository.findById(addDiseaseRequest.getDiseaseEncoder());
+            if (optionalDoctor.isPresent()) {
+                Doctor doctor = optionalDoctor.get();
+                disease.setDiseaseEncoder(doctor);
+                histology.setHistoEncoder(doctor);
+                metastaticSite.setMetsEncoder(doctor);
+            }
+
+            Optional<Basis> optionalBasis = basisRepository.findById(addDiseaseRequest.getBasisID());
+            if (optionalBasis.isPresent()) {
+                Basis basis = optionalBasis.get();
+                disease.setBasis(basis);
+            }
+
+            Optional<BodySite> optionalBodySite = bodySiteRepository.findById(addDiseaseRequest.getBodySiteID());
+            if (optionalBodySite.isPresent()) {
+                BodySite bodySite = optionalBodySite.get();
+                disease.setBodySite(bodySite);
+            }
+
+            disease.setDiseaseHistology(histology);
+            disease.setDiseaseMetastaticSite(metastaticSite);
+            disease.setDiseaseStatus(diseaseStatus);
+
+            histologyRepository.save(histology);
+            metastaticSiteRepository.save(metastaticSite);
+            diseaseStatusRepository.save(diseaseStatus);
+            diseaseRepository.save(disease);
+
+            List<DiseaseOtherSite> diseaseOtherSites = diseaseOtherSiteRepository.fetchOtherSitesByDiseaseID(diseaseId);
+            diseaseOtherSiteRepository.deleteAll(diseaseOtherSites);
+
+            if (addDiseaseRequest.getDiseaseOtherSites() != null) {
+                for (Long bodySiteId : addDiseaseRequest.getDiseaseOtherSites()) {
+                    DiseaseOtherSite diseaseOtherSite = new DiseaseOtherSite();
+                    diseaseOtherSite.setDisease(disease);
+
+                    Optional<BodySite> optionalOtherBodySite = bodySiteRepository.findById(bodySiteId);
+                    if (optionalOtherBodySite.isPresent()) {
+                        BodySite otherBodySite = optionalOtherBodySite.get();
+                        diseaseOtherSite.setBodySite(otherBodySite);
+                        diseaseOtherSiteRepository.save(diseaseOtherSite);
+                    }
+                }
+            }
+            return disease;
+        }
+        return null;
+    }
+
     public Disease findByPatientID(Long patientID) {
 //        Patient patient = patientService.findPatient(patientID);
 //        if (patient == null) {

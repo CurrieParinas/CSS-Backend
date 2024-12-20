@@ -25,6 +25,11 @@ public class DiseaseController {
         return diseaseService.addDisease(addDiseaseRequest);
     }
 
+    @PutMapping("/update/{diseaseId}")
+    public Disease updateDisease(@RequestBody AddDiseaseRequest addDiseaseRequest, @PathVariable Long diseaseId) {
+        return diseaseService.updateDisease(addDiseaseRequest, diseaseId);
+    }
+
     @GetMapping("/getbypatientid")
     public Disease findDiseaseByPatientID(@RequestParam(value="patientID") Long patientID){
         return diseaseService.findByPatientID(patientID);
